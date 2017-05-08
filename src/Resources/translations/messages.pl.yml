@@ -1,0 +1,7 @@
+bitbag:
+    mailchimp_plugin:
+        newsletter: Newsletter
+        subscribe: Subskrybuj
+        your_email_address: Twój adres email
+        subscribed_successfully: Zostałeś zapisany do newslettera.
+        invalid_csrf_token: Przesłany token CSRF jest nieprawidłowy. Prosimy spróbować ponownie.

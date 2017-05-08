@@ -1,0 +1,41 @@
+{
+  "name": "bitbag/mailchimp-plugin",
+  "type": "sylius-plugin",
+  "description": "Basic MailChimp integration for Sylius applications.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mikołaj Król",
+      "email": "mikolaj.krol@bitbag.pl",
+      "homepage": "https://www.linkedin.com/in/miko%C5%82aj-kr%C3%B3l-535679116/"
+    }
+  ],
+  "require": {
+    "php": "^5.6|^7.0",
+    "sylius/sylius": "^1.0.0@beta",
+    "drewm/mailchimp-api": "^2.4"
+  },
+  "require-dev": {
+    "phpspec/phpspec": "^3.2",
+    "phpunit/phpunit": "^5.6",
+    "behat/behat": "^3.3",
+    "behat/mink": "^1.7",
+    "behat/mink-browserkit-driver": "^1.3",
+    "behat/mink-extension": "^2.2",
+    "behat/mink-selenium2-driver": "^1.3",
+    "friends-of-behat/context-service-extension": "^0.3",
+    "friends-of-behat/cross-container-extension": "^0.2",
+    "friends-of-behat/performance-extension": "^1.0",
+    "friends-of-behat/service-container-extension": "^0.3",
+    "friends-of-behat/symfony-extension": "^0.2.1",
+    "friends-of-behat/variadic-extension": "^0.1",
+    "lakion/mink-debug-extension": "^1.2.3",
+    "se/selenium-server-standalone": "^2.52"
+  },
+  "autoload": {
+    "psr-4": {
+      "BitBag\\MailChimpPlugin\\": "src/",
+      "Tests\\BitBag\\MailChimpPlugin\\": "tests/"
+    }
+  }
+}

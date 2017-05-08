@@ -1,0 +1,33 @@
+default:
+    extensions:
+        FriendsOfBehat\ContextServiceExtension:
+            imports:
+                - vendor/sylius/sylius/src/Sylius/Behat/Resources/config/services.xml
+                - vendor/sylius/sylius/behat.yml.dist
+
+                - tests/Behat/Resources/contexts.yml
+                - tests/Behat/Resources/pages.yml
+                - tests/Behat/Resources/suites.yml
+
+        FriendsOfBehat\SymfonyExtension:
+            kernel:
+                class: AppKernel
+                path: tests/Application/app/AppKernel.php
+                bootstrap: tests/Application/app/autoload.php
+        Behat\MinkExtension:
+            javascript_session: chromium
+            sessions:
+                chromium:
+                    selenium2:
+                        browser: chrome
+                        capabilities:
+                            browserName: chrome
+                            browser: chrome
+                            version: ""
+                            chrome:
+                                binary: "/usr/bin/chromium-browser"
+                                switches:
+                                    - "start-fullscreen"
+                                    - "start-maximized"
+                                    - "no-sandbox"
+

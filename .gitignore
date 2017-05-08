@@ -1,0 +1,9 @@
+/.idea
+
+/vendor/
+/node_modules/
+
+/etc/build/*
+!/etc/build/.gitkeep
+
+/tests/Application/app/config/parameters_test.yml

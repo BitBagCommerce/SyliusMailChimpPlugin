@@ -1,0 +1,75 @@
+# Put your Behat suites definitions here
+
+default:
+    suites:
+        subscribing_newsletter:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.setup.channel
+
+                - bitbag_mailchimp_plugin.context.ui.shop.subscription
+                - bitbag_mailchimp_plugin.context.ui.shop.mailchimp
+
+            filters:
+                tags: "@subscribing_newsletter"
+
+        ui_customer_registration:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.email_spool
+
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.customer
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.order
+                - sylius.behat.context.setup.shop_security
+                - sylius.behat.context.setup.user
+
+                - sylius.behat.context.ui.email
+                - sylius.behat.context.ui.shop.registration
+
+                - bitbag_mailchimp_plugin.context.ui.shop.mailchimp
+            filters:
+                tags: "@customer_registration && @ui"
+
+        ui_customer_account:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.email_spool
+
+                - sylius.behat.context.transform.address
+                - sylius.behat.context.transform.country
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.order
+                - sylius.behat.context.transform.payment
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shipping_method
+                - sylius.behat.context.transform.user
+                - sylius.behat.context.transform.zone
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.currency
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.geographical
+                - sylius.behat.context.setup.order
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.shop_security
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.user
+                - sylius.behat.context.setup.zone
+
+                - sylius.behat.context.ui.shop.account
+                - sylius.behat.context.ui.shop.cart
+                - sylius.behat.context.ui.shop.checkout
+                - sylius.behat.context.ui.shop.checkout.addressing
+                - sylius.behat.context.ui.shop.checkout.complete
+                - sylius.behat.context.ui.shop.currency
+
+                - bitbag_mailchimp_plugin.context.ui.shop.mailchimp
+            filters:
+                tags: "@customer_account && @ui"

@@ -1,0 +1,18 @@
+services:
+    bitbag_mailchimp_plugin.context.ui.shop.subscription:
+        class: Tests\BitBag\MailChimpPlugin\Behat\Context\Ui\Shop\SubscriptionContext
+        arguments:
+            - "@bitbag_mailchimp_plugin.behat.page.newsletter_page"
+            - "@__symfony__.sylius.repository.customer"
+            - "@__symfony__.sylius.factory.customer"
+            - "@__symfony__.sylius.manager.customer"
+        tags:
+            - { name: fob.context_service }
+
+    bitbag_mailchimp_plugin.context.ui.shop.mailchimp:
+        class: Tests\BitBag\MailChimpPlugin\Behat\Context\Ui\Shop\MailChimpContext
+        arguments:
+            - "%__symfony__.mailchimp.api_key%"
+            - "%__symfony__.mailchimp.list_id%"
+        tags:
+            - { name: fob.context_service }

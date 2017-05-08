@@ -1,0 +1,5 @@
+services:
+    bitbag_mailchimp_plugin.behat.page.newsletter_page:
+        class: Tests\BitBag\MailChimpPlugin\Behat\Page\Shop\NewsletterPage
+        parent: sylius.behat.page.shop.home
+        public: false

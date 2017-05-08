@@ -1,0 +1,5 @@
+bitbag_mailchimp_plugin_newsletter_subscribe:
+    path: /newsletter/subscribe
+    methods: ["POST", "PATCH"]
+    defaults:
+        _controller: MailChimpPlugin:Newsletter:subscribe

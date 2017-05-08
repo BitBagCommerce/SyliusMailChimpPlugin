@@ -1,0 +1,17 @@
+imports:
+    - "vendor/sylius/sylius/behat.yml.dist"
+    - "tests/Behat/Resources/suites.yml"
+
+default:
+    extensions:
+        FriendsOfBehat\ContextServiceExtension:
+            imports:
+                - "vendor/sylius/sylius/src/Sylius/Behat/Resources/config/services.xml"
+                - "tests/Behat/Resources/contexts.yml"
+                - "tests/Behat/Resources/pages.yml"
+
+        FriendsOfBehat\SymfonyExtension:
+            kernel:
+                class: AppKernel
+                path: tests/Application/app/AppKernel.php
+                bootstrap: tests/Application/app/autoload.php

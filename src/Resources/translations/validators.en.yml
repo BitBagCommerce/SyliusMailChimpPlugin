@@ -1,0 +1,5 @@
+bitbag:
+    mailchimp_plugin:
+        invalid_email: The submitted email address is not valid.
+        email_not_blank: Please fill the email field.
+        unique_email: Given email address is already subscribed to the newsletter.
