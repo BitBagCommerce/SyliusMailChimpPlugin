@@ -1,4 +1,4 @@
-@subscribing_newsletter
+@newsletter
 Feature: Validating newsletter form
   In order to be sure that subscribed emails are valid
   As a guest

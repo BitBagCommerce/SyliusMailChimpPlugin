@@ -7,6 +7,9 @@ use DrewM\MailChimp\MailChimp;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Webmozart\Assert\Assert;
 
 final class NewsletterSubscriptionHandler
 {
@@ -78,15 +81,31 @@ final class NewsletterSubscriptionHandler
             $this->createNewCustomer($email);
         }
 
-        $this->exportNewEmail($email);
+        $response = $this->mailChimp->get('lists/' . $this->listId . '/members/' . $this->getEmailHash($email));
+        Assert::keyExists($response, 'status');
+
+        if ($response['status'] === Response::HTTP_NOT_FOUND) {
+            $this->exportNewEmail($email);
+        }
     }
 
     /**
      * @param CustomerInterface $customer
      */
-    private function updateCustomer(CustomerInterface $customer)
+    public function unsubscribe(CustomerInterface $customer)
     {
-        $customer->setSubscribedToNewsletter(true);
+        $this->updateCustomer($customer, false);
+        $email = $customer->getEmail();
+        $this->mailChimp->delete('lists/' . $this->listId . '/members/' . $this->getEmailHash($email));
+    }
+
+    /**
+     * @param CustomerInterface $customer
+     * @param bool $subscribedToNewsletter
+     */
+    private function updateCustomer(CustomerInterface $customer, $subscribedToNewsletter = true)
+    {
+        $customer->setSubscribedToNewsletter($subscribedToNewsletter);
         $this->customerManager->flush();
     }
 
@@ -109,9 +128,24 @@ final class NewsletterSubscriptionHandler
      */
     private function exportNewEmail($email)
     {
-        $this->mailChimp->post("lists/" . $this->listId . "/members", [
+        $response = $this->mailChimp->post("lists/" . $this->listId . "/members", [
             'email_address' => $email,
             'status' => 'subscribed',
         ]);
+
+        Assert::keyExists($response, 'status');
+
+        if ($response['status'] !== 'subscribed') {
+            throw new BadRequestHttpException();
+        }
+    }
+
+    /**
+     * @param string $email
+     * @return string
+     */
+    private function getEmailHash($email)
+    {
+        return md5(strtolower($email));
     }
 }

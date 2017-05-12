@@ -4,11 +4,17 @@ namespace Tests\BitBag\MailChimpPlugin\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use DrewM\MailChimp\MailChimp;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-class MailChimpContext implements Context
+final class MailChimpContext implements Context
 {
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
     /**
      * @var MailChimp
      */
@@ -22,10 +28,17 @@ class MailChimpContext implements Context
     /**
      * @var string
      */
-    private $subscriberHash;
+    private $subscribedEmail;
 
-    public function __construct($apiKey, $listId)
+    /**
+     * MailChimpContext constructor.
+     * @param SharedStorageInterface $sharedStorage
+     * @param string $apiKey
+     * @param string $listId
+     */
+    public function __construct(SharedStorageInterface $sharedStorage, $apiKey, $listId)
     {
+        $this->sharedStorage = $sharedStorage;
         $this->mailChimp = new MailChimp($apiKey);
         $this->listId = $listId;
     }
@@ -39,57 +52,71 @@ class MailChimpContext implements Context
     }
 
     /**
+     * @Given this email is also subscribed to the default MailChimp list
+     */
+    public function thisEmailIsAlsoExportedToMailChimpDefaultList()
+    {
+        $email = $this->sharedStorage->get('newsletter_email');
+        Assert::notNull($email);
+        $this->thereIsAnExistingEmailInMailChimpDefaultList($email);
+    }
+
+    /**
      * @Then the email :email should be exported to MailChimp's default list
      */
     public function theEmailShouldBeExportedToMailChimp($email)
     {
-        $members = $this->getListMembers($this->listId);
-
-        foreach ($members as $member) {
-            Assert::keyExists($member, 'email_address');
-            Assert::keyExists($member, 'id');
-
-            if ($member['email_address'] === $email) {
-                $this->subscriberHash = $member['id'];
-
-                return;
-            }
-        }
-
-        throw new NotFoundHttpException(
-            sprintf(
-                "The email %s doesn't exist in MailChimp with list with %s ID",
-                $email,
-                $this->listId
-            ));
+        $emailHash = $this->getSubscriberHash($email);
+        $response = $this->mailChimp->get('lists/' . $this->listId . '/members/' . $emailHash);
+        Assert::keyExists($response, 'status');
+        Assert::eq($response['status'], 'subscribed', sprintf(
+            "The email %s doesn't exist in MailChimp with list with %s ID",
+            $email,
+            $this->listId
+        ));
+        $this->subscribedEmail = $email;
     }
 
     /**
      * @Given there is an existing :email email in MailChimp's default list
      */
-    public function thereIsAnExistingEmailInMailChimp($email)
+    public function thereIsAnExistingEmailInMailChimpDefaultList($email)
     {
-        $response = $this->mailChimp->post($this->mailChimp->post("lists/" . $this->listId . "/members", [
+        $response = $this->mailChimp->post("lists/" . $this->listId . "/members", [
             'email_address' => $email,
             'status' => 'subscribed',
-        ]));
+        ]);
         Assert::keyExists($response, 'status');
-        Assert::eq($response['status'], 200);
+        Assert::eq($response['status'], 'subscribed');
+    }
+
+    /**
+     * @Then the email :email should be removed from MailChimp's default list
+     */
+    public function theEmailShouldBeRemovedFromMailchimpSDefaultList($email)
+    {
+        $emailHash = $this->getSubscriberHash($email);
+        $response = $this->mailChimp->get('lists/' . $this->listId . '/members/' . $emailHash);
+        Assert::keyExists($response, 'status');
+        Assert::eq($response['status'], Response::HTTP_NOT_FOUND);
+        $this->subscribedEmail = $email;
     }
 
     /**
      * @AfterScenario
      */
-    public function removeClient()
+    public function removeNewsletterEmail()
     {
-        $this->mailChimp->delete('lists/' . $this->listId . '/members/' . $this->subscriberHash);
+        $subscriberHash = $this->getSubscriberHash($this->subscribedEmail);
+        $this->mailChimp->delete('lists/' . $this->listId . '/members/' . $subscriberHash);
     }
 
-    private function getListMembers($listId)
+    /**
+     * @param string $email
+     * @return string
+     */
+    private function getSubscriberHash($email)
     {
-        $response = $this->mailChimp->get('lists/' . $listId . '/members');
-        Assert::keyExists($response, 'members');
-
-        return $response['members'];
+        return md5(strtolower($email));
     }
 }

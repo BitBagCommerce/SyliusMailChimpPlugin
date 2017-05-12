@@ -14,6 +14,7 @@ class CustomerNewsletterListener
      */
     private $newsletterSubscriptionHandler;
 
+
     /**
      * @param NewsletterSubscriptionHandler $newsletterSubscriptionHandler
      */
@@ -27,6 +28,7 @@ class CustomerNewsletterListener
      */
     public function customerCreateEvent(GenericEvent $event)
     {
+        /** @var CustomerInterface $customer */
         $customer = $event->getSubject();
 
         if (!$customer instanceof CustomerInterface) {
@@ -36,7 +38,7 @@ class CustomerNewsletterListener
             );
         }
 
-        $this->subscribe($customer);
+        $customer->isSubscribedToNewsletter() === false ? $this->unsubscribe($customer) : $this->subscribe($customer);
     }
 
 
@@ -50,9 +52,11 @@ class CustomerNewsletterListener
 
     private function subscribe(CustomerInterface $customer)
     {
-        if ($customer->isSubscribedToNewsletter() === true) {
+        $this->newsletterSubscriptionHandler->subscribe($customer->getEmail());
+    }
 
-            $this->newsletterSubscriptionHandler->subscribe($customer->getEmail());
-        }
+    private function unsubscribe(CustomerInterface $customer)
+    {
+        $this->newsletterSubscriptionHandler->unsubscribe($customer);
     }
 }

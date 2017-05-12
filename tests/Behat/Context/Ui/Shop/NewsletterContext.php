@@ -4,14 +4,16 @@ namespace Tests\BitBag\MailChimpPlugin\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Behat\Service\SharedStorage;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Tests\BitBag\MailChimpPlugin\Behat\Page\Shop\NewsletterPageInterface;
+use Tests\BitBag\MailChimpPlugin\Behat\Page\Shop\ProfileUpdatePageInterface;
 use Webmozart\Assert\Assert;
 
-final class SubscriptionContext implements Context
+final class NewsletterContext implements Context
 {
     /**
      * @var NewsletterPageInterface
@@ -39,23 +41,38 @@ final class SubscriptionContext implements Context
     private $customerManager;
 
     /**
-     * SubscriptionContext constructor.
+     * @var SharedStorage
+     */
+    private $sharedStorage;
+
+    /**
+     * @var ProfileUpdatePageInterface
+     */
+    private $profileUpdatePage;
+
+    /**
      * @param NewsletterPageInterface $newsletterPage
      * @param CustomerRepositoryInterface $customerRepository
      * @param FactoryInterface $customerFactory
      * @param EntityManagerInterface $customerManager
+     * @param SharedStorage $sharedStorage
+     * @param ProfileUpdatePageInterface $profileUpdatePage
      */
     public function __construct(
         NewsletterPageInterface $newsletterPage,
         CustomerRepositoryInterface $customerRepository,
         FactoryInterface $customerFactory,
-        EntityManagerInterface $customerManager
+        EntityManagerInterface $customerManager,
+        SharedStorage $sharedStorage,
+        ProfileUpdatePageInterface $profileUpdatePage
     )
     {
         $this->newsletterPage = $newsletterPage;
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
         $this->customerManager = $customerManager;
+        $this->sharedStorage = $sharedStorage;
+        $this->profileUpdatePage = $profileUpdatePage;
     }
 
     /**
@@ -96,7 +113,7 @@ final class SubscriptionContext implements Context
     public function theCustomerShouldBeCreated($email)
     {
         $customer = $this->getCustomerByEmail($email);
-        Assert::isInstanceOf($customer, CustomerInterface::class, "The customer does not exist.");
+        Assert::isInstanceOf($customer, CustomerInterface::class);
 
         $this->customer = $customer;
     }
@@ -106,7 +123,7 @@ final class SubscriptionContext implements Context
      */
     public function theCustomerShouldBeSubscribedToTheNewsletter()
     {
-        Assert::true($this->customer->isSubscribedToNewsletter(), "The customer should be subscribed to the newsletter.");
+        Assert::true($this->customer->isSubscribedToNewsletter());
     }
 
     /**
@@ -176,11 +193,32 @@ final class SubscriptionContext implements Context
     }
 
     /**
+     * @Given the :email customer is subscribed to the newsletter
+     */
+    public function theCustomerIsSubscribedToTheNewsletter($email)
+    {
+        /** @var CustomerInterface $customer */
+        $customer = $this->customerRepository->findOneBy(['email' => $email]);
+        Assert::isInstanceOf($customer, CustomerInterface::class);
+        $customer->setSubscribedToNewsletter(true);
+        $this->customerManager->flush();
+        $this->sharedStorage->set('newsletter_email', $customer->getEmail());
+    }
+
+    /**
      * @param string $email
      * @return null|object|CustomerInterface
      */
     private function getCustomerByEmail($email)
     {
         return $this->customerRepository->findOneBy(['email' => $email]);
+    }
+
+    /**
+     * @When I unsubscribe the newsletter
+     */
+    public function iUnsubscribeTheNewsletter()
+    {
+        $this->profileUpdatePage->unsubscribeNewsletter();
     }
 }

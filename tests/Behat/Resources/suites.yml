@@ -1,17 +1,19 @@
-# Put your Behat suites definitions here
-
 default:
     suites:
-        subscribing_newsletter:
+        ui_newsletter:
             contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.shop_security
+                - sylius.behat.context.setup.user
 
-                - bitbag_mailchimp_plugin.context.ui.shop.subscription
+                - sylius.behat.context.ui.shop.account
+
+                - bitbag_mailchimp_plugin.context.ui.shop.newsletter
                 - bitbag_mailchimp_plugin.context.ui.shop.mailchimp
 
             filters:
-                tags: "@subscribing_newsletter"
+                tags: "@newsletter && @ui"
 
         ui_customer_registration:
             contexts_services:
