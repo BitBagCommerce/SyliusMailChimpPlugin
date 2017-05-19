@@ -7,3 +7,5 @@
 !/etc/build/.gitkeep
 
 /tests/Application/app/config/parameters_test.yml
+
+.DS_Store
