@@ -7,7 +7,7 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class UniqueNewsletterEmailValidator extends ConstraintValidator
+final class UniqueNewsletterEmailValidator extends ConstraintValidator
 {
     /**
      * @var CustomerRepositoryInterface
@@ -28,10 +28,7 @@ class UniqueNewsletterEmailValidator extends ConstraintValidator
     public function validate($email, Constraint $constraint)
     {
         if ($this->isEmailValid($email) === false) {
-            $this->context
-                ->buildViolation($constraint->message)
-                ->addViolation()
-            ;
+            $this->context->addViolation($constraint->message);
         }
     }
 

@@ -1,10 +1,10 @@
 services:
-    bitbag_mailchimp_plugin.behat.page.newsletter_page:
+    bitbag.mailchimp_plugin.behat.page.newsletter_page:
         class: Tests\BitBag\MailChimpPlugin\Behat\Page\Shop\NewsletterPage
         parent: sylius.behat.page.shop.home
         public: false
 
-    bitbag_mailchimp_plugin.behat.page.profile_update_page:
+    bitbag.mailchimp_plugin.behat.page.profile_update_page:
         class: Tests\BitBag\MailChimpPlugin\Behat\Page\Shop\ProfileUpdatePage
         parent: sylius.behat.page.shop.account.profile_update
         public: false

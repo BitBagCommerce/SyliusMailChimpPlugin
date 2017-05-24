@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Webmozart\Assert\Assert;
 
-final class NewsletterSubscriptionHandler
+class NewsletterSubscriptionHandler
 {
     /**
      * @var CustomerRepositoryInterface
@@ -29,11 +29,6 @@ final class NewsletterSubscriptionHandler
     private $customerManager;
 
     /**
-     * @var string $apiKey
-     */
-    private $apiKey;
-
-    /**
      * @var string $listId
      */
     private $listId;
@@ -48,23 +43,22 @@ final class NewsletterSubscriptionHandler
      * @param CustomerRepositoryInterface $customerRepository
      * @param FactoryInterface $customerFactory
      * @param EntityManagerInterface $customerManager
-     * @param string $apiKey
+     * @param MailChimp $mailChimp
      * @param string $listId
      */
     public function __construct(
         CustomerRepositoryInterface $customerRepository,
         FactoryInterface $customerFactory,
         EntityManagerInterface $customerManager,
-        $apiKey,
+        MailChimp $mailChimp,
         $listId
     )
     {
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
         $this->customerManager = $customerManager;
-        $this->apiKey = $apiKey;
+        $this->mailChimp = $mailChimp;
         $this->listId = $listId;
-        $this->mailChimp = new MailChimp($this->apiKey);
     }
 
 
@@ -100,16 +94,6 @@ final class NewsletterSubscriptionHandler
     }
 
     /**
-     * @param CustomerInterface $customer
-     * @param bool $subscribedToNewsletter
-     */
-    private function updateCustomer(CustomerInterface $customer, $subscribedToNewsletter = true)
-    {
-        $customer->setSubscribedToNewsletter($subscribedToNewsletter);
-        $this->customerManager->flush();
-    }
-
-    /**
      * @param string $email
      */
     private function createNewCustomer($email)
@@ -138,6 +122,16 @@ final class NewsletterSubscriptionHandler
         if ($response['status'] !== 'subscribed') {
             throw new BadRequestHttpException();
         }
+    }
+
+    /**
+     * @param CustomerInterface $customer
+     * @param bool $subscribedToNewsletter
+     */
+    private function updateCustomer(CustomerInterface $customer, $subscribedToNewsletter = true)
+    {
+        $customer->setSubscribedToNewsletter($subscribedToNewsletter);
+        $this->customerManager->flush();
     }
 
     /**

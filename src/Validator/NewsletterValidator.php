@@ -31,6 +31,10 @@ final class NewsletterValidator
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @param string $email
+     * @return array
+     */
     public function validate($email)
     {
         $violations = $this->validator->validate($email, [
@@ -39,11 +43,11 @@ final class NewsletterValidator
             new UniqueNewsletterEmail(),
         ]);
 
-        if (count($violations) === 0) {
-            return [];
-        }
-
         $errors = [];
+
+        if (count($violations) === 0) {
+            return $errors;
+        }
 
         /** @var ConstraintViolation $violation */
         foreach ($violations as $violation) {

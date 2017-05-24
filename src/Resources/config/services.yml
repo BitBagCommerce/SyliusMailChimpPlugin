@@ -1,30 +1,35 @@
 services:
-    bitbag_mailchimp_plugin.validator.email_validator:
+    bitbag.mailchimp_plugin.validator.email_validator:
         class: BitBag\MailChimpPlugin\Validator\NewsletterValidator
         arguments:
             - "@validator"
             - "@sylius.manager.customer"
 
-    bitbag_mailchimp_plugin.handler.newsleter_subscription_handler:
+    bitbag.mailchimp_plugin.drewm.mailchimp:
+        class: DrewM\MailChimp\MailChimp
+        arguments:
+            - "%mailchimp.api_key%"
+
+    bitbag.mailchimp_plugin.handler.newsleter_subscription_handler:
         class: BitBag\MailChimpPlugin\Handler\NewsletterSubscriptionHandler
         arguments:
             - "@sylius.repository.customer"
             - "@sylius.factory.customer"
             - "@sylius.manager.customer"
-            - "%mailchimp.api_key%"
+            - "@bitbag.mailchimp_plugin.drewm.mailchimp"
             - "%mailchimp.list_id%"
 
-    bitbag_mailchimp_plugin.validator.unique_newsletter_email_validator:
+    bitbag.mailchimp_plugin.validator.unique_newsletter_email_validator:
         class: BitBag\MailChimpPlugin\Validator\Constraints\UniqueNewsletterEmailValidator
         arguments:
             - "@sylius.repository.customer"
         tags:
             - { name: "validator.constraint_validator" }
 
-    bitbag_mailchimp_plugin.event_listener.customer_listener:
+    bitbag.mailchimp_plugin.event_listener.customer_listener:
         class: BitBag\MailChimpPlugin\EventListener\CustomerNewsletterListener
         arguments:
-            - "@bitbag_mailchimp_plugin.handler.newsleter_subscription_handler"
+            - "@bitbag.mailchimp_plugin.handler.newsleter_subscription_handler"
         tags:
             - { name: "kernel.event_listener", event: "sylius.customer.post_register", method: customerCreateEvent }
             - { name: "kernel.event_listener", event: "sylius.customer.pre_update", method: customerUpdateEvent }

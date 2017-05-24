@@ -7,7 +7,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-class CustomerNewsletterListener
+final class CustomerNewsletterListener
 {
     /**
      * @var NewsletterSubscriptionHandler

@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: BitBag\MailChimpPlugin
+        psr4_prefix: BitBag\MailChimpPlugin
+        src_path: .
