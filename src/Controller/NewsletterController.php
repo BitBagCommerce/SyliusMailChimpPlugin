@@ -13,7 +13,7 @@ final class NewsletterController extends FOSRestController
     {
         $email = $request->request->get('email');
 
-        $validator = $this->get('bitbag_mailchimp_plugin.validator.email_validator');
+        $validator = $this->get('bitbag.mailchimp_plugin.validator.email_validator');
         $errors = $validator->validate($email);
 
         if (!$this->isCsrfTokenValid('newsletter', $request->request->get('_token'))) {
