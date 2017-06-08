@@ -21,7 +21,7 @@ final class NewsletterController extends FOSRestController
         }
 
         if (count($errors) === 0) {
-            $handler = $this->get('bitbag_mailchimp_plugin.handler.newsleter_subscription_handler');
+            $handler = $this->get('bitbag.mailchimp_plugin.handler.newsleter_subscription_handler');
             $handler->subscribe($email);
             return new JsonResponse([
                 'success' => true,
