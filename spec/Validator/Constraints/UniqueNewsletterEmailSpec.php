@@ -4,7 +4,6 @@ namespace spec\BitBag\MailChimpPlugin\Validator\Constraints;
 
 use BitBag\MailChimpPlugin\Validator\Constraints\UniqueNewsletterEmail;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\Validator\Constraint;
 
 final class UniqueNewsletterEmailSpec extends ObjectBehavior

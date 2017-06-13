@@ -3,7 +3,6 @@
 namespace BitBag\MailChimpPlugin\Validator;
 
 use BitBag\MailChimpPlugin\Validator\Constraints\UniqueNewsletterEmail;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -17,18 +16,11 @@ final class NewsletterValidator
     private $validator;
 
     /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-
-    /**
      * @param ValidatorInterface $validator
-     * @param EntityManagerInterface $entityManager
      */
-    public function __construct(ValidatorInterface $validator, EntityManagerInterface $entityManager)
+    public function __construct(ValidatorInterface $validator)
     {
         $this->validator = $validator;
-        $this->entityManager = $entityManager;
     }
 
     /**
@@ -45,7 +37,7 @@ final class NewsletterValidator
 
         $errors = [];
 
-        if (count($violations) === 0) {
+        if ($violations->count() === 0) {
             return $errors;
         }
 

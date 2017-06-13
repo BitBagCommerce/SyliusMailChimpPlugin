@@ -27,7 +27,7 @@
                         if (response.responseJSON.hasOwnProperty('errors')) {
                             var errors = $.parseJSON(response.responseJSON.errors);
                             var message = '';
-
+            
                             $(errors).each(function (key, value) {
                                 message += value + " ";
                             });
