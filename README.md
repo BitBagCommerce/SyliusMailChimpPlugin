@@ -1,11 +1,12 @@
-# Sylius MailChimpPlugin 
+![BitBag](https://bitbag.pl/static/bitbag-logo.png)
 
 ## Installation
 
 ```bash
 $ composer require bitbag/mailchimp-plugin
-```
 
+```
+    
 Import routing in your routing.yml file:
 
 ```yml
@@ -65,8 +66,8 @@ $ bin/console assets:install --symlink
 
 That's the simplest and fastest way to integrate the jQuery plugin. If you need to customize it, simply take a look at   
 `bitbag-mailchimp-plugin-newsletter.js`, create your own `*.js` plugin and import it in your main `Gulpfile.js`.
- 
-## Testing & Development
+
+## Testing
 
 In order to run tests, execute following commands:
 
@@ -81,3 +82,6 @@ $ vendor/bin/behat
 $ vendor/bin/phpunit
 $ vendor/bin/phpspec
 ```
+## Contribution
+
+Learn more about our contribution workflow on http://docs.sylius.org/en/latest/contributing/
