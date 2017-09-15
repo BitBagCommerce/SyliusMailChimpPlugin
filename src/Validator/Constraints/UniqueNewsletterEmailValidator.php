@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * This file was created by the developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * another great project.
+ * You can find more information about us on https://bitbag.shop and write us
+ * an email on kontakt@bitbag.pl.
+ */
+
+declare(strict_types=1);
+
 namespace BitBag\MailChimpPlugin\Validator\Constraints;
 
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
@@ -25,7 +35,7 @@ final class UniqueNewsletterEmailValidator extends ConstraintValidator
     /**
      * {@inheritdoc]
      */
-    public function validate($email, Constraint $constraint)
+    public function validate($email, Constraint $constraint): void
     {
         if ($this->isEmailValid($email) === false) {
             $this->context->addViolation($constraint->message);
@@ -34,9 +44,10 @@ final class UniqueNewsletterEmailValidator extends ConstraintValidator
 
     /**
      * @param string $email
+     *
      * @return bool
      */
-    private function isEmailValid($email)
+    private function isEmailValid(string $email): bool
     {
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
 

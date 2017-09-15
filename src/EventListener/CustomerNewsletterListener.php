@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * This file was created by the developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * another great project.
+ * You can find more information about us on https://bitbag.shop and write us
+ * an email on kontakt@bitbag.pl.
+ */
+
+declare(strict_types=1);
+
 namespace BitBag\MailChimpPlugin\EventListener;
 
 use BitBag\MailChimpPlugin\Handler\NewsletterSubscriptionHandler;
@@ -14,7 +24,6 @@ final class CustomerNewsletterListener
      */
     private $newsletterSubscriptionHandler;
 
-
     /**
      * @param NewsletterSubscriptionHandler $newsletterSubscriptionHandler
      */
@@ -26,7 +35,7 @@ final class CustomerNewsletterListener
     /**
      * @param GenericEvent $event
      */
-    public function customerCreateEvent(GenericEvent $event)
+    public function customerCreateEvent(GenericEvent $event): void
     {
         /** @var CustomerInterface $customer */
         $customer = $event->getSubject();
@@ -41,21 +50,26 @@ final class CustomerNewsletterListener
         $customer->isSubscribedToNewsletter() === false ? $this->unsubscribe($customer) : $this->subscribe($customer);
     }
 
-
     /**
      * @param GenericEvent $event
      */
-    public function customerUpdateEvent(GenericEvent $event)
+    public function customerUpdateEvent(GenericEvent $event): void
     {
         $this->customerCreateEvent($event);
     }
 
-    private function subscribe(CustomerInterface $customer)
+    /**
+     * @param CustomerInterface $customer
+     */
+    private function subscribe(CustomerInterface $customer): void
     {
         $this->newsletterSubscriptionHandler->subscribe($customer->getEmail());
     }
 
-    private function unsubscribe(CustomerInterface $customer)
+    /**
+     * @param CustomerInterface $customer
+     */
+    private function unsubscribe(CustomerInterface $customer): void
     {
         $this->newsletterSubscriptionHandler->unsubscribe($customer);
     }
