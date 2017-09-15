@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * This file was created by the developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * another great project.
+ * You can find more information about us on https://bitbag.shop and write us
+ * an email on kontakt@bitbag.pl.
+ */
+
+declare(strict_types=1);
+
 namespace BitBag\MailChimpPlugin\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -51,7 +61,7 @@ class NewsletterSubscriptionHandler
         FactoryInterface $customerFactory,
         EntityManagerInterface $customerManager,
         MailChimp $mailChimp,
-        $listId
+        string $listId
     )
     {
         $this->customerRepository = $customerRepository;
@@ -61,11 +71,10 @@ class NewsletterSubscriptionHandler
         $this->listId = $listId;
     }
 
-
     /**
-     * @param string $email
+     * @param string|null $email
      */
-    public function subscribe($email)
+    public function subscribe(?string $email): void
     {
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
 
@@ -86,7 +95,7 @@ class NewsletterSubscriptionHandler
     /**
      * @param CustomerInterface $customer
      */
-    public function unsubscribe(CustomerInterface $customer)
+    public function unsubscribe(CustomerInterface $customer): void
     {
         $this->updateCustomer($customer, false);
         $email = $customer->getEmail();
@@ -96,7 +105,7 @@ class NewsletterSubscriptionHandler
     /**
      * @param string $email
      */
-    private function createNewCustomer($email)
+    private function createNewCustomer(string $email): void
     {
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
@@ -110,7 +119,7 @@ class NewsletterSubscriptionHandler
     /**
      * @param string $email
      */
-    private function exportNewEmail($email)
+    private function exportNewEmail(string $email): void
     {
         $response = $this->mailChimp->post("lists/" . $this->listId . "/members", [
             'email_address' => $email,
@@ -128,7 +137,7 @@ class NewsletterSubscriptionHandler
      * @param CustomerInterface $customer
      * @param bool $subscribedToNewsletter
      */
-    private function updateCustomer(CustomerInterface $customer, $subscribedToNewsletter = true)
+    private function updateCustomer(CustomerInterface $customer, $subscribedToNewsletter = true): void
     {
         $customer->setSubscribedToNewsletter($subscribedToNewsletter);
         $this->customerManager->flush();
@@ -136,9 +145,10 @@ class NewsletterSubscriptionHandler
 
     /**
      * @param string $email
+     *
      * @return string
      */
-    private function getEmailHash($email)
+    private function getEmailHash(string $email): string
     {
         return md5(strtolower($email));
     }
