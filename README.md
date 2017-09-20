@@ -1,5 +1,13 @@
 ![BitBag](https://bitbag.pl/static/bitbag-logo.png)
 
+## Overview
+
+This plugin allows you to integrate MailChimp newsletter sign-in process with Sylius platform through customer registration, account updates or footer/modal join newsletter form.
+
+## Support
+
+Do you want us to customize this plugin for your specific needs? Write us an email on mikolaj.krol@bitbag.pl 💻
+
 ## Installation
 
 ```bash
