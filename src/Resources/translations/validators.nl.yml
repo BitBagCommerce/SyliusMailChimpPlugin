@@ -1,0 +1,5 @@
+bitbag:
+    mailchimp_plugin:
+        invalid_email: Het ingediende e-mailadres is niet geldig.
+        email_not_blank: Vul het e-mailveld in.
+        unique_email: Ingediende e-mailadres is al ingeschreven op de nieuwsbrief.
