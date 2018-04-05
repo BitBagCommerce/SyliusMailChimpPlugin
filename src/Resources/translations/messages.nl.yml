@@ -1,0 +1,7 @@
+bitbag:
+    mailchimp_plugin:
+        newsletter: Nieuwsbrief
+        subscribe: Abonneren
+        your_email_address: Jouw e-mailadres
+        subscribed_successfully: Je bent nu geabonneerd op de nieuwsbrief.
+        invalid_csrf_token: Ingediende CSRF-token is ongeldig.
