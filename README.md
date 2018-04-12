@@ -19,7 +19,7 @@ Import routing in your routing.yml file:
 
 ```yml
 bitbag_sylius_mailchimp_plugin:
-    resource: "@MailChimpPlugin/Resources/config/routing.yml"
+    resource: "@BitBagSyliusMailChimpPlugin/Resources/config/routing.yml"
     prefix: /
 ```
     
@@ -51,7 +51,7 @@ parameters:
 In your twig template include 
 
 ```twig
-{% include '@BitBagMailChimpPlugin/_subscribe.html.twig' %}
+{% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
 ```
 
 In case you'd like to submit the form with AJAX

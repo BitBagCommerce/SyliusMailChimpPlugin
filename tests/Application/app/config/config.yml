@@ -1,6 +1,8 @@
 parameters:
     locale: en_US
     secret: "Heron is the best animal in the world!"
+    mailchimp.api_key: a5e78797e0d66051912e81ef67cfac3f-us16
+    mailchimp.list_id: 87730e1b86
 
 imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
