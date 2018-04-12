@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\BitBag\MailChimpPlugin\Behat\Context\Ui\Shop;
+namespace Tests\BitBag\SyliusMailChimpPlugin\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
@@ -9,8 +9,8 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
-use Tests\BitBag\MailChimpPlugin\Behat\Page\Shop\NewsletterPageInterface;
-use Tests\BitBag\MailChimpPlugin\Behat\Page\Shop\ProfileUpdatePageInterface;
+use Tests\BitBag\SyliusMailChimpPlugin\Behat\Page\Shop\NewsletterPageInterface;
+use Tests\BitBag\SyliusMailChimpPlugin\Behat\Page\Shop\ProfileUpdatePageInterface;
 use Webmozart\Assert\Assert;
 
 final class NewsletterContext implements Context

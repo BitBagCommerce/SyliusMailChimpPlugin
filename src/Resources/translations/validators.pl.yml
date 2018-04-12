@@ -1,5 +1,5 @@
-bitbag:
-    mailchimp_plugin:
+bitbag_sylius_mailchimp_plugin:
+    ui:
         invalid_email: Przesłany adres email nie jest prawidłowy.
         email_not_blank: Proszę podać adres email.
         unique_email: Na podany adres email zarejestrowana jest już subskrybcja newslettera.

@@ -1,5 +1,5 @@
-bitbag:
-    mailchimp_plugin:
+bitbag_sylius_mailchimp_plugin:
+    ui:
         newsletter: Newsletter
         subscribe: Subskrybuj
         your_email_address: Twój adres email

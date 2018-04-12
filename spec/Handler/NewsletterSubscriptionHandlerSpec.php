@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\BitBag\MailChimpPlugin\Handler;
+namespace spec\BitBag\SyliusMailChimpPlugin\Handler;
 
-use BitBag\MailChimpPlugin\Handler\NewsletterSubscriptionHandler;
+use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use DrewM\MailChimp\MailChimp;
 use PhpSpec\ObjectBehavior;

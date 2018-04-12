@@ -1,5 +1,5 @@
-bitbag:
-    mailchimp_plugin:
+bitbag_sylius_mailchimp_plugin:
+    ui:
         newsletter: Nieuwsbrief
         subscribe: Abonneren
         your_email_address: Jouw e-mailadres

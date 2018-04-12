@@ -1,13 +1,13 @@
 <?php
 
-namespace BitBag\MailChimpPlugin\DependencyInjection;
+namespace BitBag\SyliusMailChimpPlugin\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-final class MailChimpExtension extends Extension
+final class BitBagSyliusMailChimpExtension extends Extension
 {
     /**
      * {@inheritdoc}

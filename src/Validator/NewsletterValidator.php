@@ -1,8 +1,8 @@
 <?php
 
-namespace BitBag\MailChimpPlugin\Validator;
+namespace BitBag\SyliusMailChimpPlugin\Validator;
 
-use BitBag\MailChimpPlugin\Validator\Constraints\UniqueNewsletterEmail;
+use BitBag\SyliusMailChimpPlugin\Validator\Constraints\UniqueNewsletterEmail;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\ConstraintViolation;
@@ -38,8 +38,8 @@ final class NewsletterValidator
     public function validate($email)
     {
         $violations = $this->validator->validate($email, [
-            new Email(['message' => 'bitbag.mailchimp_plugin.invalid_email']),
-            new NotBlank(['message' => 'bitbag.mailchimp_plugin.email_not_blank']),
+            new Email(['message' => 'bitbag_sylius_mailchimp_plugin.invalid_email']),
+            new NotBlank(['message' => 'bitbag_sylius_mailchimp_plugin.email_not_blank']),
             new UniqueNewsletterEmail(),
         ]);
 

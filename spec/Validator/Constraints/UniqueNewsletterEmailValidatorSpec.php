@@ -1,9 +1,9 @@
 <?php
 
-namespace spec\BitBag\MailChimpPlugin\Validator\Constraints;
+namespace spec\BitBag\SyliusMailChimpPlugin\Validator\Constraints;
 
-use BitBag\MailChimpPlugin\Validator\Constraints\UniqueNewsletterEmail;
-use BitBag\MailChimpPlugin\Validator\Constraints\UniqueNewsletterEmailValidator;
+use BitBag\SyliusMailChimpPlugin\Validator\Constraints\UniqueNewsletterEmail;
+use BitBag\SyliusMailChimpPlugin\Validator\Constraints\UniqueNewsletterEmailValidator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\CustomerInterface;

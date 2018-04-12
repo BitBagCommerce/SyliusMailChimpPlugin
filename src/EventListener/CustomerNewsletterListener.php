@@ -1,8 +1,8 @@
 <?php
 
-namespace BitBag\MailChimpPlugin\EventListener;
+namespace BitBag\SyliusMailChimpPlugin\EventListener;
 
-use BitBag\MailChimpPlugin\Handler\NewsletterSubscriptionHandler;
+use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionHandler;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;

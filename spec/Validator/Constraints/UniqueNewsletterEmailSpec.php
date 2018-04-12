@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\BitBag\MailChimpPlugin\Validator\Constraints;
+namespace spec\BitBag\SyliusMailChimpPlugin\Validator\Constraints;
 
-use BitBag\MailChimpPlugin\Validator\Constraints\UniqueNewsletterEmail;
+use BitBag\SyliusMailChimpPlugin\Validator\Constraints\UniqueNewsletterEmail;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Validator\Constraint;
@@ -21,6 +21,6 @@ final class UniqueNewsletterEmailSpec extends ObjectBehavior
 
     function it_points_proper_validator_class()
     {
-        $this->validatedBy()->shouldReturn('BitBag\MailChimpPlugin\Validator\Constraints\UniqueNewsletterEmailValidator');
+        $this->validatedBy()->shouldReturn('BitBag\SyliusMailChimpPlugin\Validator\Constraints\UniqueNewsletterEmailValidator');
     }
 }

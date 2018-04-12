@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\BitBag\MailChimpPlugin\Behat\Context\Ui\Shop;
+namespace Tests\BitBag\SyliusMailChimpPlugin\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use DrewM\MailChimp\MailChimp;

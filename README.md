@@ -18,7 +18,7 @@ $ composer require bitbag/mailchimp-plugin
 Import routing in your routing.yml file:
 
 ```yml
-bitbag_mailchimp_plugin:
+bitbag_sylius_mailchimp_plugin:
     resource: "@MailChimpPlugin/Resources/config/routing.yml"
     prefix: /
 ```
@@ -31,7 +31,7 @@ public function registerBundles()
     return array_merge(parent::registerBundles(), [
         ...
         
-        new \BitBag\MailChimpPlugin\MailChimpPlugin(),
+        new \BitBag\SyliusMailChimpPlugin\BitBagSyliusMailChimpPlugin(),
     ]);
 }
 ```
@@ -51,7 +51,7 @@ parameters:
 In your twig template include 
 
 ```twig
-{% include '@MailChimpPlugin/_subscribe.html.twig' %}
+{% include '@BitBagMailChimpPlugin/_subscribe.html.twig' %}
 ```
 
 In case you'd like to submit the form with AJAX

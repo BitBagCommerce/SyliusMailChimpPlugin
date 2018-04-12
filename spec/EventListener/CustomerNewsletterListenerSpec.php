@@ -1,9 +1,9 @@
 <?php
 
-namespace spec\BitBag\MailChimpPlugin\EventListener;
+namespace spec\BitBag\SyliusMailChimpPlugin\EventListener;
 
-use BitBag\MailChimpPlugin\EventListener\CustomerNewsletterListener;
-use BitBag\MailChimpPlugin\Handler\NewsletterSubscriptionHandler;
+use BitBag\SyliusMailChimpPlugin\EventListener\CustomerNewsletterListener;
+use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionHandler;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;

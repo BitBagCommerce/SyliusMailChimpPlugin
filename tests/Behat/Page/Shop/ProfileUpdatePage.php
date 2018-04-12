@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\BitBag\MailChimpPlugin\Behat\Page\Shop;
+namespace Tests\BitBag\SyliusMailChimpPlugin\Behat\Page\Shop;
 
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePage as BaseProfileUpdatePage;
 

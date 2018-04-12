@@ -1,6 +1,6 @@
 <?php
 
-namespace BitBag\MailChimpPlugin\Validator\Constraints;
+namespace BitBag\SyliusMailChimpPlugin\Validator\Constraints;
 
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;

@@ -1,11 +1,11 @@
 <?php
 
-namespace BitBag\MailChimpPlugin;
+namespace BitBag\SyliusMailChimpPlugin;
 
 use Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-final class MailChimpPlugin extends Bundle
+final class BitBagSyliusMailChimpPlugin extends Bundle
 {
     use SyliusPluginTrait;
 }

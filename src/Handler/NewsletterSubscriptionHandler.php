@@ -1,6 +1,6 @@
 <?php
 
-namespace BitBag\MailChimpPlugin\Handler;
+namespace BitBag\SyliusMailChimpPlugin\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
 use DrewM\MailChimp\MailChimp;

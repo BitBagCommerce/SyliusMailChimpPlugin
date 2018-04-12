@@ -1,12 +1,12 @@
 <?php
 
-namespace BitBag\MailChimpPlugin\Validator\Constraints;
+namespace BitBag\SyliusMailChimpPlugin\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
 final class UniqueNewsletterEmail extends Constraint
 {
-    public $message = 'bitbag.mailchimp_plugin.unique_email';
+    public $message = 'bitbag_sylius_mailchimp_plugin.unique_email';
 
     public function validatedBy()
     {

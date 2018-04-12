@@ -1,14 +1,14 @@
-<form action="{{ path('bitbag_mailchimp_plugin_newsletter_subscribe') }}" method="POST" class="ui form" id="footer-newsletter-form">
+<form action="{{ path('bitbag_sylius_mailchimp_plugin_newsletter_subscribe') }}" method="POST" class="ui form" id="footer-newsletter-form">
     <div class="success-element"></div>
     <div class="validation-element"></div>
     <div class="inline field">
         <input type="text"
                id="newsletter-email" name="email"
-               placeholder="{{ 'bitbag.mailchimp_plugin.your_email_address'|trans }}"
+               placeholder="{{ 'bitbag_sylius_mailchimp_plugin.ui.your_email_address'|trans }}"
         />
         <input type="hidden" id="newsletter-token" name="_token" value="{{ csrf_token('newsletter') }}">
-        <button title="{{ 'bitbag.mailchimp_plugin.subscribe' }}" type="submit" class="ui button">
-            {{ 'bitbag.mailchimp_plugin.subscribe'|trans }}
+        <button title="{{ 'bitbag_sylius_mailchimp_plugin.ui.subscribe' }}" type="submit" class="ui button">
+            {{ 'bitbag_sylius_mailchimp_plugin.ui.subscribe'|trans }}
         </button>
     </div>
 </form>
