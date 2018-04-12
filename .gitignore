@@ -1,11 +1,11 @@
-/.idea
+/bin/*
+!/bin/.gitkeep
 
 /vendor/
 /node_modules/
+/composer.lock
 
 /etc/build/*
 !/etc/build/.gitkeep
 
-/tests/Application/app/config/parameters_test.yml
-
-.DS_Store
+/tests/Application/yarn.lock

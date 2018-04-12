@@ -3,8 +3,6 @@ parameters:
     secret: "Heron is the best animal in the world!"
 
 imports:
-    - { resource: "parameters_test.yml" }
-
     - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
@@ -28,6 +26,16 @@ framework:
         storage_id: session.storage.mock_file
     test: ~
 
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+        firephp:
+            type: firephp
+            level: info
+
 swiftmailer:
     disable_delivery: true
     logging: true
@@ -38,7 +46,7 @@ swiftmailer:
 doctrine:
     dbal:
         driver: "pdo_sqlite"
-        path: "%kernel.cache_dir%/db.sql"
+        path: "%kernel.root_dir%/../var/db.sql"
         charset: UTF8
 
 fos_rest:
