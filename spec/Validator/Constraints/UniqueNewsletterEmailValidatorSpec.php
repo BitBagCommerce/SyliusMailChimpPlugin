@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\BitBag\SyliusMailChimpPlugin\Validator\Constraints;
 
 use BitBag\SyliusMailChimpPlugin\Validator\Constraints\UniqueNewsletterEmail;
@@ -35,8 +37,7 @@ final class UniqueNewsletterEmailValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         CustomerRepositoryInterface $customerRepository,
         CustomerInterface $customer
-    )
-    {
+    ) {
         $customerRepository->findOneBy(['email' => self::EMAIL])->willReturn($customer);
         $customer->isSubscribedToNewsletter()->willReturn(true);
 
@@ -52,8 +53,7 @@ final class UniqueNewsletterEmailValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         CustomerRepositoryInterface $customerRepository,
         CustomerInterface $customer
-    )
-    {
+    ) {
         $customerRepository->findOneBy(['email' => self::EMAIL])->willReturn($customer);
         $customer->isSubscribedToNewsletter()->willReturn(false);
 
@@ -67,8 +67,7 @@ final class UniqueNewsletterEmailValidatorSpec extends ObjectBehavior
     function it_does_not_adds_violation_if_customer_not_exist(
         ExecutionContextInterface $executionContext,
         CustomerRepositoryInterface $customerRepository
-    )
-    {
+    ) {
         $customerRepository->findOneBy(['email' => self::EMAIL])->willReturn(null);
 
         $executionContext->addViolation(Argument::any())->shouldNotBeCalled();

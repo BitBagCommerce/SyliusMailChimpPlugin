@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusMailChimpPlugin\Validator\Constraints;
 
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
@@ -34,13 +36,14 @@ final class UniqueNewsletterEmailValidator extends ConstraintValidator
 
     /**
      * @param string $email
+     *
      * @return bool
      */
     private function isEmailValid($email)
     {
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
 
-        if($customer instanceof CustomerInterface === false) {
+        if ($customer instanceof CustomerInterface === false) {
             return true;
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\BitBag\SyliusMailChimpPlugin\EventListener;
 
 use BitBag\SyliusMailChimpPlugin\EventListener\CustomerNewsletterListener;
@@ -23,8 +25,7 @@ final class CustomerNewsletterListenerSpec extends ObjectBehavior
 
     function it_throws_exception_when_subject_is_not_customer_interface(
         GenericEvent $genericEvent
-    )
-    {
+    ) {
         $genericEvent->getSubject()->willReturn(null);
 
         $this
@@ -36,8 +37,7 @@ final class CustomerNewsletterListenerSpec extends ObjectBehavior
     function it_should_subscribe_customer_when_hes_not_subscribed(
         GenericEvent $genericEvent,
         CustomerInterface $customer
-    )
-    {
+    ) {
         $genericEvent->getSubject()->willReturn($customer);
         $customer->isSubscribedToNewsletter()->willReturn(true);
         $customer->getEmail()->shouldBeCalled();
@@ -48,8 +48,7 @@ final class CustomerNewsletterListenerSpec extends ObjectBehavior
     function it_should_usubscribe_customer(
         GenericEvent $genericEvent,
         CustomerInterface $customer
-    )
-    {
+    ) {
         $genericEvent->getSubject()->willReturn($customer);
         $customer->isSubscribedToNewsletter()->willReturn(false);
         $customer->getEmail()->shouldNotBeCalled();

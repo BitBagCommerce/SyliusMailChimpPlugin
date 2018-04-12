@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusMailChimpPlugin\EventListener;
 
 use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionHandler;
@@ -13,7 +15,6 @@ final class CustomerNewsletterListener
      * @var NewsletterSubscriptionHandler
      */
     private $newsletterSubscriptionHandler;
-
 
     /**
      * @param NewsletterSubscriptionHandler $newsletterSubscriptionHandler
@@ -40,7 +41,6 @@ final class CustomerNewsletterListener
 
         $customer->isSubscribedToNewsletter() === false ? $this->unsubscribe($customer) : $this->subscribe($customer);
     }
-
 
     /**
      * @param GenericEvent $event

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusMailChimpPlugin\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,7 +31,7 @@ class NewsletterSubscriptionHandler
     private $customerManager;
 
     /**
-     * @var string $listId
+     * @var string
      */
     private $listId;
 
@@ -40,6 +42,7 @@ class NewsletterSubscriptionHandler
 
     /**
      * NewsletterSubscriptionHandler constructor.
+     *
      * @param CustomerRepositoryInterface $customerRepository
      * @param FactoryInterface $customerFactory
      * @param EntityManagerInterface $customerManager
@@ -52,15 +55,13 @@ class NewsletterSubscriptionHandler
         EntityManagerInterface $customerManager,
         MailChimp $mailChimp,
         $listId
-    )
-    {
+    ) {
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
         $this->customerManager = $customerManager;
         $this->mailChimp = $mailChimp;
         $this->listId = $listId;
     }
-
 
     /**
      * @param string $email
@@ -112,7 +113,7 @@ class NewsletterSubscriptionHandler
      */
     private function exportNewEmail($email)
     {
-        $response = $this->mailChimp->post("lists/" . $this->listId . "/members", [
+        $response = $this->mailChimp->post('lists/' . $this->listId . '/members', [
             'email_address' => $email,
             'status' => 'subscribed',
         ]);
@@ -136,6 +137,7 @@ class NewsletterSubscriptionHandler
 
     /**
      * @param string $email
+     *
      * @return string
      */
     private function getEmailHash($email)

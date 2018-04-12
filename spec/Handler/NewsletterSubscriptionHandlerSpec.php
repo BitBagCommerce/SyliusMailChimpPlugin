@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\BitBag\SyliusMailChimpPlugin\Handler;
 
 use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionHandler;
@@ -23,8 +25,7 @@ final class NewsletterSubscriptionHandlerSpec extends ObjectBehavior
         FactoryInterface $customerFactory,
         EntityManagerInterface $customerManager,
         MailChimp $mailChimp
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $customerRepository,
             $customerFactory,
@@ -44,8 +45,7 @@ final class NewsletterSubscriptionHandlerSpec extends ObjectBehavior
         FactoryInterface $customerFactory,
         CustomerInterface $customer,
         MailChimp $mailChimp
-    )
-    {
+    ) {
         $customerRepository->findOneBy(['email' => self::EMAIL])->willReturn(null);
         $customerFactory->createNew()->willReturn($customer);
         $customerRepository->add($customer)->shouldBeCalled();
@@ -58,8 +58,7 @@ final class NewsletterSubscriptionHandlerSpec extends ObjectBehavior
         CustomerRepositoryInterface $customerRepository,
         CustomerInterface $customer,
         MailChimp $mailChimp
-    )
-    {
+    ) {
         $customerRepository->findOneBy(['email' => self::EMAIL])->willReturn($customer);
         $customer->isSubscribedToNewsletter()->willReturn(false);
         $customer->setSubscribedToNewsletter(true)->shouldBeCalled();

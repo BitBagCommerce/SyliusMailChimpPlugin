@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusMailChimpPlugin\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
@@ -10,6 +12,6 @@ final class UniqueNewsletterEmail extends Constraint
 
     public function validatedBy()
     {
-        return get_class($this).'Validator';
+        return get_class($this) . 'Validator';
     }
 }

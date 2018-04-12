@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\BitBag\SyliusMailChimpPlugin\Validator\Constraints;
 
 use BitBag\SyliusMailChimpPlugin\Validator\Constraints\UniqueNewsletterEmail;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\Validator\Constraint;
 
 final class UniqueNewsletterEmailSpec extends ObjectBehavior

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusMailChimpPlugin\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
@@ -23,9 +25,10 @@ final class NewsletterController extends FOSRestController
         if (count($errors) === 0) {
             $handler = $this->get('bitbag_sylius_mailchimp_plugin.handler.newsleter_subscription_handler');
             $handler->subscribe($email);
+
             return new JsonResponse([
                 'success' => true,
-                'message' => $this->get('translator')->trans('bitbag_sylius_mailchimp_plugin.subscribed_successfully')
+                'message' => $this->get('translator')->trans('bitbag_sylius_mailchimp_plugin.subscribed_successfully'),
             ]);
         }
 

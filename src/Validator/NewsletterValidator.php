@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitBag\SyliusMailChimpPlugin\Validator;
 
 use BitBag\SyliusMailChimpPlugin\Validator\Constraints\UniqueNewsletterEmail;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Validator\Constraints\Email;
 
 final class NewsletterValidator
 {
@@ -33,6 +35,7 @@ final class NewsletterValidator
 
     /**
      * @param string $email
+     *
      * @return array
      */
     public function validate($email)
