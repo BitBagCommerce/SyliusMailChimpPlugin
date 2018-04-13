@@ -1,0 +1,7 @@
+bitbag_sylius_mailchimp_plugin:
+    ui:
+        newsletter: Newsletter
+        subscribe: S'inscrire
+        your_email_address: Votre adresse email
+        subscribed_successfully: Vous êtes bien inscrit à notre newsletter.
+        invalid_csrf_token: Le jeton CSRF est invalide.
