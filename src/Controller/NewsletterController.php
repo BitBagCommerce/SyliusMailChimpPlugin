@@ -19,16 +19,16 @@ final class NewsletterController extends FOSRestController
         $errors = $validator->validate($email);
 
         if (!$this->isCsrfTokenValid('newsletter', $request->request->get('_token'))) {
-            $errors[] = $this->get('translator')->trans('bitbag_sylius_mailchimp_plugin.invalid_csrf_token');
+            $errors[] = $this->get('translator')->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_csrf_token');
         }
 
         if (count($errors) === 0) {
-            $handler = $this->get('bitbag_sylius_mailchimp_plugin.handler.newsleter_subscription_handler');
+            $handler = $this->get('bitbag_sylius_mailchimp_plugin.handler.newsletter_subscription_handler');
             $handler->subscribe($email);
 
             return new JsonResponse([
                 'success' => true,
-                'message' => $this->get('translator')->trans('bitbag_sylius_mailchimp_plugin.subscribed_successfully'),
+                'message' => $this->get('translator')->trans('bitbag_sylius_mailchimp_plugin.ui.subscribed_successfully'),
             ]);
         }
 

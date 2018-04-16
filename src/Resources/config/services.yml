@@ -10,7 +10,7 @@ services:
         arguments:
             - "%mailchimp.api_key%"
 
-    bitbag_sylius_mailchimp_plugin.handler.newsleter_subscription_handler:
+    bitbag_sylius_mailchimp_plugin.handler.newsletter_subscription_handler:
         class: BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionHandler
         arguments:
             - "@sylius.repository.customer"
@@ -29,7 +29,7 @@ services:
     bitbag_sylius_mailchimp_plugin.event_listener.customer_listener:
         class: BitBag\SyliusMailChimpPlugin\EventListener\CustomerNewsletterListener
         arguments:
-            - "@bitbag_sylius_mailchimp_plugin.handler.newsleter_subscription_handler"
+            - "@bitbag_sylius_mailchimp_plugin.handler.newsletter_subscription_handler"
         tags:
             - { name: "kernel.event_listener", event: "sylius.customer.post_register", method: customerCreateEvent }
             - { name: "kernel.event_listener", event: "sylius.customer.pre_update", method: customerUpdateEvent }

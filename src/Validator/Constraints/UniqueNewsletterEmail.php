@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class UniqueNewsletterEmail extends Constraint
 {
-    public $message = 'bitbag_sylius_mailchimp_plugin.unique_email';
+    public $message = 'bitbag_sylius_mailchimp_plugin.ui.unique_email';
 
     public function validatedBy()
     {

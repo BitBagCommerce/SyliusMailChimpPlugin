@@ -41,8 +41,8 @@ final class NewsletterValidator
     public function validate($email)
     {
         $violations = $this->validator->validate($email, [
-            new Email(['message' => 'bitbag_sylius_mailchimp_plugin.invalid_email']),
-            new NotBlank(['message' => 'bitbag_sylius_mailchimp_plugin.email_not_blank']),
+            new Email(['message' => 'bitbag_sylius_mailchimp_plugin.ui.invalid_email']),
+            new NotBlank(['message' => 'bitbag_sylius_mailchimp_plugin.ui.email_not_blank']),
             new UniqueNewsletterEmail(),
         ]);
 
