@@ -1,0 +1,5 @@
+bitbag_sylius_mailchimp_plugin:
+    ui:
+        invalid_email: L'adresse email est invalide.
+        email_not_blank: Veuillez remplir le champ d'email.
+        unique_email: Vous êtes déjà inscrit sur notre newsletter.
