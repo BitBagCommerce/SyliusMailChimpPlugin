@@ -72,7 +72,7 @@ $ bin/console assets:install --symlink
 
 ```html
 <script src="{{ asset(path) }}"></script>
-<script src="{{ asset('bundles/mailchimpplugin/bitbag-mailchimp-plugin-newsletter.js') }}"></script>
+<script src="{{ asset('bundles/bitbagsyliusmailchimpplugin/bitbag-mailchimp-plugin-newsletter.js') }}"></script>
 <script>
     $('#footer-newsletter-form').joinNewsletter();
 </script>
