@@ -1,17 +1,20 @@
 services:
     bitbag_sylius_mailchimp_plugin.validator.email_validator:
         class: BitBag\SyliusMailChimpPlugin\Validator\NewsletterValidator
+        public: true
         arguments:
             - "@validator"
             - "@sylius.manager.customer"
 
     bitbag_sylius_mailchimp_plugin.drewm.mailchimp:
         class: DrewM\MailChimp\MailChimp
+        public: true
         arguments:
             - "%mailchimp.api_key%"
 
     bitbag_sylius_mailchimp_plugin.handler.newsletter_subscription_handler:
         class: BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionHandler
+        public: true
         arguments:
             - "@sylius.repository.customer"
             - "@sylius.factory.customer"
@@ -21,6 +24,7 @@ services:
 
     bitbag_sylius_mailchimp_plugin.validator.unique_newsletter_email_validator:
         class: BitBag\SyliusMailChimpPlugin\Validator\Constraints\UniqueNewsletterEmailValidator
+        public: true
         arguments:
             - "@sylius.repository.customer"
         tags:
@@ -28,6 +32,7 @@ services:
 
     bitbag_sylius_mailchimp_plugin.event_listener.customer_listener:
         class: BitBag\SyliusMailChimpPlugin\EventListener\CustomerNewsletterListener
+        public: true
         arguments:
             - "@bitbag_sylius_mailchimp_plugin.handler.newsletter_subscription_handler"
         tags:
