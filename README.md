@@ -1,4 +1,8 @@
-![BitBag](https://bitbag.pl/static/bitbag-logo.png)
+![BitBag](https://bitbag.shop/static/bitbag-logo.png)
+
+<p>
+    <img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="85">
+</p>
 
 ## Overview
 
