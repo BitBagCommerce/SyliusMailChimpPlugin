@@ -18,4 +18,3 @@ Feature: Unsubscribing newsletter
     And I unsubscribe the newsletter
     And I save my changes
     Then I should be notified that it has been successfully edited
-    And the email "pablo@escobar.co" should be removed from MailChimp's default list

@@ -6,6 +6,7 @@ use Behat\Behat\Context\Context;
 use DrewM\MailChimp\MailChimp;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\BitBag\SyliusMailChimpPlugin\Behat\Fake\AlwaysSuccessMailChimpClient;
 use Webmozart\Assert\Assert;
 
 final class MailChimpContext implements Context
@@ -39,7 +40,7 @@ final class MailChimpContext implements Context
     public function __construct(SharedStorageInterface $sharedStorage, $apiKey, $listId)
     {
         $this->sharedStorage = $sharedStorage;
-        $this->mailChimp = new MailChimp($apiKey);
+        $this->mailChimp = new AlwaysSuccessMailChimpClient($apiKey);
         $this->listId = $listId;
     }
 
@@ -88,18 +89,6 @@ final class MailChimpContext implements Context
         ]);
         Assert::keyExists($response, 'status');
         Assert::eq($response['status'], 'subscribed');
-    }
-
-    /**
-     * @Then the email :email should be removed from MailChimp's default list
-     */
-    public function theEmailShouldBeRemovedFromMailchimpSDefaultList($email)
-    {
-        $emailHash = $this->getSubscriberHash($email);
-        $response = $this->mailChimp->get('lists/' . $this->listId . '/members/' . $emailHash);
-        Assert::keyExists($response, 'status');
-        Assert::eq($response['status'], Response::HTTP_NOT_FOUND);
-        $this->subscribedEmail = $email;
     }
 
     /**
