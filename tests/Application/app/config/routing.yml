@@ -1,0 +1,6 @@
+sylius:
+    resource: "../../../../vendor/sylius/sylius/app/config/routing.yml"
+
+bitbag_sylius_mailchimp_plugin:
+    resource: "@BitBagSyliusMailChimpPlugin/Resources/config/routing.yml"
+    prefix: /

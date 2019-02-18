@@ -1,19 +1,21 @@
 services:
-    _defaults: { public: true }
-
     bitbag_sylius_mailchimp_plugin.context.ui.shop.newsletter:
         class: Tests\BitBag\SyliusMailChimpPlugin\Behat\Context\Ui\Shop\NewsletterContext
         arguments:
             - "@bitbag_sylius_mailchimp_plugin.behat.page.newsletter_page"
-            - "@sylius.repository.customer"
-            - "@sylius.factory.customer"
-            - "@sylius.manager.customer"
+            - "@__symfony__.sylius.repository.customer"
+            - "@__symfony__.sylius.factory.customer"
+            - "@__symfony__.sylius.manager.customer"
             - "@sylius.behat.shared_storage"
             - "@bitbag_sylius_mailchimp_plugin.behat.page.profile_update_page"
+        tags:
+            - { name: fob.context_service }
 
     bitbag_sylius_mailchimp_plugin.context.ui.shop.mailchimp:
         class: Tests\BitBag\SyliusMailChimpPlugin\Behat\Context\Ui\Shop\MailChimpContext
         arguments:
             - "@sylius.behat.shared_storage"
-            - "%mailchimp.api_key%"
-            - "%mailchimp.list_id%"
+            - "%__symfony__.mailchimp.api_key%"
+            - "%__symfony__.mailchimp.list_id%"
+        tags:
+            - { name: fob.context_service }

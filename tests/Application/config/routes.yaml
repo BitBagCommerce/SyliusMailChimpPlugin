@@ -1,3 +1,0 @@
-bitbag_sylius_mailchimp_plugin:
-    resource: "@BitBagSyliusMailChimpPlugin/Resources/config/routing.yml"
-    prefix: /
