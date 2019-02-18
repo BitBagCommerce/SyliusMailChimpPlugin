@@ -1,21 +1,52 @@
 imports:
-    - vendor/sylius/sylius/behat.yml.dist
+    - vendor/sylius/sylius/src/Sylius/Behat/Resources/config/suites.yml
     - tests/Behat/Resources/suites.yml
 
 default:
     extensions:
-        FriendsOfBehat\ContextServiceExtension:
-            imports:
-                - vendor/sylius/sylius/src/Sylius/Behat/Resources/config/services.xml
-                - tests/Behat/Resources/services.xml
 
         FriendsOfBehat\SymfonyExtension:
+            bootstrap: tests/Application/config/bootstrap.php
             kernel:
-                class: AppKernel
-                path: tests/Application/app/AppKernel.php
-                bootstrap: vendor/autoload.php
+                debug: true
+                class: Tests\BitBag\SyliusMailChimpPlugin\Application\Kernel
+                path: tests/Application/Kernel.php
+                environment: test
 
         Lakion\Behat\MinkDebugExtension:
             directory: etc/build
             clean_start: false
             screenshot: true
+
+        Behat\MinkExtension:
+            files_path: "%paths.base%/vendor/sylius/sylius/src/Sylius/Behat/Resources/fixtures/"
+            base_url: "http://localhost:8080/"
+            default_session: symfony
+            javascript_session: chrome
+            sessions:
+                symfony:
+                    symfony: ~
+                chrome:
+                    selenium2:
+                        browser: chrome
+                        capabilities:
+                            browserName: chrome
+                            browser: chrome
+                            version: ""
+                            marionette: null # https://github.com/Behat/MinkExtension/pull/311
+                            chrome:
+                                switches:
+                                    - "start-fullscreen"
+                                    - "start-maximized"
+                                    - "no-sandbox"
+
+        FriendsOfBehat\VariadicExtension: ~
+
+        FriendsOfBehat\SuiteSettingsExtension:
+            paths:
+                - "features"
+    formatters:
+        pretty:
+            verbose: true
+            paths: false
+            snippets: false

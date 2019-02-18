@@ -1,3 +1,0 @@
-parameters:
-    mailchimp.api_key: API_KEY
-    mailchimp.list_id: DEFAULT_LIST_ID

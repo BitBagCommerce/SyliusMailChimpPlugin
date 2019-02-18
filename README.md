@@ -48,7 +48,7 @@ Add plugin dependencies to your `config/bundles.php` file:
 return [
 ...
 
-BitBag\SyliusMailChimpPlugin\BitBagSyliusMailChimpPlugin => ['all' => true],
+BitBag\SyliusMailChimpPlugin\BitBagSyliusMailChimpPlugin::class => ['all' => true],
 ];
 ```
 
@@ -62,13 +62,13 @@ bitbag_sylius_mailChimp_plugin:
 
 Configure MailChimp credentials
 ```yaml
-# config/_sylius.yaml
+# .env
 
-parameters:
-    ...
+...
+MAIL_CHIMP_API_KEY=YOUR_KEY
 
-    mailchimp.api_key: YOUR_API_KEY
-    mailchimp.list_id: DEFAULT_LIST_ID
+MAIL_CHIMP_LIST_ID=YOUR_LIST_ID
+
 ```
 
 Include the newsletter in your template:

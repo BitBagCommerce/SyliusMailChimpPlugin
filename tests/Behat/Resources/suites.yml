@@ -1,7 +1,7 @@
 default:
     suites:
         ui_newsletter:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.shop_security
@@ -16,7 +16,7 @@ default:
                 tags: "@newsletter && @ui"
 
         ui_customer_registration:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.email_spool
 
@@ -37,7 +37,7 @@ default:
                 tags: "@customer_registration && @ui"
 
         ui_customer_account:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.email_spool
 
