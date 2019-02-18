@@ -15,6 +15,9 @@
     <a href="https://packagist.org/packages/bitbag/mailchimp-plugin" title="Total Downloads" target="_blank">
         <img src="https://poser.pugx.org/bitbag/mailchimp-plugin/downloads" />
     </a>
+    <a href="http://travis-ci.org/BitBagCommerce/SyliusMailChimpPlugin" title="Build status" target="_blank">
+        <img src="https://travis-ci.org/BitBagCommerce/SyliusMailChimpPlugin.svg?branch=master" />
+    </a>
     <p>
         <img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="85">
     </p>
