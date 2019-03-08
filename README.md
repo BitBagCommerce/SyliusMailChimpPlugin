@@ -49,9 +49,9 @@ $ composer require bitbag/mailcimp-plugin
 Add plugin dependencies to your `config/bundles.php` file:
 ```php
 return [
-...
+    ...
 
-BitBag\SyliusMailChimpPlugin\BitBagSyliusMailChimpPlugin::class => ['all' => true],
+    BitBag\SyliusMailChimpPlugin\BitBagSyliusMailChimpPlugin::class => ['all' => true],
 ];
 ```
 
