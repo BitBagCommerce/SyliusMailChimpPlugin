@@ -43,7 +43,7 @@ The admin can be accessed under [demo.bitbag.shop/admin](https://demo.bitbag.sho
 
 ## Installation
 ```bash
-$ composer require bitbag/mailcimp-plugin
+$ composer require bitbag/mailchimp-plugin
 ```
 
 Add plugin dependencies to your `config/bundles.php` file:
