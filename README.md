@@ -59,7 +59,7 @@ Import routing **on top** of your `config/routes.yaml` file:
 ```yaml
 # config/routes.yaml
 
-bitbag_sylius_mailChimp_plugin:
+bitbag_sylius_mailchimp_plugin:
     resource: "@BitBagSyliusMailChimpPlugin/Resources/config/routing.yml"
 ```
 
