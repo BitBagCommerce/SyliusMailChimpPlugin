@@ -30,7 +30,7 @@ platform through customer registration, account updates or footer/modal join new
 
 ## Support
 
-You can order our support on [this page](https://bitbag.shop/products/sylius-mailchimp).
+You can order our support on [this page](https://bitbag.io/contact).
 
 We work on amazing eCommerce projects on top of Sylius and other great Symfony based solutions, like eZ Platform, Akeneo or Pimcore.
 Need some help or additional resources for a project? Write us an email on mikolaj.krol@bitbag.pl or visit
