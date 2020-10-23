@@ -5,9 +5,8 @@
     "description": "MailChimp plugin for Sylius.",
     "license": "MIT",
     "require": {
-        "php": "^7.2",
-
-        "sylius/sylius": "^1.4",
+        "php": "^7.3",
+        "sylius/sylius": "~1.7",
         "drewm/mailchimp-api": "^2.5"
     },
     "require-dev": {
@@ -21,7 +20,7 @@
         "friends-of-behat/symfony-extension": "^2.0",
         "friends-of-behat/variadic-extension": "^1.1",
         "lakion/mink-debug-extension": "^1.2.3",
-        "phpspec/phpspec": "^5.0",
+        "phpspec/phpspec": "^6.2",
         "phpstan/phpstan-doctrine": "^0.10",
         "phpstan/phpstan-shim": "^0.10",
         "phpstan/phpstan-symfony": "^0.10",
@@ -52,8 +51,5 @@
     },
     "autoload-dev": {
         "classmap": ["tests/Application/Kernel.php"]
-    },
-    "config": {
-        "bin-dir": "bin"
     }
 }
