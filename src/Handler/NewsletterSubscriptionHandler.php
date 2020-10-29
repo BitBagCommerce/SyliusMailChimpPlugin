@@ -63,12 +63,9 @@ class NewsletterSubscriptionHandler
         $this->listId = $listId;
     }
 
-    /**
-     * @param string $email
-     */
-    public function subscribe($email)
+    public function subscribe(CustomerInterface $customer)
     {
-        $customer = $this->customerRepository->findOneBy(['email' => $email]);
+        $email = $customer->getEmail();
 
         if ($customer instanceof CustomerInterface) {
             $this->updateCustomer($customer);

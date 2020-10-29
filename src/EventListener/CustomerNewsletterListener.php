@@ -52,7 +52,7 @@ final class CustomerNewsletterListener
 
     private function subscribe(CustomerInterface $customer)
     {
-        $this->newsletterSubscriptionHandler->subscribe($customer->getEmail());
+        $this->newsletterSubscriptionHandler->subscribe($customer);
     }
 
     private function unsubscribe(CustomerInterface $customer)
