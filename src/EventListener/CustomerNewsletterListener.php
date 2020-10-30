@@ -11,23 +11,15 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class CustomerNewsletterListener
 {
-    /**
-     * @var NewsletterSubscriptionHandler
-     */
+    /** @var NewsletterSubscriptionHandler */
     private $newsletterSubscriptionHandler;
 
-    /**
-     * @param NewsletterSubscriptionHandler $newsletterSubscriptionHandler
-     */
     public function __construct(NewsletterSubscriptionHandler $newsletterSubscriptionHandler)
     {
         $this->newsletterSubscriptionHandler = $newsletterSubscriptionHandler;
     }
 
-    /**
-     * @param GenericEvent $event
-     */
-    public function customerCreateEvent(GenericEvent $event)
+    public function customerCreateEvent(GenericEvent $event): void
     {
         /** @var CustomerInterface $customer */
         $customer = $event->getSubject();
@@ -42,20 +34,17 @@ final class CustomerNewsletterListener
         $customer->isSubscribedToNewsletter() === false ? $this->unsubscribe($customer) : $this->subscribe($customer);
     }
 
-    /**
-     * @param GenericEvent $event
-     */
-    public function customerUpdateEvent(GenericEvent $event)
+    public function customerUpdateEvent(GenericEvent $event): void
     {
         $this->customerCreateEvent($event);
     }
 
-    private function subscribe(CustomerInterface $customer)
+    private function subscribe(CustomerInterface $customer): void
     {
         $this->newsletterSubscriptionHandler->subscribe($customer);
     }
 
-    private function unsubscribe(CustomerInterface $customer)
+    private function unsubscribe(CustomerInterface $customer): void
     {
         $this->newsletterSubscriptionHandler->unsubscribe($customer);
     }

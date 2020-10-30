@@ -15,46 +15,27 @@ use Webmozart\Assert\Assert;
 
 class NewsletterSubscriptionHandler
 {
-    /**
-     * @var CustomerRepositoryInterface
-     */
+    /** @var CustomerRepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $customerFactory;
 
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $customerManager;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $listId;
 
-    /**
-     * @var MailChimp
-     */
+    /** @var MailChimp */
     private $mailChimp;
 
-    /**
-     * NewsletterSubscriptionHandler constructor.
-     *
-     * @param CustomerRepositoryInterface $customerRepository
-     * @param FactoryInterface $customerFactory
-     * @param EntityManagerInterface $customerManager
-     * @param MailChimp $mailChimp
-     * @param string $listId
-     */
     public function __construct(
         CustomerRepositoryInterface $customerRepository,
         FactoryInterface $customerFactory,
         EntityManagerInterface $customerManager,
         MailChimp $mailChimp,
-        $listId
+        string $listId
     ) {
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
@@ -63,7 +44,7 @@ class NewsletterSubscriptionHandler
         $this->listId = $listId;
     }
 
-    public function subscribe(CustomerInterface $customer)
+    public function subscribe(CustomerInterface $customer): void
     {
         $email = $customer->getEmail();
 
@@ -81,20 +62,14 @@ class NewsletterSubscriptionHandler
         }
     }
 
-    /**
-     * @param CustomerInterface $customer
-     */
-    public function unsubscribe(CustomerInterface $customer)
+    public function unsubscribe(CustomerInterface $customer): void
     {
         $this->updateCustomer($customer, false);
         $email = $customer->getEmail();
         $this->mailChimp->delete('lists/' . $this->listId . '/members/' . $this->getEmailHash($email));
     }
 
-    /**
-     * @param string $email
-     */
-    private function createNewCustomer($email)
+    private function createNewCustomer(string $email): void
     {
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
@@ -105,10 +80,7 @@ class NewsletterSubscriptionHandler
         $this->customerRepository->add($customer);
     }
 
-    /**
-     * @param string $email
-     */
-    private function exportNewEmail($email)
+    private function exportNewEmail(string $email): void
     {
         $response = $this->mailChimp->post('lists/' . $this->listId . '/members', [
             'email_address' => $email,
@@ -122,22 +94,13 @@ class NewsletterSubscriptionHandler
         }
     }
 
-    /**
-     * @param CustomerInterface $customer
-     * @param bool $subscribedToNewsletter
-     */
-    private function updateCustomer(CustomerInterface $customer, $subscribedToNewsletter = true)
+    private function updateCustomer(CustomerInterface $customer, bool $subscribedToNewsletter = true): void
     {
         $customer->setSubscribedToNewsletter($subscribedToNewsletter);
         $this->customerManager->flush();
     }
 
-    /**
-     * @param string $email
-     *
-     * @return string
-     */
-    private function getEmailHash($email)
+    private function getEmailHash(string $email): string
     {
         return md5(strtolower($email));
     }
