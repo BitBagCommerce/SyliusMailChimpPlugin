@@ -37,4 +37,4 @@ services:
             - "@bitbag_sylius_mailchimp_plugin.handler.newsletter_subscription_handler"
         tags:
             - { name: "kernel.event_listener", event: "sylius.customer.post_register", method: customerCreateEvent }
-            - { name: "kernel.event_listener", event: "sylius.customer.pre_update", method: customerUpdateEvent }
+            - { name: "kernel.event_listener", event: "sylius.customer.post_update", method: customerUpdateEvent }
