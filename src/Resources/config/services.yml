@@ -4,7 +4,14 @@ services:
         public: true
         arguments:
             - "@validator"
-            - "@sylius.manager.customer"
+
+    bitbag_sylius_mailchimp_plugin.validator.webhook_validator:
+        class: BitBag\SyliusMailChimpPlugin\Validator\WebhookValidator
+        public: true
+        arguments:
+            - "@validator"
+            - "%mailchimp.list_id%"
+            - "%mailchimp.webhook_secret%"
 
     bitbag_sylius_mailchimp_plugin.controller.newsletter:
         class: BitBag\SyliusMailChimpPlugin\Controller\NewsletterController
@@ -14,6 +21,13 @@ services:
             - "@translator"
             - "@bitbag_sylius_mailchimp_plugin.handler.newsletter_subscription_handler"
             - "@security.csrf.token_manager"
+
+    bitbag_sylius_mailchimp_plugin.controller.mailchimp:
+        class: BitBag\SyliusMailChimpPlugin\Controller\MailchimpController
+        public: true
+        arguments:
+            - "@bitbag_sylius_mailchimp_plugin.validator.email_validator"
+            - "@bitbag_sylius_mailchimp_plugin.handler.newsletter_subscription_handler"
 
     bitbag_sylius_mailchimp_plugin.drewm.mailchimp:
         class: DrewM\MailChimp\MailChimp
