@@ -12,13 +12,15 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailChimpPlugin\Validator;
 
-use BitBag\SyliusMailChimpPlugin\Validator\Constraints\UniqueNewsletterEmail;
-use Symfony\Component\Validator\Constraints\Email;
+use BitBag\SyliusMailChimpPlugin\Model\WebhookData;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-final class NewsletterValidator
+final class WebhookValidator
 {
     /** @var ValidatorInterface */
     private $validator;
@@ -26,25 +28,42 @@ final class NewsletterValidator
     /** @var string */
     private $listId;
 
-    /**
-     * @param ValidatorInterface $validator
-     * @param string $listId
-     */
-    public function __construct(ValidatorInterface $validator, string $listId)
+    /** @var string */
+    private $webhookSecret;
+
+    public function __construct(ValidatorInterface $validator, string $listId, string $webhookSecret)
     {
         $this->validator = $validator;
+        $this->listId = $listId;
+        $this->webhookSecret = $webhookSecret;
     }
 
-    /**
-     * @param null|string $email
-     * @return array
-     */
-    public function validate(?string $email): array
+    public function validate(WebhookData $webhookData): array
     {
-        $violations = $this->validator->validate($email, [
-            new Email(['message' => 'bitbag_sylius_mailchimp_plugin.ui.invalid_email']),
-            new NotBlank(['message' => 'bitbag_sylius_mailchimp_plugin.ui.email_not_blank']),
-            new UniqueNewsletterEmail(),
+        $data = $webhookData->getData();
+        $violations = $this->validator->validate($data, [
+            new Collection([
+                'allowExtraFields' => true,
+                'allowMissingFields' => false,
+                'fields' => [
+                    'list_id' => [
+                        new NotBlank(),
+                        new Type(['type' => 'string']),
+                    ],
+                    'status' => [
+                        new NotBlank(),
+                        new Type(['type' => 'string']),
+                    ],
+                    'id' => [
+                        new NotBlank(),
+                        new Type(['type' => 'string']),
+                    ],
+                    'email' => [
+                        new NotBlank(),
+                        new Type(['type' => 'string']),
+                    ],
+                ],
+            ]),
         ]);
 
         $errors = [];
@@ -61,16 +80,13 @@ final class NewsletterValidator
         return $errors;
     }
 
-    /**
-     * @param string|null $listId
-     * @return array
-     */
-    public function validateListId(?string $listId): array
+    public function isListIdValid(?string $listId): bool
     {
-        $errors = [];
-        if($listId !== $this->listId){
-            $errors[] = 'bitbag_sylius_mailchimp_plugin.ui.invalid_list_id';
-        }
-        return $errors;
+        return $listId === $this->listId;
+    }
+
+    public function isRequestValid(Request $request): bool
+    {
+        return $request->query->get('qsecret') === $this->webhookSecret;
     }
 }

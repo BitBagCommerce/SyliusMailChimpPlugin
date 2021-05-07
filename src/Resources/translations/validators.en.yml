@@ -3,3 +3,7 @@ bitbag_sylius_mailchimp_plugin:
         invalid_email: The submitted email address is not valid.
         email_not_blank: Please fill the email field.
         unique_email: Given email address is already subscribed to the newsletter.
+        invalid_list_id_malichimp: Given List ID is different then configured one.
+        invalid_list_id_configured: Given List ID does not match ones on your Mailchimp account.
+        invalid_query_secret: Webhook query secret sent from webhook is different then configured one.
+        invalid_webhook_type: Invalid webhook type supplied.

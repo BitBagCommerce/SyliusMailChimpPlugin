@@ -4,4 +4,8 @@ bitbag_sylius_mailchimp_plugin_newsletter_subscribe:
     defaults:
         _controller: bitbag_sylius_mailchimp_plugin.controller.newsletter:subscribeAction
 
-#TODO - webhook
+bitbag_sylius_mailchimp_plugin_webhook:
+    path: /mailchimp/webhook
+    methods: ["POST", "GET"]
+    defaults:
+        _controller: bitbag_sylius_mailchimp_plugin.controller.mailchimp:webhookAction

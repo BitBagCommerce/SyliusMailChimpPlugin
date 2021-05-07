@@ -5,3 +5,4 @@ bitbag_sylius_mailchimp_plugin:
         your_email_address: Your email address
         subscribed_successfully: You are now subscribed to the newsletter.
         invalid_csrf_token: Submited CSRF token is invalid.
+        unsubscribed_successfully: You are now unsubscribed from the newsletter.
