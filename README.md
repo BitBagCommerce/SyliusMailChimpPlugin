@@ -60,6 +60,11 @@ bitbag_sylius_mailchimp_plugin:
 ```
 
 Configure MailChimp credentials
+
+To get info about list id:
+https://mailchimp.com/developer/marketing/api/lists/get-lists-info/
+
+
 ```yaml
 # .env
 

@@ -2,4 +2,6 @@ bitbag_sylius_mailchimp_plugin_newsletter_subscribe:
     path: /newsletter/subscribe
     methods: ["POST", "PATCH"]
     defaults:
-        _controller: BitBagSyliusMailChimpPlugin:Newsletter:subscribe
+        _controller: bitbag_sylius_mailchimp_plugin.controller.newsletter:subscribeAction
+
+#TODO - webhook

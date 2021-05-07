@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * another great project.
+ * You can find more information about us on https://bitbag.shop and write us
+ * an email on tomasz.grochowski@bitbag.pl.
+ */
+
 declare(strict_types=1);
 
 namespace BitBag\SyliusMailChimpPlugin\Handler;
@@ -54,7 +62,7 @@ class NewsletterSubscriptionHandler
         FactoryInterface $customerFactory,
         EntityManagerInterface $customerManager,
         MailChimp $mailChimp,
-        $listId
+        string $listId
     ) {
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
@@ -121,7 +129,10 @@ class NewsletterSubscriptionHandler
         Assert::keyExists($response, 'status');
 
         if ($response['status'] !== 'subscribed') {
-            throw new BadRequestHttpException();
+            dump($response);
+            throw new BadRequestHttpException(
+                sprintf("Response status is %s instead of %s", $response["status"], 'subscribed')
+            );
         }
     }
 

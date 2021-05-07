@@ -6,6 +6,15 @@ services:
             - "@validator"
             - "@sylius.manager.customer"
 
+    bitbag_sylius_mailchimp_plugin.controller.newsletter:
+        class: BitBag\SyliusMailChimpPlugin\Controller\NewsletterController
+        public: true
+        arguments:
+            - "@bitbag_sylius_mailchimp_plugin.validator.email_validator"
+            - "@translator"
+            - "@bitbag_sylius_mailchimp_plugin.handler.newsletter_subscription_handler"
+            - "@security.csrf.token_manager"
+
     bitbag_sylius_mailchimp_plugin.drewm.mailchimp:
         class: DrewM\MailChimp\MailChimp
         public: true
@@ -37,4 +46,5 @@ services:
             - "@bitbag_sylius_mailchimp_plugin.handler.newsletter_subscription_handler"
         tags:
             - { name: "kernel.event_listener", event: "sylius.customer.post_register", method: customerCreateEvent }
-            - { name: "kernel.event_listener", event: "sylius.customer.pre_update", method: customerUpdateEvent }
+            - { name: "kernel.event_listener", event: "sylius.customer.pre_update", method: customerPreUpdateEvent }
+            - { name: "kernel.event_listener", event: "sylius.customer.post_update", method: customerUpdateEvent }
