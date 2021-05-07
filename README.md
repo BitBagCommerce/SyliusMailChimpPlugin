@@ -73,7 +73,14 @@ MAIL_CHIMP_API_KEY=YOUR_KEY
 
 MAIL_CHIMP_LIST_ID=YOUR_LIST_ID
 
+MAIL_CHIMP_WEBHOOK_SECRET=QUERY_PARAMETER_FOR_UNSUBSCRIBED_WEBHHOOK
 ```
+
+[Read more about MAIL_CHIMP_WEBHOOK_SECRET](#Configuring Unsubscribe webhook)
+
+You can read more about Mailchimp webhooks here: https://mailchimp.com/developer/marketing/guides/sync-audience-data-webhooks/
+
+
 
 Include the newsletter in your template:
 ```twig
@@ -87,7 +94,7 @@ $ bin/console assets:install --symlink
 
 Add these javascripts to the layout template that includes your subscription form imported in the previous steps
 ```html
-<script src="{{ asset(path) }}"></script>
+<script src="{{ asset('path/to/jquery.js') }}"></script>
 <script src="{{ asset('bundles/bitbagsyliusmailchimpplugin/bitbag-mailchimp-plugin-newsletter.js') }}"></script>
 <script>
     $('#footer-newsletter-form').joinNewsletter();
@@ -97,6 +104,25 @@ Add these javascripts to the layout template that includes your subscription for
 That's the simplest and fastest way to integrate the jQuery plugin. If you need to customize it, simply take a look at
 [bitbag-mailchimp-plugin-newsletter.js](src/Resources/public/bitbag-mailchimp-plugin-newsletter.js), create your own `*.js` plugin and 
 import it in your main `Gulpfile.js`.
+
+## Configuring Unsubscribe webhook
+
+Configuring this options allows you to keep your database in sync with mailchimp if user will decide to resign from subscribing your mailing list through MailChimp link.
+
+To create such a webhook on mailchimp side follow [this official mailchimp article](https://mailchimp.com/developer/marketing/guides/sync-audience-data-webhooks/)
+
+Plugin ready endpoint is defined as follows:
+
+```yaml
+bitbag_sylius_mailchimp_plugin_webhook:
+    path: /mailchimp/webhook
+```
+
+On webhook configuration on mailchimp use following Webhook URL:
+
+`https://yourdomain/mailchimp/webhook/?qsecret=<WEBHOOK_SECRET>`
+
+Used `WEBHOOK_SECRET` on Mailchimp side should be the same as `MAIL_CHIMP_WEBHOOK_SECRET` from .env file on Your project.
 
 ## Customization
 
