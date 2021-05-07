@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file has been created by developers from BitBag.
+ * Feel free to contact us once you face any issues or want to start
+ * another great project.
+ * You can find more information about us on https://bitbag.shop and write us
+ * an email on tomasz.grochowski@bitbag.pl.
+ */
+
 declare(strict_types=1);
 
 namespace BitBag\SyliusMailChimpPlugin\Validator\Constraints;
@@ -11,14 +19,9 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 final class UniqueNewsletterEmailValidator extends ConstraintValidator
 {
-    /**
-     * @var CustomerRepositoryInterface
-     */
+    /** @var CustomerRepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @param CustomerRepositoryInterface $customerRepository
-     */
     public function __construct(CustomerRepositoryInterface $customerRepository)
     {
         $this->customerRepository = $customerRepository;
@@ -27,19 +30,14 @@ final class UniqueNewsletterEmailValidator extends ConstraintValidator
     /**
      * {@inheritdoc]
      */
-    public function validate($email, Constraint $constraint)
+    public function validate($email, Constraint $constraint): void
     {
         if ($this->isEmailValid($email) === false) {
             $this->context->addViolation($constraint->message);
         }
     }
 
-    /**
-     * @param string $email
-     *
-     * @return bool
-     */
-    private function isEmailValid($email)
+    private function isEmailValid(?string $email): bool
     {
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
 

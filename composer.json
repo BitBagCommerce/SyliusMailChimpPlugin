@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
-        "sylius/sylius": "~1.7",
+        "sylius/sylius": "~1.9",
         "drewm/mailchimp-api": "^2.5"
     },
     "require-dev": {
