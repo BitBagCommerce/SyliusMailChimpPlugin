@@ -8,7 +8,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 
 interface NewsletterSubscriptionInterface
 {
-
     public function subscribe(string $email): void;
 
     public function unsubscribe(CustomerInterface $customer): void;

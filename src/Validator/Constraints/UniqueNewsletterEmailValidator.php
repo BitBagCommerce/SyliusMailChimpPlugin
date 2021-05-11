@@ -28,11 +28,12 @@ final class UniqueNewsletterEmailValidator extends ConstraintValidator
     }
 
     /**
-     * {@inheritdoc]
+     * @param mixed $value
+     * @param Constraint|UniqueNewsletterEmail $constraint
      */
-    public function validate($email, Constraint $constraint): void
+    public function validate($value, Constraint $constraint): void
     {
-        if ($this->isEmailValid($email) === false) {
+        if ($this->isEmailValid($value) === false) {
             $this->context->addViolation($constraint->message);
         }
     }

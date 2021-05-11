@@ -23,7 +23,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class NewsletterController
 {
-
     /** @var NewsletterValidator */
     private $validator;
 
@@ -41,8 +40,7 @@ final class NewsletterController
         TranslatorInterface $translator,
         NewsletterSubscriptionHandler $handler,
         CsrfTokenManager $tokenManager
-    )
-    {
+    ) {
         $this->validator = $validator;
         $this->translator = $translator;
         $this->handler = $handler;

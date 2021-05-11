@@ -22,7 +22,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class MailchimpController
 {
-
     /** @var WebhookValidator */
     private $validator;
 
@@ -36,8 +35,7 @@ final class MailchimpController
         WebhookValidator $validator,
         NewsletterSubscriptionHandler $handler,
         TranslatorInterface $translator
-    )
-    {
+    ) {
         $this->validator = $validator;
         $this->handler = $handler;
         $this->translator = $translator;
@@ -49,7 +47,7 @@ final class MailchimpController
         $errors = $this->validateRequest($webhookData, $request);
 
         if (count($errors) === 0) {
-            $this->handler->unsubscribeCustomerFromLocalDatabase($webhookData["email"]);
+            $this->handler->unsubscribeCustomerFromLocalDatabase($webhookData->getData()['email']);
 
             return new JsonResponse([
                 'success' => true,
@@ -72,9 +70,10 @@ final class MailchimpController
         if (WebhookData::TYPE_UNSUBSCRIBE !== $webhookData->getType()) {
             $errors[] = $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_webhook_type');
         }
-        if (!$this->validator->isListIdValid($webhookData["list_id"])) {
+        if (!$this->validator->isListIdValid($webhookData->getData()['list_id'])) {
             $errors[] = $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_list_id_malichimp');
         }
+
         return $errors;
     }
 }

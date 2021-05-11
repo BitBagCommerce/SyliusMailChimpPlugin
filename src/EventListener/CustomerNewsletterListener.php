@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusMailChimpPlugin\EventListener;
 
 use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionHandler;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -22,14 +23,17 @@ final class CustomerNewsletterListener
     /** @var NewsletterSubscriptionHandler */
     private $newsletterSubscriptionHandler;
 
-    public function __construct(NewsletterSubscriptionHandler $newsletterSubscriptionHandler)
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
+    public function __construct(NewsletterSubscriptionHandler $newsletterSubscriptionHandler, EntityManagerInterface $entityManager)
     {
         $this->newsletterSubscriptionHandler = $newsletterSubscriptionHandler;
+        $this->entityManager = $entityManager;
     }
 
     public function customerCreateEvent(GenericEvent $event): void
     {
-        /** @var CustomerInterface $customer */
         $customer = $event->getSubject();
 
         if (!$customer instanceof CustomerInterface) {
@@ -42,30 +46,59 @@ final class CustomerNewsletterListener
         $customer->isSubscribedToNewsletter() === false ? $this->unsubscribe($customer) : $this->subscribe($customer);
     }
 
-    public function customerUpdateEvent(GenericEvent $event): void
+    public function customerPostUpdateEvent(GenericEvent $event): void
     {
         $this->customerCreateEvent($event);
     }
 
     public function customerPreUpdateEvent(GenericEvent $event): void
     {
-        /** @var CustomerInterface $customer */
         $customer = $event->getSubject();
+
         if (!$customer instanceof CustomerInterface) {
             throw new UnexpectedTypeException(
                 $customer,
                 CustomerInterface::class
             );
         }
+
+        $uow = $this->entityManager->getUnitOfWork();
+        $uow->computeChangeSets();
+        $changelist = $uow->getEntityChangeSet($customer);
+
+        $oldEmail = $this->getOldEmailFromChangeList($changelist);
+
+        if (null !== $oldEmail) {
+            $this->newsletterSubscriptionHandler->unsubscribeEmail($oldEmail);
+        }
     }
 
     private function subscribe(CustomerInterface $customer): void
     {
-        $this->newsletterSubscriptionHandler->subscribe($customer->getEmail());
+        if (null !== $customer->getEmail()) {
+            $this->newsletterSubscriptionHandler->subscribe($customer->getEmail());
+        }
     }
 
     private function unsubscribe(CustomerInterface $customer): void
     {
         $this->newsletterSubscriptionHandler->unsubscribe($customer);
+    }
+
+    private function getOldEmailFromChangeList(array $changelist): ?string
+    {
+        if (!array_key_exists('email', $changelist)) {
+            return null;
+        }
+        $emailChanges = $changelist['email'];
+        if (!is_array($emailChanges)) {
+            return null;
+        }
+        $oldEmail = reset($emailChanges);
+        if (false === $oldEmail) {
+            return null;
+        }
+
+        return $oldEmail;
     }
 }

@@ -23,19 +23,11 @@ final class NewsletterValidator
     /** @var ValidatorInterface */
     private $validator;
 
-    /**
-     * @param ValidatorInterface $validator
-     * @param string $listId
-     */
     public function __construct(ValidatorInterface $validator)
     {
         $this->validator = $validator;
     }
 
-    /**
-     * @param null|string $email
-     * @return array
-     */
     public function validate(?string $email): array
     {
         $violations = $this->validator->validate($email, [

@@ -45,8 +45,7 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
         EntityManagerInterface $customerManager,
         MailChimp $mailChimp,
         string $listId
-    )
-    {
+    ) {
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
         $this->customerManager = $customerManager;
@@ -66,17 +65,22 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
         $customer->setSubscribedToNewsletter(true);
         $this->customerManager->flush();
-
     }
 
     public function getValidMailchimpListIds(): array
     {
         $responseArray = $this->mailChimp->get('/lists');
         $ids = [];
-        $lists = $responseArray["lists"];
-        foreach ($lists as $list) {
-            $ids[] = $list["id"];
+
+        if (false === $responseArray) {
+            return $ids;
         }
+
+        $lists = $responseArray['lists'];
+        foreach ($lists as $list) {
+            $ids[] = $list['id'];
+        }
+
         return $ids;
     }
 
@@ -84,6 +88,13 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
     {
         $this->updateCustomer($customer, false);
         $email = $customer->getEmail();
+        if (null !== $email) {
+            $this->mailChimp->delete('lists/' . $this->listId . '/members/' . $this->getEmailHash($email));
+        }
+    }
+
+    public function unsubscribeEmail(string $email): void
+    {
         $this->mailChimp->delete('lists/' . $this->listId . '/members/' . $this->getEmailHash($email));
     }
 
@@ -110,21 +121,30 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
             'status' => 'subscribed',
         ]);
 
+        if (false === $response) {
+            throw new BadRequestHttpException(
+                sprintf('Mailchimp returned false instead of response array, last error : %s',
+                    $this->mailChimp->getLastError())
+            );
+        }
+
         Assert::keyExists($response, 'status');
 
         if ($response['status'] === Response::HTTP_NOT_FOUND) {
             $validListIds = $this->getValidMailchimpListIds();
+            $concatenatedList = implode(',', $validListIds);
+
             throw new BadRequestHttpException(
-                sprintf("Mailchimp returned %i code, is the MAIL_CHIMP_LIST_ID [%s] one of available ones: [%s] ?",
+                sprintf('Mailchimp returned %1$i code, is the MAIL_CHIMP_LIST_ID [ %2$s ] one of available ones: [ %3$s ] ?',
                     Response::HTTP_NOT_FOUND,
                     $this->listId,
-                    join(",", $validListIds)
+                    $concatenatedList
                 )
             );
         }
         if ($response['status'] !== 'subscribed') {
             throw new BadRequestHttpException(
-                sprintf("Response status is %s instead of %s", $response["status"], 'subscribed')
+                sprintf('Response status is %s instead of %s', $response['status'], 'subscribed')
             );
         }
     }
@@ -143,10 +163,19 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
     protected function addMailchimpData(string $email): void
     {
         $response = $this->mailChimp->get('lists/' . $this->listId . '/members/' . $this->getEmailHash($email));
+
+        if (false === $response) {
+            throw new BadRequestHttpException(
+                sprintf('Mailchimp returned false instead of response array, last error : %s',
+                    $this->mailChimp->getLastError())
+            );
+        }
+
         Assert::keyExists($response, 'status');
 
         if (Response::HTTP_UNAUTHORIZED === $response['status']) {
             Assert::keyExists($response, 'detail');
+
             throw new UnauthorizedHttpException('Mailchimp', $response['detail']);
         }
 

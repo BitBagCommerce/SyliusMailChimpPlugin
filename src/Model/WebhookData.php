@@ -20,16 +20,23 @@ use Symfony\Component\HttpFoundation\Request;
 final class WebhookData
 {
     public const TYPE_SUBSCRIBE = 'subscribe';
+
     public const TYPE_UNSUBSCRIBE = 'unsubscribe'; //An event's action is either unsub or delete. The reason will be manual unless caused by a spam complaint, then it will be abuse.
+
     public const TYPE_PROFILE = 'profile'; //profile update
+
     public const TYPE_UPEMAIL = 'upemail'; //email change
+
     public const TYPE_CLEANED = 'cleaned';
+
     public const TYPE_CAMPAIGN = 'campaign';
 
     /** @var string */
     private $type;
+
     /** @var string */
     private $firedAt;
+
     /** @var array */
     private $data;
 
@@ -37,8 +44,7 @@ final class WebhookData
         string $type,
         string $firedAt,
         array $data
-    )
-    {
+    ) {
         $this->type = $type;
         $this->firedAt = $firedAt;
         $this->data = $data;
