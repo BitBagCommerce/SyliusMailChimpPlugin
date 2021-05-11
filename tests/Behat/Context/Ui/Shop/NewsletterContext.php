@@ -3,7 +3,8 @@
 namespace Tests\BitBag\SyliusMailChimpPlugin\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
+use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Sylius\Behat\Service\SharedStorage;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
@@ -15,56 +16,38 @@ use Webmozart\Assert\Assert;
 
 final class NewsletterContext implements Context
 {
-    /**
-     * @var NewsletterPageInterface
-     */
+    /** @var NewsletterPageInterface */
     private $newsletterPage;
 
-    /**
-     * @var CustomerRepositoryInterface
-     */
+    /** @var CustomerRepositoryInterface */
     private $customerRepository;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $customerFactory;
 
-    /**
-     * @var CustomerInterface
-     */
+    /** @var CustomerInterface */
     private $customer;
 
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var ObjectManager */
     private $customerManager;
 
-    /**
-     * @var SharedStorage
-     */
+    /** @var SharedStorage */
     private $sharedStorage;
 
-    /**
-     * @var ProfileUpdatePageInterface
-     */
+    /** @var ProfileUpdatePageInterface */
     private $profileUpdatePage;
 
-    /**
-     * @param NewsletterPageInterface $newsletterPage
-     * @param CustomerRepositoryInterface $customerRepository
-     * @param FactoryInterface $customerFactory
-     * @param EntityManagerInterface $customerManager
-     * @param SharedStorage $sharedStorage
-     * @param ProfileUpdatePageInterface $profileUpdatePage
-     */
+    /** @var UpdatePageInterface  */
+    private $adminUpdatePage;
+
     public function __construct(
         NewsletterPageInterface $newsletterPage,
         CustomerRepositoryInterface $customerRepository,
         FactoryInterface $customerFactory,
-        EntityManagerInterface $customerManager,
+        ObjectManager $customerManager,
         SharedStorage $sharedStorage,
-        ProfileUpdatePageInterface $profileUpdatePage
+        ProfileUpdatePageInterface $profileUpdatePage,
+        UpdatePageInterface $adminUpdatePage
     )
     {
         $this->newsletterPage = $newsletterPage;
@@ -73,6 +56,7 @@ final class NewsletterContext implements Context
         $this->customerManager = $customerManager;
         $this->sharedStorage = $sharedStorage;
         $this->profileUpdatePage = $profileUpdatePage;
+        $this->adminUpdatePage = $adminUpdatePage;
     }
 
     /**
@@ -119,7 +103,7 @@ final class NewsletterContext implements Context
     }
 
     /**
-     * @Then this customer should be subscribed to the newsletter
+     * @Then the customer should be subscribed to the newsletter
      */
     public function theCustomerShouldBeSubscribedToTheNewsletter()
     {
@@ -220,5 +204,13 @@ final class NewsletterContext implements Context
     public function iUnsubscribeTheNewsletter()
     {
         $this->profileUpdatePage->unsubscribeNewsletter();
+    }
+
+    /**
+     * @Given I want to edit this signed up customer
+     */
+    public function iWantToEditThisSignedUpCustomer()
+    {
+        $this->adminUpdatePage->open(['id' => $this->customer->getId()]);
     }
 }
