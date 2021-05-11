@@ -1,156 +1,111 @@
-<h1 align="center">
-    <a href="http://bitbag.shop" target="_blank">
-        <img src="doc/logo.png" width="55%" />
-    </a>
-    <br />
-    <a href="https://packagist.org/packages/bitbag/mailchimp-plugin" title="License" target="_blank">
-        <img src="https://img.shields.io/packagist/l/bitbag/mailchimp-plugin.svg" />
-    </a>
-    <a href="http://travis-ci.org/BitBagCommerce/SyliusMailChimpPlugin" title="Build status" target="_blank">
-        <img src="https://travis-ci.org/BitBagCommerce/SyliusMailChimpPlugin.svg?branch=master" />
-    </a>
-    <a href="https://packagist.org/packages/bitbag/mailchimp-plugin" title="Version" target="_blank">
-        <img src="https://img.shields.io/packagist/v/bitbag/mailchimp-plugin.svg" />
-    </a>
-    <a href="https://scrutinizer-ci.com/g/BitBagCommerce/Sylius/" title="Scrutinizer" target="_blank">
-        <img src="https://img.shields.io/scrutinizer/g/BitBagCommerce/SyliusMailChimpPlugin.svg" />
-    </a>
-    <a href="https://packagist.org/packages/bitbag/mailchimp-plugin" title="Total Downloads" target="_blank">
-        <img src="https://poser.pugx.org/bitbag/mailchimp-plugin/downloads" />
-    </a>
-    <p>
-        <img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="85">
-    </p>
-</h1>
+# [![](https://bitbag.io/wp-content/uploads/2021/01/Mailchimp.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailchimp)
 
-## About us
+# BitBag SyliusMailchimpPlugin
 
-At BitBag we do believe in open source. However, we are able to do it just beacuse of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us working together, feel free to reach us out. You will find out more about our professional services, technologies and contact details at https://bitbag.io/.
+----
 
-## BitBag SyliusMailChimpPlugin
+[![](https://img.shields.io/packagist/l/bitbag/mailchimp-plugin.svg) ](https://packagist.org/packages/bitbag/mailchimp-plugin "License") [ ![](https://img.shields.io/packagist/v/bitbag/mailchimp-plugin.svg) ](https://packagist.org/packages/bitbag/mailchimp-plugin "Version") [ ![](https://img.shields.io/travis/BitBagCommerce/SyliusMailchimpPlugin/master.svg) ](http://travis-ci.org/BitBagCommerce/SyliusMailchimpPlugin "Build status") [ ![](https://img.shields.io/scrutinizer/g/BitBagCommerce/SyliusMailchimpPlugin.svg) ](https://scrutinizer-ci.com/g/BitBagCommerce/SyliusMailchimpPlugin/ "Scrutinizer") [![](https://poser.pugx.org/bitbag/mailchimp-plugin/downloads)](https://packagist.org/packages/bitbag/mailchimp-plugin "Total Downloads") [![Slack](https://img.shields.io/badge/community%20chat-slack-FF1493.svg)](http://sylius-devs.slack.com) [![Support](https://img.shields.io/badge/support-contact%20author-blue])](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailchimp)
 
+<p>
+ <img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="85">
+</p> 
+
+At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us working together, feel free to reach us out. You will find out more about our professional services, technologies and contact details at [https://bitbag.io/](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailchimp).
+
+## Table of Content
+
+***
+
+* [Overview](#overview)
+* [Support](#we-are-here-to-help)
+* [About us](#about-us)
+    * [Community](#community)
+* [Demo](#demo)
+* [License](#license)
+* [Contact](#contact)
+
+# Overview
+***
 This plugin allows you to integrate MailChimp newsletter sign-in process with Sylius
 platform through customer registration, account updates or footer/modal join newsletter form.
 
-## Demo
+- [Installation](doc/installation.md)
+- [Upgrade](UPGRADE.md)
+- [Mailchimp Webhook configuration](doc/mailchimp_webhook.md)
+- [Customization & Testing](doc/customization.md)
 
-We created a demo app with some useful use-cases of the plugin! Visit [demo.bitbag.shop](https://demo.bitbag.shop/en_US/products-list/t-shirts) to take a look at it.
+## We are here to help
+This **open-source plugin was developed to help the Sylius community**. If you have any additional questions, would like help with installing or configuring the plugin or need any assistance with your Sylius project - let us know!
+
+[![](https://bitbag.io/wp-content/uploads/2020/10/button-contact.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailchimp)
+
+# About us
+
+---
+
+BitBag is an agency that provides high-quality **eCommerce and Digital Experience software**. Our main area of expertise includes eCommerce consulting and development for B2C, B2B, and Multi-vendor Marketplaces.
+The scope of our services related to Sylius includes:
+- **Consulting** in the field of strategy development
+- Personalized **headless software development**
+- **System maintenance and long-term support**
+- **Outsourcing**
+- **Plugin development**
+- **Data migration**
+
+Some numbers regarding Sylius:
+* **20+ experts** including consultants, UI/UX designers, Sylius trained front-end and back-end developers,
+* **100+ projects** delivered on top of Sylius,
+* Clients from  **20+ countries**
+* **3+ years** in the Sylius ecosystem.
+
+---
+
+If you need some help with Sylius development, don't be hesitate to contact us directly. You can fill the form on [this site](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailchimp) or send us an e-mail to hello@bitbag.io!
+
+---
+
+[![](https://bitbag.io/wp-content/uploads/2020/10/badges-sylius.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailchimp)
+
+## Community
+
+---- 
+
+For online communication, we invite you to chat with us & other users on [Sylius Slack](https://sylius-devs.slack.com/).
+
+# Demo
+
+---
+
+We created a demo app with some useful use-cases of the plugin! Visit [demo.bitbag.shop](https://demo.bitbag.shop) to take a look at it.
 The admin can be accessed under [demo.bitbag.shop/admin](https://demo.bitbag.shop/admin) link and `sylius: sylius` credentials.
 
-## Installation
-```bash
-$ composer require bitbag/mailchimp-plugin
-```
+We also recorded a webinar which presents most of the plugin features, including how they have been implemented and specific use-cases.
 
-Add plugin dependencies to your `config/bundles.php` file:
-```php
-return [
-    ...
+<div align="center">
 
-    BitBag\SyliusMailChimpPlugin\BitBagSyliusMailChimpPlugin::class => ['all' => true],
-];
-```
+[![Webinar](https://img.youtube.com/vi/Nk8fKA48t_Y/0.jpg)](https://www.youtube.com/watch?v=Nk8fKA48t_Y)
 
-Import routing **on top** of your `config/routes.yaml` file:
-```yaml
-# config/routes.yaml
-
-bitbag_sylius_mailchimp_plugin:
-    resource: "@BitBagSyliusMailChimpPlugin/Resources/config/routing.yml"
-```
-
-Configure MailChimp credentials
-
-To get info about list id:
-https://mailchimp.com/developer/marketing/api/lists/get-lists-info/
-
-
-```yaml
-# .env
-
-...
-MAIL_CHIMP_API_KEY=YOUR_KEY
-
-MAIL_CHIMP_LIST_ID=YOUR_LIST_ID
-
-MAIL_CHIMP_WEBHOOK_SECRET=QUERY_PARAMETER_FOR_UNSUBSCRIBED_WEBHHOOK
-```
-
-[Read more about MAIL_CHIMP_WEBHOOK_SECRET](#Configuring Unsubscribe webhook)
-
-You can read more about Mailchimp webhooks here: https://mailchimp.com/developer/marketing/guides/sync-audience-data-webhooks/
+</div>
 
 
 
-Include the newsletter in your template:
-```twig
-{% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
-```
+**If you need an overview of this plugin, schedule a consultation with our expert.**
 
-Install the assets
-```bash
-$ bin/console assets:install --symlink
-```
+[![](https://bitbag.io/wp-content/uploads/2020/10/button_free_consulatation-1.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailchimp)
 
-Add these javascripts to the layout template that includes your subscription form imported in the previous steps
-```html
-<script src="{{ asset('path/to/jquery.js') }}"></script>
-<script src="{{ asset('bundles/bitbagsyliusmailchimpplugin/bitbag-mailchimp-plugin-newsletter.js') }}"></script>
-<script>
-    $('#footer-newsletter-form').joinNewsletter();
-</script>
-```
 
-That's the simplest and fastest way to integrate the jQuery plugin. If you need to customize it, simply take a look at
-[bitbag-mailchimp-plugin-newsletter.js](src/Resources/public/bitbag-mailchimp-plugin-newsletter.js), create your own `*.js` plugin and 
-import it in your main `Gulpfile.js`.
 
-## Configuring Unsubscribe webhook
+## License
 
-Configuring this options allows you to keep your database in sync with mailchimp if user will decide to resign from subscribing your mailing list through MailChimp link.
+---
 
-To create such a webhook on mailchimp side follow [this official mailchimp article](https://mailchimp.com/developer/marketing/guides/sync-audience-data-webhooks/)
+This plugin's source code is completely free and released under the terms of the MIT license.
 
-Plugin ready endpoint is defined as follows:
+[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.)
 
-```yaml
-bitbag_sylius_mailchimp_plugin_webhook:
-    path: /mailchimp/webhook
-```
+## Contact
 
-On webhook configuration on mailchimp use following Webhook URL:
+---
+If you want to contact us, the best way is to fill the form on [our website](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailchimp) or send us an e-mail to hello@bitbag.io with your question(s). We guarantee that we answer as soon as we can!
 
-`https://yourdomain/mailchimp/webhook/?qsecret=<WEBHOOK_SECRET>`
-
-Used `WEBHOOK_SECRET` on Mailchimp side should be the same as `MAIL_CHIMP_WEBHOOK_SECRET` from .env file on Your project.
-
-## Customization
-
-### Available services you can [decorate](https://symfony.com/doc/current/service_container/service_decoration.html) and forms you can [extend](http://symfony.com/doc/current/form/create_form_type_extension.html)
-```bash
-$ bin/console debug:container | grep bitbag_sylius_mailchimp_plugin
-```
-
-### Parameters you can override in your parameters.yml(.dist) file
-```bash
-$ bin/console debug:container --parameters | grep bitbag
-```
-
-## Testing
-```bash
-$ composer install
-$ cd tests/Application
-$ yarn install
-$ yarn run gulp
-$ bin/console assets:install public -e test
-$ bin/console doctrine:schema:create -e test
-$ bin/console server:run 127.0.0.1:8080 -d public -e test
-$ mailChimp
-$ open http://localhost:8080
-$ vendor/bin/behat
-$ vendor/bin/phpspec run
-```
-
-## Contribution
-
-Learn more about our contribution workflow on http://docs.sylius.org/en/latest/contributing/.
+[![](https://bitbag.io/wp-content/uploads/2020/10/footer.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailchimp)
