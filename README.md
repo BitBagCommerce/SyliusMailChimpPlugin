@@ -1,4 +1,4 @@
-# [![](https://bitbag.io/wp-content/uploads/2021/01/Mailchimp.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailchimp)
+# [![](https://bitbag.io/wp-content/uploads/2021/05/mailchimp.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mailchimp)
 
 # BitBag SyliusMailchimpPlugin
 
