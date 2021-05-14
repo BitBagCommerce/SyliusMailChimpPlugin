@@ -3,9 +3,8 @@
 /*
  * This file has been created by developers from BitBag.
  * Feel free to contact us once you face any issues or want to start
- * another great project.
- * You can find more information about us on https://bitbag.shop and write us
- * an email on tomasz.grochowski@bitbag.pl.
+ * You can find more information about us on https://bitbag.io and write us
+ * an email on hello@bitbag.io.
  */
 
 declare(strict_types=1);
@@ -24,6 +23,9 @@ use Webmozart\Assert\Assert;
 
 class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 {
+    const API_PATH_LISTS = 'lists';
+    const API_PATH_MEMBERS = 'members';
+
     /** @var CustomerRepositoryInterface */
     private $customerRepository;
 
@@ -69,7 +71,7 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
     public function getValidMailchimpListIds(): array
     {
-        $responseArray = $this->mailChimp->get('/lists');
+        $responseArray = $this->mailChimp->get(self::API_PATH_LISTS);
         $ids = [];
 
         if (false === $responseArray) {
@@ -89,13 +91,13 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
         $this->updateCustomer($customer, false);
         $email = $customer->getEmail();
         if (null !== $email) {
-            $this->mailChimp->delete('lists/' . $this->listId . '/members/' . $this->getEmailHash($email));
+            $this->unsubscribeEmail($email);
         }
     }
 
     public function unsubscribeEmail(string $email): void
     {
-        $this->mailChimp->delete('lists/' . $this->listId . '/members/' . $this->getEmailHash($email));
+        $this->mailChimp->delete($this->getListMemberEndpoint($email));
     }
 
     public function unsubscribeCustomerFromLocalDatabase(string $email): void
@@ -116,7 +118,7 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
     private function exportNewEmail(string $email): void
     {
-        $response = $this->mailChimp->post('lists/' . $this->listId . '/members', [
+        $response = $this->mailChimp->post($this->getListMemberEndpoint(), [
             'email_address' => $email,
             'status' => 'subscribed',
         ]);
@@ -162,7 +164,7 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
     protected function addMailchimpData(string $email): void
     {
-        $response = $this->mailChimp->get('lists/' . $this->listId . '/members/' . $this->getEmailHash($email));
+        $response = $this->mailChimp->get($this->getListMemberEndpoint($email));
 
         if (false === $response) {
             throw new BadRequestHttpException(
@@ -183,4 +185,18 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
             $this->exportNewEmail($email);
         }
     }
+
+    private function getListMemberEndpoint(string $email = null) : string
+    {
+        $parts = [
+            self::API_PATH_LISTS,
+            $this->listId,
+            self::API_PATH_MEMBERS,
+        ];
+        if(null !== $email){
+            $parts[] = $this->getEmailHash($email);
+        }
+        return join('/',$parts);
+    }
+
 }
