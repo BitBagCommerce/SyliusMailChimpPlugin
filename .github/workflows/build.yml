@@ -170,10 +170,6 @@ jobs:
                 name: Run security check
                 run: symfony security:check
 
-#            -
-#                name: Check coding standard
-#                run: vendor/bin/ecs check src
-
             -   
                 name: Run PHPStan
                 run: vendor/bin/phpstan analyse -c phpstan.neon -l max src/
@@ -189,20 +185,3 @@ jobs:
             -
                 name: Run PHPUnit
                 run: vendor/bin/phpunit --colors=always
-#Temporary disabled
-#            -   
-#                name: Run non-JS Behat
-#                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript && ~@todo && ~@cli"
-#            
-#            -
-#                name: Run JS Behat
-#                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript && ~@todo && ~@cli" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript && ~@todo && ~@cli" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript && ~@todo && ~@cli" --rerun
-#
-#            -
-#                name: Upload Behat logs
-#                uses: actions/upload-artifact@v2
-#                if: failure()
-#                with:
-#                    name: "Behat logs (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
-#                    path: etc/build/
-#                    if-no-files-found: ignore
