@@ -13,6 +13,6 @@ Feature: Updating not subscribed customer
     When I fill newsletter with "tata@escobar.co" email
     And I subscribe to it
     Then the "tata@escobar.co" customer should be created
-    And this customer should be subscribed to the newsletter
+    And the customer should be subscribed to the newsletter
     And I should be notified that I am subscribed to the newsletter
     And the email "tata@escobar.co" should be exported to MailChimp's default list

@@ -6,6 +6,7 @@ namespace spec\BitBag\SyliusMailChimpPlugin\EventListener;
 
 use BitBag\SyliusMailChimpPlugin\EventListener\CustomerNewsletterListener;
 use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionHandler;
+use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -13,9 +14,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class CustomerNewsletterListenerSpec extends ObjectBehavior
 {
-    function let(NewsletterSubscriptionHandler $newsletterSubscriptionHandler)
+    function let(NewsletterSubscriptionHandler $newsletterSubscriptionHandler, EntityManagerInterface $entityManager)
     {
-        $this->beConstructedWith($newsletterSubscriptionHandler);
+        $this->beConstructedWith($newsletterSubscriptionHandler, $entityManager);
     }
 
     function it_is_initializable()

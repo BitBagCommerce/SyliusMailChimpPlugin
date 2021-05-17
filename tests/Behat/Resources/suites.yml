@@ -75,3 +75,16 @@ default:
                 - bitbag_sylius_mailchimp_plugin.context.ui.shop.mailchimp
             filters:
                 tags: "@customer_account && @ui"
+
+        ui_admin:
+            contexts:
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.ui.admin.managing_customers
+
+                - bitbag_sylius_mailchimp_plugin.context.ui.shop.mailchimp
+                - bitbag_sylius_mailchimp_plugin.context.ui.shop.newsletter
+
+            filters:
+                tags: "@admin && @ui"

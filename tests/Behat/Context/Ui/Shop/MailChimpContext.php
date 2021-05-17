@@ -63,6 +63,23 @@ final class MailChimpContext implements Context
     }
 
     /**
+     *
+     * @Then the email :email should not be in MailChimp's list
+     */
+    public function theEmailShouldNotBeInMailChimpList($email)
+    {
+        $emailHash = $this->getSubscriberHash($email);
+        $response = $this->mailChimp->get('lists/' . $this->listId . '/members/' . $emailHash);
+        Assert::keyExists($response, 'status');
+        Assert::eq($response['status'], 'subscribed', sprintf(
+            "The email %s doesn't exist in MailChimp with list with %s ID",
+            $email,
+            $this->listId
+        ));
+        $this->subscribedEmail = $email;
+    }
+
+    /**
      * @Then the email :email should be exported to MailChimp's default list
      */
     public function theEmailShouldBeExportedToMailChimp($email)
