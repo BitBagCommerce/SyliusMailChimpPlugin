@@ -16,7 +16,6 @@ use BitBag\SyliusMailChimpPlugin\Model\WebhookData;
 use BitBag\SyliusMailChimpPlugin\Validator\WebhookValidator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class MailchimpController
@@ -57,7 +56,7 @@ final class MailchimpController
         return new JsonResponse([
             'success' => false,
             'errors' => json_encode($errors),
-        ], Response::HTTP_BAD_REQUEST);
+        ]);
     }
 
     private function validateRequest(WebhookData $webhookData, Request $request): array
@@ -69,7 +68,8 @@ final class MailchimpController
         if (WebhookData::TYPE_UNSUBSCRIBE !== $webhookData->getType()) {
             $errors[] = $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_webhook_type');
         }
-        if (!$this->validator->isListIdValid($webhookData->getData()['list_id'])) {
+        $data = $webhookData->getData();
+        if (array_key_exists('list_id', $data) && !$this->validator->isListIdValid($data['list_id'])) {
             $errors[] = $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_list_id_malichimp');
         }
 
