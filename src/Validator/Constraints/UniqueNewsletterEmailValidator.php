@@ -15,6 +15,7 @@ use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Webmozart\Assert\Assert;
 
 final class UniqueNewsletterEmailValidator extends ConstraintValidator
 {
@@ -28,10 +29,12 @@ final class UniqueNewsletterEmailValidator extends ConstraintValidator
 
     /**
      * @param mixed $value
-     * @param Constraint|UniqueNewsletterEmail $constraint
+     * @param UniqueNewsletterEmail|Constraint $constraint
      */
     public function validate($value, Constraint $constraint): void
     {
+        Assert::isInstanceOf($constraint, UniqueNewsletterEmail::class);
+
         if ($this->isEmailValid($value) === false) {
             $this->context->addViolation($constraint->message);
         }

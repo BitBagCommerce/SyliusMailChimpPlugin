@@ -51,10 +51,12 @@ final class WebhookData
 
     public static function createFromRequest(Request $request): self
     {
+        $dateString = (new \DateTime())->format('Y-m-d H:i:s');
+
         return new self(
-            $request->get('type'),
-            $request->get('fired_at'),
-            $request->get('data')
+            $request->get('type', self::TYPE_UNSUBSCRIBE),
+            $request->get('fired_at', $dateString),
+            $request->get('data', [])
         );
     }
 
