@@ -118,8 +118,8 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-composer-
 
-            -   name: Add packagist
-                run: composer config --global --auth http-basic.bitbagcommerce.repo.packagist.com token ${{ secrets.BITBAG_DEMO_TOKEN }}
+#            -   name: Add packagist
+#                run: composer config --global --auth http-basic.bitbagcommerce.repo.packagist.com token ${{ secrets.BITBAG_DEMO_TOKEN }}
 
             -   name: Install PHP dependencies
                 run: composer install --no-interaction
