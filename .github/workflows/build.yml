@@ -145,7 +145,7 @@ jobs:
             -
                 name: Prepare test application database
                 run: |
-                    (cd tests/Application && APP_DEBUG=1 bin/console doctrine:database:create -vvv)
+                    (APP_DEBUG=1 tests/Application/bin/console doctrine:database:create -vvv)
                     (cd tests/Application && bin/console doctrine:migrations:migrate -n -vvv)
 
             -
