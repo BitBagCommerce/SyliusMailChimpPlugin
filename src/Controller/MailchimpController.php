@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailChimpPlugin\Controller;
 
-use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionHandler;
+use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionInterface;
 use BitBag\SyliusMailChimpPlugin\Model\WebhookData;
 use BitBag\SyliusMailChimpPlugin\Validator\WebhookValidator;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,7 +23,7 @@ final class MailchimpController
     /** @var WebhookValidator */
     private $validator;
 
-    /** @var NewsletterSubscriptionHandler */
+    /** @var NewsletterSubscriptionInterface */
     private $handler;
 
     /** @var TranslatorInterface */
@@ -31,7 +31,7 @@ final class MailchimpController
 
     public function __construct(
         WebhookValidator $validator,
-        NewsletterSubscriptionHandler $handler,
+        NewsletterSubscriptionInterface $handler,
         TranslatorInterface $translator
     ) {
         $this->validator = $validator;

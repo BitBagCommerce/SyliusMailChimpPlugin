@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailChimpPlugin\EventListener;
 
-use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionHandler;
+use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -19,13 +19,13 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class CustomerNewsletterListener
 {
-    /** @var NewsletterSubscriptionHandler */
+    /** @var NewsletterSubscriptionInterface */
     private $newsletterSubscriptionHandler;
 
     /** @var EntityManagerInterface */
     private $entityManager;
 
-    public function __construct(NewsletterSubscriptionHandler $newsletterSubscriptionHandler, EntityManagerInterface $entityManager)
+    public function __construct(NewsletterSubscriptionInterface $newsletterSubscriptionHandler, EntityManagerInterface $entityManager)
     {
         $this->newsletterSubscriptionHandler = $newsletterSubscriptionHandler;
         $this->entityManager = $entityManager;
