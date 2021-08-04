@@ -140,12 +140,12 @@ jobs:
 
             -
                 name: Install JS dependencies
-                run: yarn install
+                run: (cd tests/Application && yarn install)
 
             -
                 name: Prepare test application database
                 run: |
-                    (APP_DEBUG=1 tests/Application/bin/console doctrine:database:create -vvv)
+                    (cd tests/Application && bin/console doctrine:database:create -vvv)
                     (cd tests/Application && bin/console doctrine:migrations:migrate -n -vvv)
 
             -
