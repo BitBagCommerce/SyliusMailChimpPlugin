@@ -32,6 +32,8 @@ final class UniqueNewsletterEmailValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint): void
     {
+        assert($constraint instanceof UniqueNewsletterEmail);
+        
         if ($this->isEmailValid($value) === false) {
             $this->context->addViolation($constraint->message);
         }
