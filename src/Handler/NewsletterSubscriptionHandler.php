@@ -23,8 +23,9 @@ use Webmozart\Assert\Assert;
 
 class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 {
-    const API_PATH_LISTS = 'lists';
-    const API_PATH_MEMBERS = 'members';
+    public const API_PATH_LISTS = 'lists';
+
+    public const API_PATH_MEMBERS = 'members';
 
     /** @var CustomerRepositoryInterface */
     private $customerRepository;
@@ -186,17 +187,17 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
         }
     }
 
-    private function getListMemberEndpoint(string $email = null) : string
+    private function getListMemberEndpoint(string $email = null): string
     {
         $parts = [
             self::API_PATH_LISTS,
             $this->listId,
             self::API_PATH_MEMBERS,
         ];
-        if(null !== $email){
+        if (null !== $email) {
             $parts[] = $this->getEmailHash($email);
         }
-        return join('/',$parts);
-    }
 
+        return implode('/', $parts);
+    }
 }
