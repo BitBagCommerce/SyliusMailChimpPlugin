@@ -5,9 +5,10 @@
     "description": "MailChimp plugin for Sylius.",
     "license": "MIT",
     "require": {
-        "php": "^7.3",
-        "sylius/sylius": "~1.8.0 || ~1.9.0",
-        "drewm/mailchimp-api": "^v2.5.4"
+        "php": "^7.4 || ^8.0",
+        "sylius/sylius": "^1.10",
+        "drewm/mailchimp-api": "^v2.5.4",
+      "ext-json": "*"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
@@ -21,7 +22,6 @@
         "friends-of-behat/suite-settings-extension": "^1.0",
         "friends-of-behat/symfony-extension": "^2.1",
         "friends-of-behat/variadic-extension": "^1.3",
-        "friendsofsymfony/oauth-server-bundle": "^1.6 || >2.0.0-alpha.0 ^2.0@dev",
         "lakion/mink-debug-extension": "^2.0.0",
         "phpspec/phpspec": "^7.0",
         "phpstan/extension-installer": "^1.0",
@@ -38,9 +38,6 @@
         "symfony/intl": "^4.4 || ^5.2",
         "symfony/web-profiler-bundle": "^4.4 || ^5.2",
         "vimeo/psalm": "4.6.4"
-    },
-    "conflict": {
-        "api-platform/core": "^2.6"
     },
     "prefer-stable": true,
     "autoload": {
