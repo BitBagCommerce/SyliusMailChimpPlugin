@@ -49,9 +49,18 @@ final class NewsletterController
     public function subscribeAction(Request $request): JsonResponse
     {
         $email = $request->request->get('email');
+        $token = $request->request->get('_token');
+
+        if(!is_string($email) || !is_string($token)){
+            return new JsonResponse([
+                'success' => false,
+                'errors' => json_encode($this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_variable_type')),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
         $errors = $this->validator->validate($email);
 
-        if (!$this->tokenManager->isTokenValid(new CsrfToken('newsletter', $request->request->get('_token')))) {
+        if (!$this->tokenManager->isTokenValid(new CsrfToken('newsletter', $token))) {
             $errors[] = $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_csrf_token');
         }
 
