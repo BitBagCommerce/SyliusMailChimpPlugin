@@ -7,12 +7,12 @@ use Sylius\Behat\Page\Shop\HomePageInterface;
 interface NewsletterPageInterface extends HomePageInterface
 {
     /**
-     * @param string
+     * @param string $email
      */
     public function fillEmail($email);
 
     /**
-     * @param string
+     * @param string $token
      */
     public function fillToken($token);
 

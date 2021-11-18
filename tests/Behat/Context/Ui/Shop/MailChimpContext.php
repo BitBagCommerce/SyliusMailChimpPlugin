@@ -45,14 +45,6 @@ final class MailChimpContext implements Context
     }
 
     /**
-     * @Given there is a created list in MailChimp with specified ID
-     */
-    public function thereIsAMailChimpListWithSpecifiedId()
-    {
-        Assert::notNull($this->listId);
-    }
-
-    /**
      * @Given this email is also subscribed to the default MailChimp list
      */
     public function thisEmailIsAlsoExportedToMailChimpDefaultList()

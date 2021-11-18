@@ -6,7 +6,7 @@ Feature: Validating newsletter form
 
   Background:
     Given the store operates on a single channel
-    And there is a created list in MailChimp with specified ID
+
 
   Scenario: Subscribing to newsletter with invalid email
     When I want to subscribe to the newsletter

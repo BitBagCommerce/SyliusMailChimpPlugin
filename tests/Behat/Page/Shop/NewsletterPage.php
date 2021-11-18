@@ -15,7 +15,7 @@ class NewsletterPage extends HomePage implements NewsletterPageInterface
     }
 
     /**
-     * @param string
+     * @param string $token
      */
     public function fillToken($token)
     {
