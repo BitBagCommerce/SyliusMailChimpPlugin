@@ -50,7 +50,7 @@ final class NewsletterController
         $email = $request->request->get('email');
         $token = $request->request->get('_token');
 
-        if(!is_string($email) || !is_string($token)){
+        if (!is_string($email) || !is_string($token)) {
             return new JsonResponse([
                 'success' => false,
                 'errors' => json_encode($this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_variable_type')),
