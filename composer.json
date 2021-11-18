@@ -8,7 +8,10 @@
         "php": "^7.4 || ^8.0",
         "sylius/sylius": "^1.10",
         "drewm/mailchimp-api": "^v2.5.4",
-        "ext-json": "*"
+        "ext-json": "*",
+        "vimeo/psalm": "^4.12",
+        "composer/xdebug-handler": "^2.0",
+        "bitbag/coding-standard": "^1.0"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
@@ -36,8 +39,7 @@
         "symfony/debug-bundle": "^4.4 || ^5.2",
         "symfony/dotenv": "^4.4 || ^5.2",
         "symfony/intl": "^4.4 || ^5.2",
-        "symfony/web-profiler-bundle": "^4.4 || ^5.2",
-        "vimeo/psalm": "4.6.4"
+        "symfony/web-profiler-bundle": "^4.4 || ^5.2"
     },
     "prefer-stable": true,
     "autoload": {
