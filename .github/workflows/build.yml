@@ -177,9 +177,9 @@ jobs:
             -
                 name: Run Behat
                 env:
-                    MAIL_CHIMP_API_KEY=${{ secrets.MAILCHIMP_API_TOKEN }}
-                    MAIL_CHIMP_LIST_ID=${{ secrets.MAIL_CHIMP_LIST_ID }}
-                    MAIL_CHIMP_WEBHOOK_SECRET=${{ secrets.MAIL_CHIMP_WEBHOOK_SECRET }}
+                    MAIL_CHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_TOKEN }}
+                    MAIL_CHIMP_LIST_ID: ${{ secrets.MAIL_CHIMP_LIST_ID }}
+                    MAIL_CHIMP_WEBHOOK_SECRET: ${{ secrets.MAIL_CHIMP_WEBHOOK_SECRET }}
                 run: vendor/bin/behat --colors --strict -vvv --no-interaction || vendor/bin/behat --colors --strict -vvv --no-interaction --rerun
 
             -
