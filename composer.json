@@ -5,7 +5,7 @@
     "description": "MailChimp plugin for Sylius.",
     "license": "MIT",
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^7.3 || ^7.4 || ^8.0",
         "sylius/sylius": "^1.10",
         "drewm/mailchimp-api": "^v2.5.4",
         "ext-json": "*",
