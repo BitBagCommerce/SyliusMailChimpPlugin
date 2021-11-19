@@ -76,7 +76,6 @@ final class MailChimpContext implements Context
             $email,
             $this->listId
         ));
-        $this->subscribedEmail = $email;
     }
 
     /**
@@ -93,7 +92,7 @@ final class MailChimpContext implements Context
     }
 
     /**
-     * @AfterScenario
+     * @AfterScenario :email
      */
     public function removeNewsletterEmail()
     {
