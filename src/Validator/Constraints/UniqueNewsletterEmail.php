@@ -19,6 +19,6 @@ final class UniqueNewsletterEmail extends Constraint
 
     public function validatedBy(): string
     {
-        return get_class($this) . 'Validator';
+        return static::class . 'Validator';
     }
 }

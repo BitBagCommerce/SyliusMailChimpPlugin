@@ -14,17 +14,35 @@ on:
 
 jobs:
     tests:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
-        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
+        name: "Sylius ${{ matrix.sylius }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
 
         strategy:
             fail-fast: false
             matrix:
-                php: [7.4]
-                symfony: [^5.2]
+                php: [7.4, 7.3, 8.0]
+                symfony: [^4.4, ^5.2]
+                sylius: [~1.8.0, ~1.9.0, ~1.10.0]
                 node: [10.x]
                 mysql: [5.7]
+
+                exclude:
+                    -
+                        php: 7.3
+                        mysql: 8.0
+                    -
+                        sylius: ~1.8.0
+                        symfony: ^5.2
+                    -
+                        sylius: ~1.8.0
+                        php: 8.0
+                    -
+                        sylius: ~1.9.0
+                        php: 8.0
+                    -
+                        sylius: ~1.10.0
+                        php: 7.3
 
         env:
             APP_ENV: test
@@ -59,33 +77,10 @@ jobs:
                 with:
                     mysql version: "${{ matrix.mysql }}"
                     mysql root password: "root"
-                    
-            -    
-                name: Configure sysctl limits
-                run: |
-                    sudo swapoff -a
-                    sudo sysctl -w vm.swappiness=1
-                    sudo sysctl -w fs.file-max=262144
-                    sudo sysctl -w vm.max_map_count=262144
-                    
-            -    
-                name: Runs Elasticsearch
-                uses: elastic/elastic-github-actions/elasticsearch@master
-                with:
-                    stack-version: 6.8.15
 
             -
                 name: Output PHP version for Symfony CLI
                 run: php -v | head -n 1 | awk '{ print $2 }' > .php-version
-
-            -   
-                name: Install wkhtmltopdf
-                run: |
-                    sudo apt-get update
-                    sudo apt-get install xvfb libfontconfig wkhtmltopdf --fix-missing 
-                    echo 'xvfb-run -a -s "-screen 0 640x480x16" wkhtmltopdf "$@"' > "/usr/local/bin/wkhtmltopdf.sh"
-                    sudo chmod a+x /usr/local/bin/wkhtmltopdf.sh
-                    echo export WKHTMLTOPDF_PATH="/usr/local/wkhtmltopdf.sh"
 
             -
                 name: Install certificates
@@ -97,12 +92,7 @@ jobs:
 
             -
                 name: Run webserver
-                run: symfony server:start --port=8080 --dir=public --daemon
-
-            -
-                name: Restrict Symfony version
-                if: matrix.symfony != ''
-                run: composer config extra.symfony.require "${{ matrix.symfony }}"
+                run: (cd tests/Application && symfony server:start --port=8080 --dir=public --daemon)
 
             -
                 name: Get Composer cache directory
@@ -117,8 +107,19 @@ jobs:
                     key: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ hashFiles('**/composer.json **/composer.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-composer-
+            -
+                name: Restrict Symfony version
+                if: matrix.symfony != ''
+                run: |
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
+            -
+                name: Restrict Sylius version
+                if: matrix.sylius != ''
+                run: composer require "sylius/sylius:${{ matrix.sylius }}" --no-update --no-scripts --no-interaction
 
-            -   name: Install PHP dependencies
+            -
+                name: Install PHP dependencies
                 run: composer install --no-interaction
 
             -
@@ -134,7 +135,6 @@ jobs:
                     key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-node-${{ matrix.node }}-yarn-
-
             -
                 name: Install JS dependencies
                 run: (cd tests/Application && yarn install)
@@ -143,38 +143,50 @@ jobs:
                 name: Prepare test application database
                 run: |
                     (cd tests/Application && bin/console doctrine:database:create -vvv)
-                    (cd tests/Application && bin/console doctrine:migrations:migrate -n -vvv)
-
+                    (cd tests/Application && bin/console doctrine:schema:create -vvv)
             -
                 name: Prepare test application assets
                 run: |
                     (cd tests/Application && bin/console assets:install public -vvv)
                     (cd tests/Application && yarn build)
-
             -
                 name: Prepare test application cache
                 run: (cd tests/Application && bin/console cache:warmup -vvv)
 
             -
-                name: Load fixtures
+                name: Load fixtures in test application
                 run: (cd tests/Application && bin/console sylius:fixtures:load -n)
 
-            -   
+            -
                 name: Validate composer.json
-                run: composer validate --ansi --strict --no-check-publish
-                
-            -   
-                name: Run security check
-                run: symfony security:check
+                run: composer validate --ansi --strict
 
-            -   
-                name: Run PHPStan
-                run: vendor/bin/phpstan analyse -c phpstan.neon -l max src/
-
-            -   
+            -
                 name: Validate database schema
                 run: (cd tests/Application && bin/console doctrine:schema:validate)
 
             -
+                name: Run PHPStan
+                run: vendor/bin/phpstan analyse -c phpstan.neon -l 7 src/
+
+            -
                 name: Run PHPSpec
                 run: vendor/bin/phpspec run --ansi -f progress --no-interaction
+
+
+            -
+                name: Run Behat
+                env:
+                    MAIL_CHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_TOKEN }}
+                    MAIL_CHIMP_LIST_ID: ${{ secrets.MAIL_CHIMP_LIST_ID }}
+                    MAIL_CHIMP_WEBHOOK_SECRET: ${{ secrets.MAIL_CHIMP_WEBHOOK_SECRET }}
+                run: vendor/bin/behat --colors --strict -vvv --no-interaction || vendor/bin/behat --colors --strict -vvv --no-interaction --rerun
+
+            -
+                name: Upload Behat logs
+                uses: actions/upload-artifact@v2
+                if: failure()
+                with:
+                    name: Behat logs
+                    path: etc/build/
+                    if-no-files-found: ignore

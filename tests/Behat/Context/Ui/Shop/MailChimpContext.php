@@ -1,39 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\BitBag\SyliusMailChimpPlugin\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use DrewM\MailChimp\MailChimp;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\BitBag\SyliusMailChimpPlugin\Behat\Fake\AlwaysSuccessMailChimpClient;
 use Webmozart\Assert\Assert;
 
 final class MailChimpContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var MailChimp
-     */
+    /** @var MailChimp */
     private $mailChimp;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $listId;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $subscribedEmail;
 
     /**
      * MailChimpContext constructor.
-     * @param SharedStorageInterface $sharedStorage
+     *
      * @param string $apiKey
      * @param string $listId
      */
@@ -42,14 +35,6 @@ final class MailChimpContext implements Context
         $this->sharedStorage = $sharedStorage;
         $this->mailChimp = new AlwaysSuccessMailChimpClient($apiKey);
         $this->listId = $listId;
-    }
-
-    /**
-     * @Given there is a created list in MailChimp with specified ID
-     */
-    public function thereIsAMailChimpListWithSpecifiedId()
-    {
-        Assert::notNull($this->listId);
     }
 
     /**
@@ -63,7 +48,6 @@ final class MailChimpContext implements Context
     }
 
     /**
-     *
      * @Then the email :email should not be in MailChimp's list
      */
     public function theEmailShouldNotBeInMailChimpList($email)
@@ -92,7 +76,6 @@ final class MailChimpContext implements Context
             $email,
             $this->listId
         ));
-        $this->subscribedEmail = $email;
     }
 
     /**
@@ -100,7 +83,7 @@ final class MailChimpContext implements Context
      */
     public function thereIsAnExistingEmailInMailChimpDefaultList($email)
     {
-        $response = $this->mailChimp->post("lists/" . $this->listId . "/members", [
+        $response = $this->mailChimp->post('lists/' . $this->listId . '/members', [
             'email_address' => $email,
             'status' => 'subscribed',
         ]);
@@ -109,7 +92,7 @@ final class MailChimpContext implements Context
     }
 
     /**
-     * @AfterScenario
+     * @AfterScenario :email
      */
     public function removeNewsletterEmail()
     {
@@ -119,6 +102,7 @@ final class MailChimpContext implements Context
 
     /**
      * @param string $email
+     *
      * @return string
      */
     private function getSubscriberHash($email)
