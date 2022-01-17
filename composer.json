@@ -8,7 +8,7 @@
         "php": "^7.3 || ^7.4 || ^8.0",
         "sylius/sylius": "^1.10",
         "drewm/mailchimp-api": "^v2.5.4",
-        "ext-json": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
