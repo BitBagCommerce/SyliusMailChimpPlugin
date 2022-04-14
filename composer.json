@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3 || ^7.4 || ^8.0",
-        "sylius/sylius": "^1.10",
+        "sylius/sylius": "~1.9.0 || ~1.10.0 || ~1.11.0",
         "drewm/mailchimp-api": "^v2.5.4",
         "ext-json": "*",
         "vimeo/psalm": "^4.12",
@@ -39,7 +39,9 @@
         "symfony/debug-bundle": "^4.4 || ^5.2",
         "symfony/dotenv": "^4.4 || ^5.2",
         "symfony/intl": "^4.4 || ^5.2",
-        "symfony/web-profiler-bundle": "^4.4 || ^5.2"
+        "symfony/web-profiler-bundle": "^4.4 || ^5.2",
+        "friendsofsymfony/oauth-server-bundle": "2.*@dev",
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "prefer-stable": true,
     "conflict": {
@@ -53,5 +55,13 @@
     },
     "autoload-dev": {
         "classmap": ["tests/Application/Kernel.php"]
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/thanks": true,
+            "composer/package-versions-deprecated": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
+        }
     }
 }
