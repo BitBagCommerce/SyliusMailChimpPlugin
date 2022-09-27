@@ -12,6 +12,8 @@ namespace BitBag\SyliusMailChimpPlugin\EventListener;
 
 use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionHandler;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\Mapping\MappingException;
+use ReflectionException;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -49,6 +51,10 @@ final class CustomerNewsletterListener
         $this->customerCreateEvent($event);
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws MappingException
+     */
     public function customerPreUpdateEvent(GenericEvent $event): void
     {
         $customer = $event->getSubject();
@@ -60,8 +66,11 @@ final class CustomerNewsletterListener
             );
         }
 
+        $metadataFactory = $this->entityManager->getMetadataFactory();
+        $customerClassMetadata = $metadataFactory->getMetadataFor(get_class($customer));
+
         $unitOfWork = $this->entityManager->getUnitOfWork();
-        $unitOfWork->computeChangeSets();
+        $unitOfWork->recomputeSingleEntityChangeSet($customerClassMetadata, $customer);
         $changelist = $unitOfWork->getEntityChangeSet($customer);
 
         $oldEmail = $this->getOldEmailFromChangeList($changelist);
