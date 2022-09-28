@@ -21,6 +21,17 @@ bitbag_sylius_mailchimp_plugin:
     resource: "@BitBagSyliusMailChimpPlugin/Resources/config/routing.yml"
 ```
 
+Add plugin parameters to your `config/services.yaml` file:
+```yaml
+# config/services.yaml
+
+parameters:
+  ...
+  mailchimp.api_key: '%env(resolve:MAIL_CHIMP_API_KEY)%'
+  mailchimp.list_id: '%env(resolve:MAIL_CHIMP_LIST_ID)%'
+  mailchimp.webhook_secret: '%env(resolve:MAIL_CHIMP_WEBHOOK_SECRET)%'
+```
+
 Configure MailChimp credentials
 
 To get info about list id:
