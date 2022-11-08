@@ -42,6 +42,14 @@ MAIL_CHIMP_WEBHOOK_SECRET=QUERY_PARAMETER_FOR_UNSUBSCRIBED_WEBHHOOK
 
 You can read more about Mailchimp webhooks here: https://mailchimp.com/developer/marketing/guides/sync-audience-data-webhooks/
 
+Add the parameters listed below to your `config/packages/_sylius.yaml` file:
+
+```
+parameters:
+    mailchimp.api_key: '%env(resolve:MAIL_CHIMP_API_KEY)%'
+    mailchimp.list_id: '%env(resolve:MAIL_CHIMP_LIST_ID)%'
+    mailchimp.webhook_secret: '%env(resolve:MAIL_CHIMP_WEBHOOK_SECRET)%'
+```
 
 
 Include the newsletter in your template:
