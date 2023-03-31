@@ -102,6 +102,7 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
     public function unsubscribeCustomerFromLocalDatabase(string $email): void
     {
+        /** @var CustomerInterface $customer */
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
         $this->updateCustomer($customer, false);
     }
