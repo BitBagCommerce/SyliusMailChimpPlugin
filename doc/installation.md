@@ -51,21 +51,34 @@ parameters:
     mailchimp.webhook_secret: '%env(resolve:MAIL_CHIMP_WEBHOOK_SECRET)%'
 ```
 
+Import plugin's `webpack.config.js` file
+
+```js
+// webpack.config.js
+const [bitbagMailChimp] = require('./vendor/bitbag/mail-chimp-plugin/webpack.config.js');
+...
+
+module.exports = [..., bitbagMailChimp];
+```
+
+Configure config/packages/webpack_encore.yaml
+```yaml
+    builds:
+        *: *
+        shop: '%kernel.project_dir%/public/build/shop'
+        admin: '%kernel.project_dir%/public/build/admin'
+        mail-chimp-shop: '%kernel.project_dir%/public/build/bitbag/mail-chimp/shop'
+```
 
 Include the newsletter in your template:
 ```twig
 {% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
 ```
 
-Install the assets
-```bash
-$ bin/console assets:install --symlink
-```
-
 Add these javascripts to the layout template that includes your subscription form imported in the previous steps
 ```html
-<script src="{{ asset('path/to/jquery.js') }}"></script>
-<script src="{{ asset('bundles/bitbagsyliusmailchimpplugin/bitbag-mailchimp-plugin-newsletter.js') }}"></script>
+
+{{ encore_entry_script_tags('bitbag-mail-chimp-shop', null, 'mail-chimp-shop') }}
 <script>
     $('#footer-newsletter-form').joinNewsletter();
 </script>
