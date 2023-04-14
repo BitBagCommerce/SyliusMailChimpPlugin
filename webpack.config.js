@@ -1,6 +1,6 @@
 const path = require('path');
 const Encore = require('@symfony/webpack-encore');
-const pluginName = 'cs';
+const pluginName = 'mail-chimp';
 
 const getConfig = (pluginName, type) => {
     Encore.reset();
@@ -19,20 +19,20 @@ const getConfig = (pluginName, type) => {
     return config;
 };
 
-Encore.setOutputPath(`src/Resources/public/build/`)
-    .setPublicPath(`/public/build/`)
-    .addEntry(`bitbag-${pluginName}-shop`, path.resolve(__dirname, `./src/Resources/assets/shop/entry.js`))
-    .addEntry(`bitbag-${pluginName}-admin`, path.resolve(__dirname, `./src/Resources/assets/admin/entry.js`))
-    .cleanupOutputBeforeBuild()
-    .disableSingleRuntimeChunk()
-    .enableSassLoader();
+// Encore.setOutputPath(`src/Resources/public/build/`)
+//     .setPublicPath(`/public/build/`)
+//     .addEntry(`bitbag-${pluginName}-shop`, path.resolve(__dirname, `./src/Resources/assets/shop/entry.js`))
+//     .addEntry(`bitbag-${pluginName}-admin`, path.resolve(__dirname, `./src/Resources/assets/admin/entry.js`))
+//     .cleanupOutputBeforeBuild()
+//     .disableSingleRuntimeChunk()
+//     .enableSassLoader();
 
-const distConfig = Encore.getWebpackConfig();
-distConfig.name = `bitbag-plugin-dist`;
+// const distConfig = Encore.getWebpackConfig();
+// distConfig.name = `bitbag-plugin-dist`;
 
 Encore.reset();
 
 const shopConfig = getConfig(pluginName, 'shop');
-const adminConfig = getConfig(pluginName, 'admin');
+// const adminConfig = getConfig(pluginName, 'admin');
 
-module.exports = [shopConfig, adminConfig, distConfig];
+module.exports = [shopConfig];
