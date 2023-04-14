@@ -11,7 +11,7 @@
         "ext-json": "*",
         "vimeo/psalm": "^4.12",
         "composer/xdebug-handler": "^2.0",
-        "bitbag/coding-standard": "^1.0 || ^v2.0.0"
+        "bitbag/coding-standard": "^1.0.0 || ^2.0.0 "
     },
     "require-dev": {
         "symfony/webpack-encore-bundle": "^1.14",
@@ -29,10 +29,6 @@
         "lakion/mink-debug-extension": "^2.0.0",
         "phpspec/phpspec": "^7.0",
         "phpstan/extension-installer": "^1.0",
-        "phpstan/phpstan": "0.12.82",
-        "phpstan/phpstan-doctrine": "0.12.33",
-        "phpstan/phpstan-strict-rules": "^0.12.0",
-        "phpstan/phpstan-webmozart-assert": "0.12.12",
         "phpunit/phpunit": "^9.5",
         "sylius-labs/coding-standard": "^4.0",
         "symfony/browser-kit": "^5.4 || ^6.0",
