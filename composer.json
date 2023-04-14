@@ -11,7 +11,7 @@
         "ext-json": "*",
         "vimeo/psalm": "^4.12",
         "composer/xdebug-handler": "^2.0",
-        "bitbag/coding-standard": "^1.0"
+        "bitbag/coding-standard": "^1.0 || ^v2.0.0"
     },
     "require-dev": {
         "symfony/webpack-encore-bundle": "^1.14",
