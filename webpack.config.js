@@ -19,16 +19,16 @@ const getConfig = (pluginName, type) => {
     return config;
 };
 
-// Encore.setOutputPath(`src/Resources/public/build/`)
-//     .setPublicPath(`/public/build/`)
-//     .addEntry(`bitbag-${pluginName}-shop`, path.resolve(__dirname, `./src/Resources/assets/shop/entry.js`))
-//     .addEntry(`bitbag-${pluginName}-admin`, path.resolve(__dirname, `./src/Resources/assets/admin/entry.js`))
-//     .cleanupOutputBeforeBuild()
-//     .disableSingleRuntimeChunk()
-//     .enableSassLoader();
+Encore.setOutputPath(`src/Resources/public/build/`)
+    .setPublicPath(`/public/build/`)
+    .addEntry(`bitbag-${pluginName}-shop`, path.resolve(__dirname, `./src/Resources/assets/shop/entry.js`))
+    .addEntry(`bitbag-${pluginName}-admin`, path.resolve(__dirname, `./src/Resources/assets/admin/entry.js`))
+    .cleanupOutputBeforeBuild()
+    .disableSingleRuntimeChunk()
+    .enableSassLoader();
 
-// const distConfig = Encore.getWebpackConfig();
-// distConfig.name = `bitbag-plugin-dist`;
+const distConfig = Encore.getWebpackConfig();
+distConfig.name = `bitbag-plugin-dist`;
 
 Encore.reset();
 
