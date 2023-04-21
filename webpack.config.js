@@ -33,6 +33,6 @@ distConfig.name = `bitbag-plugin-dist`;
 Encore.reset();
 
 const shopConfig = getConfig(pluginName, 'shop');
-// const adminConfig = getConfig(pluginName, 'admin');
+const adminConfig = getConfig(pluginName, 'admin');
 
 module.exports = [shopConfig];
