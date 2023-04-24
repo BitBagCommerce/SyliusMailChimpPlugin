@@ -1,8 +1,10 @@
 
 ## Installation
-***
+
+Please require plugin by running composer command:
+
 ```bash
-$ composer require bitbag/mailchimp-plugin
+$ composer require bitbag/mailchimp-plugin --no-scripts
 ```
 
 Add plugin dependencies to your `config/bundles.php` file:
@@ -39,13 +41,12 @@ https://mailchimp.com/developer/marketing/api/lists/get-lists-info/
 
 
 ```yaml
-# .env
+# .env.local
 
-...
+// ...
+
 MAIL_CHIMP_API_KEY=YOUR_KEY
-
 MAIL_CHIMP_LIST_ID=YOUR_LIST_ID
-
 MAIL_CHIMP_WEBHOOK_SECRET=QUERY_PARAMETER_FOR_UNSUBSCRIBED_WEBHHOOK
 ```
 
@@ -66,13 +67,14 @@ Import plugin's `webpack.config.js` file
 
 ```js
 // webpack.config.js
-const [bitbagMailChimp] = require('./vendor/bitbag/mail-chimp-plugin/webpack.config.js');
+const [bitbagMailChimp] = require('./vendor/bitbag/mailchimp-plugin/webpack.config.js');
 ...
 
 module.exports = [..., bitbagMailChimp];
 ```
 
 Configure config/packages/webpack_encore.yaml
+.yaml
 ```yaml
     builds:
         *: *
@@ -95,7 +97,13 @@ Add these javascripts to the layout template that includes your subscription for
 </script>
 ```
 
-That's the simplest and fastest way to integrate the jQuery plugin. If you need to customize it, simply take a look at
-[bitbag-mailchimp-plugin-newsletter.js](src/Resources/public/bitbag-mailchimp-plugin-newsletter.js), create your own `*.js` plugin and
-import it in your main `Gulpfile.js`.
+Clear project cache:
+```php
+bin/console cache:clear
+```
 
+Update your webpack build:
+
+```bash
+yarn encore dev # or yarn encore prod, when you build production environment
+```
