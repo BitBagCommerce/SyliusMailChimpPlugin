@@ -77,7 +77,7 @@ Configure config/packages/webpack_encore.yaml
 .yaml
 ```yaml
     builds:
-        *: *
+        // ...
         shop: '%kernel.project_dir%/public/build/shop'
         admin: '%kernel.project_dir%/public/build/admin'
         mail-chimp-shop: '%kernel.project_dir%/public/build/bitbag/mail-chimp/shop'
