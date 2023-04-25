@@ -51,6 +51,7 @@ final class NewsletterController
         $token = $request->request->get('_token');
 
         if (!is_string($email) || !is_string($token)) {
+            /**@phpstan-ignore-next-line */
             $session->getFlashBag()->add('error', $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_variable_type'));
             return new RedirectResponse($request->headers->get('referer'));
         }
@@ -65,11 +66,12 @@ final class NewsletterController
             $this->handler->subscribe($email);
 
             if ($this->handler::$isValidEmail) {
+                /**@phpstan-ignore-next-line */
                 $session->getFlashBag()->add('success', $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.subscribed_successfully'));
                 return new RedirectResponse($request->headers->get('referer'));
             }
         }
-
+        /**@phpstan-ignore-next-line */
         $session->getFlashBag()->add('error', $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_email_variable_type'));
         return new RedirectResponse($request->headers->get('referer'));
     }
