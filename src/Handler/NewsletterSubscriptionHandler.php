@@ -24,6 +24,8 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 {
     public const API_PATH_LISTS = 'lists';
 
+    public static bool $isValidEmail = true;
+
     public const API_PATH_MEMBERS = 'members';
 
     /** @var CustomerRepositoryInterface */
@@ -65,7 +67,7 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
         $this->addMailchimpData($email);
 
-        $customer->setSubscribedToNewsletter(true);
+        $customer->setSubscribedToNewsletter(self::$isValidEmail);
         $this->customerManager->flush();
     }
 
@@ -149,9 +151,13 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
             );
         }
         if ($response['status'] !== 'subscribed') {
-            throw new BadRequestHttpException(
-                sprintf('Response status is %s instead of %s', $response['status'], 'subscribed')
-            );
+            if ($response['title'] === 'Invalid Resource') {
+                self::$isValidEmail = false;
+            } else {
+                throw new BadRequestHttpException(
+                    sprintf('Response status is %s instead of %s', $response['status'], 'subscribed')
+                );
+            }
         }
     }
 

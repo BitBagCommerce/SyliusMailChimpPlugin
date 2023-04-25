@@ -5,3 +5,4 @@ bitbag_sylius_mailchimp_plugin:
         your_email_address: Twój adres email
         subscribed_successfully: Zostałeś zapisany do newslettera.
         invalid_csrf_token: Przesłany token CSRF jest nieprawidłowy. Prosimy spróbować ponownie.
+        invalid_email_variable_type: Wprowadzono nie poprawny adres email
