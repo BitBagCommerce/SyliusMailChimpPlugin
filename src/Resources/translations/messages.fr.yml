@@ -5,3 +5,4 @@ bitbag_sylius_mailchimp_plugin:
         your_email_address: Votre adresse email
         subscribed_successfully: Vous êtes bien inscrit à notre newsletter.
         invalid_csrf_token: Le jeton CSRF est invalide.
+        unexpected_error: Une erreur inattendue est apparue. Veuillez réessayer plus tard.

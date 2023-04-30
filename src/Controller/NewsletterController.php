@@ -15,6 +15,7 @@ use BitBag\SyliusMailChimpPlugin\Validator\NewsletterValidator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -57,24 +58,31 @@ final class NewsletterController
             ], Response::HTTP_BAD_REQUEST);
         }
 
-        $errors = $this->validator->validate($email);
+        try {
+            $errors = $this->validator->validate($email);
 
-        if (!$this->tokenManager->isTokenValid(new CsrfToken('newsletter', $token))) {
-            $errors[] = $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_csrf_token');
-        }
+            if (!$this->tokenManager->isTokenValid(new CsrfToken('newsletter', $token))) {
+                $errors[] = $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_csrf_token');
+            }
 
-        if (count($errors) === 0) {
-            $this->handler->subscribe($email);
+            if (count($errors) === 0) {
+                $this->handler->subscribe($email);
+
+                return new JsonResponse([
+                    'success' => true,
+                    'message' => $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.subscribed_successfully'),
+                ]);
+            }
 
             return new JsonResponse([
-                'success' => true,
-                'message' => $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.subscribed_successfully'),
-            ]);
+                'success' => false,
+                'errors' => json_encode($errors),
+            ], Response::HTTP_BAD_REQUEST);
+        } catch (BadRequestHttpException $e) {
+            return new JsonResponse([
+                'success' => false,
+                'errors' => json_encode([$this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.unexpected_error')]),
+            ], Response::HTTP_BAD_REQUEST);
         }
-
-        return new JsonResponse([
-            'success' => false,
-            'errors' => json_encode($errors),
-        ], Response::HTTP_BAD_REQUEST);
     }
 }

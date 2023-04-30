@@ -11,10 +11,10 @@
         "ext-json": "*",
         "vimeo/psalm": "^4.12",
         "composer/xdebug-handler": "^2.0",
-        "bitbag/coding-standard": "^1.0.0 || ^2.0.0 "
+        "bitbag/coding-standard": "^1.0.0 || ^2.0.0 ",
+        "symfony/webpack-encore-bundle": "^1.16"
     },
     "require-dev": {
-        "symfony/webpack-encore-bundle": "^1.14",
         "behat/behat": "^3.6.1",
         "behat/mink-selenium2-driver": "^1.4",
         "dmore/behat-chrome-extension": "^1.3",

@@ -7,3 +7,4 @@ bitbag_sylius_mailchimp_plugin:
         invalid_csrf_token: Submited CSRF token is invalid.
         unsubscribed_successfully: You are now unsubscribed from the newsletter.
         invalid_variable_type: Invalid variable type
+        unexpected_error: An unexpected error occurred. Please try again later.
