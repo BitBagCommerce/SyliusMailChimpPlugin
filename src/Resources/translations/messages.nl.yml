@@ -5,3 +5,4 @@ bitbag_sylius_mailchimp_plugin:
         your_email_address: Jouw e-mailadres
         subscribed_successfully: Je bent nu geabonneerd op de nieuwsbrief.
         invalid_csrf_token: Ingediende CSRF-token is ongeldig.
+        unexpected_error: Er is een onverwachte fout opgetreden. Probeer het later opnieuw.

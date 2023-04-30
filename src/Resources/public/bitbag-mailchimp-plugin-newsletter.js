@@ -9,6 +9,7 @@ import { $ } from 'jquery';
                 event.preventDefault();
 
                 var successElement = form.find('.success-element');
+                var input = form.find('input[type=text]');
                 var validationElement = form.find('.validation-element');
 
                 successElement.text('');
@@ -22,10 +23,15 @@ import { $ } from 'jquery';
                     .done(function (response) {
                         if (response.hasOwnProperty('message')) {
                             successElement.html(response.message);
+                            input.val('');
                         }
                     })
                     .fail(function (response) {
-                        if (response.responseJSON.hasOwnProperty('errors')) {
+                        if (!response.responseJSON) {
+                            var message = 'An unexpected error occurred. Please try again later.';
+
+                            validationElement.text(message);
+                        } else if (response.responseJSON.hasOwnProperty('errors')) {
                             var errors = $.parseJSON(response.responseJSON.errors);
                             var message = '';
 
