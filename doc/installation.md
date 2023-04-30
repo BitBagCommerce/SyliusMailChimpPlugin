@@ -76,6 +76,7 @@ module.exports = [..., bitbagMailChimp];
 Configure config/packages/webpack_encore.yaml
 .yaml
 ```yaml
+webpack_encore:
     builds:
         // ...
         shop: '%kernel.project_dir%/public/build/shop'
