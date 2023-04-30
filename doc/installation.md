@@ -94,7 +94,9 @@ Add these javascripts to the layout template that includes your subscription for
 
 {{ encore_entry_script_tags('bitbag-mail-chimp-shop', null, 'mail-chimp-shop') }}
 <script>
-    $('#footer-newsletter-form').joinNewsletter();
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        $('#footer-newsletter-form').joinNewsletter();
+    });
 </script>
 ```
 
