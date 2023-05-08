@@ -26,8 +26,9 @@ services:
         class: BitBag\SyliusMailChimpPlugin\Controller\MailchimpController
         public: true
         arguments:
-            - "@bitbag_sylius_mailchimp_plugin.validator.email_validator"
+            - "@bitbag_sylius_mailchimp_plugin.validator.webhook_validator"
             - "@bitbag_sylius_mailchimp_plugin.handler.newsletter_subscription_handler"
+            - "@translator"
 
     bitbag_sylius_mailchimp_plugin.drewm.mailchimp:
         class: DrewM\MailChimp\MailChimp
