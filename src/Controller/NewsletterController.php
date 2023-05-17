@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusMailChimpPlugin\Controller;
 
-use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionHandler;
+use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionInterface;
 use BitBag\SyliusMailChimpPlugin\Validator\NewsletterValidator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +28,7 @@ final class NewsletterController
     /** @var TranslatorInterface */
     private $translator;
 
-    /** @var NewsletterSubscriptionHandler */
+    /** @var NewsletterSubscriptionInterface */
     private $handler;
 
     /** @var CsrfTokenManager */
@@ -37,7 +37,7 @@ final class NewsletterController
     public function __construct(
         NewsletterValidator $validator,
         TranslatorInterface $translator,
-        NewsletterSubscriptionHandler $handler,
+        NewsletterSubscriptionInterface $handler,
         CsrfTokenManager $tokenManager
     ) {
         $this->validator = $validator;

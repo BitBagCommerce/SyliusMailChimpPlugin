@@ -17,4 +17,8 @@ interface NewsletterSubscriptionInterface
     public function subscribe(string $email): void;
 
     public function unsubscribe(CustomerInterface $customer): void;
+
+    public function unsubscribeEmail(string $email): void;
+
+    public function unsubscribeCustomerFromLocalDatabase(string $email): void;
 }

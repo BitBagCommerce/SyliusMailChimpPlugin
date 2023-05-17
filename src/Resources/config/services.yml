@@ -64,3 +64,6 @@ services:
             - { name: "kernel.event_listener", event: "sylius.customer.post_register", method: customerCreateEvent }
             - { name: "kernel.event_listener", event: "sylius.customer.pre_update", method: customerPreUpdateEvent }
             - { name: "kernel.event_listener", event: "sylius.customer.post_update", method: customerPostUpdateEvent }
+
+    BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionInterface:
+        alias: 'bitbag_sylius_mailchimp_plugin.handler.newsletter_subscription_handler'
