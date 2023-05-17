@@ -7,7 +7,7 @@ Feature: Creating new newsletter customer
   Background:
     Given the store operates on a single channel
     And there is no customer with "tata@escobar.co" email
-    And there is a created list in MailChimp with specified ID
+
 
   Scenario: Subscribing to newsletter as guest
     Given I want to subscribe to the newsletter

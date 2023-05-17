@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\BitBag\SyliusMailChimpPlugin\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
@@ -37,7 +39,7 @@ final class NewsletterContext implements Context
     /** @var ProfileUpdatePageInterface */
     private $profileUpdatePage;
 
-    /** @var UpdatePageInterface  */
+    /** @var UpdatePageInterface */
     private $adminUpdatePage;
 
     public function __construct(
@@ -48,8 +50,7 @@ final class NewsletterContext implements Context
         SharedStorage $sharedStorage,
         ProfileUpdatePageInterface $profileUpdatePage,
         UpdatePageInterface $adminUpdatePage
-    )
-    {
+    ) {
         $this->newsletterPage = $newsletterPage;
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
@@ -88,7 +89,7 @@ final class NewsletterContext implements Context
      */
     public function iShouldBeNotifiedThatIAmSubscribedToTheNewsletter()
     {
-        Assert::contains($this->newsletterPage->getContents(), "You are now subscribed to the newsletter");
+        Assert::contains($this->newsletterPage->getContent(), 'You are now subscribed to the newsletter');
     }
 
     /**
@@ -127,7 +128,7 @@ final class NewsletterContext implements Context
      */
     public function iShouldBeNotifiedAboutInvalidEmailAddress()
     {
-        Assert::contains($this->newsletterPage->getContents(), 'The submitted email address is not valid');
+        Assert::contains($this->newsletterPage->getContent(), 'The submitted email address is not valid');
     }
 
     /**
@@ -143,7 +144,7 @@ final class NewsletterContext implements Context
      */
     public function iShouldBeNotifiedThatTheSubmittedCsrfTokenIsInvalid()
     {
-        Assert::contains($this->newsletterPage->getContents(), 'Submited CSRF token is invalid');
+        Assert::contains($this->newsletterPage->getContent(), 'Submited CSRF token is invalid');
     }
 
     /**
@@ -151,7 +152,7 @@ final class NewsletterContext implements Context
      */
     public function iShouldBeNotifiedThatTheSubmittedEmailIsAlreadySubscribedToTheNewsletter()
     {
-        Assert::contains($this->newsletterPage->getContents(), "Given email address is already subscribed to the newsletter");
+        Assert::contains($this->newsletterPage->getContent(), 'Given email address is already subscribed to the newsletter');
     }
 
     /**
@@ -183,7 +184,6 @@ final class NewsletterContext implements Context
     {
         /** @var CustomerInterface $customer */
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
-        Assert::isInstanceOf($customer, CustomerInterface::class);
         $customer->setSubscribedToNewsletter(true);
         $this->customerManager->flush();
         $this->sharedStorage->set('newsletter_email', $customer->getEmail());
@@ -191,7 +191,8 @@ final class NewsletterContext implements Context
 
     /**
      * @param string $email
-     * @return null|object|CustomerInterface
+     *
+     * @return object|CustomerInterface|null
      */
     private function getCustomerByEmail($email)
     {

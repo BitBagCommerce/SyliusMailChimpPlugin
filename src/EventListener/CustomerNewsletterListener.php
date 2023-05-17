@@ -1,11 +1,10 @@
 <?php
 
 /*
- * This file has been created by developers from BitBag.
- * Feel free to contact us once you face any issues or want to start
- * You can find more information about us on https://bitbag.io and write us
- * an email on hello@bitbag.io.
- */
+ * This file was created by developers working at BitBag
+ * Do you need more information about us and what we do? Visit our https://bitbag.io website!
+ * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+*/
 
 declare(strict_types=1);
 
@@ -13,6 +12,8 @@ namespace BitBag\SyliusMailChimpPlugin\EventListener;
 
 use BitBag\SyliusMailChimpPlugin\Handler\NewsletterSubscriptionInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\Mapping\MappingException;
+use ReflectionException;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -50,6 +51,10 @@ final class CustomerNewsletterListener
         $this->customerCreateEvent($event);
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws MappingException
+     */
     public function customerPreUpdateEvent(GenericEvent $event): void
     {
         $customer = $event->getSubject();
@@ -61,8 +66,11 @@ final class CustomerNewsletterListener
             );
         }
 
+        $metadataFactory = $this->entityManager->getMetadataFactory();
+        $customerClassMetadata = $metadataFactory->getMetadataFor(get_class($customer));
+
         $unitOfWork = $this->entityManager->getUnitOfWork();
-        $unitOfWork->computeChangeSets();
+        $unitOfWork->recomputeSingleEntityChangeSet($customerClassMetadata, $customer);
         $changelist = $unitOfWork->getEntityChangeSet($customer);
 
         $oldEmail = $this->getOldEmailFromChangeList($changelist);

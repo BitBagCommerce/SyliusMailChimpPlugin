@@ -6,7 +6,7 @@ Feature: Changing customer newsletter email
 
   Background:
     Given I am logged in as an administrator
-    And there is a created list in MailChimp with specified ID
+
 
   @ui
   Scenario: Subscribing to newsletter as guest

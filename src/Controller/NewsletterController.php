@@ -1,11 +1,10 @@
 <?php
 
 /*
- * This file has been created by developers from BitBag.
- * Feel free to contact us once you face any issues or want to start
- * You can find more information about us on https://bitbag.io and write us
- * an email on hello@bitbag.io.
- */
+ * This file was created by developers working at BitBag
+ * Do you need more information about us and what we do? Visit our https://bitbag.io website!
+ * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+*/
 
 declare(strict_types=1);
 
@@ -16,6 +15,7 @@ use BitBag\SyliusMailChimpPlugin\Validator\NewsletterValidator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -49,24 +49,40 @@ final class NewsletterController
     public function subscribeAction(Request $request): JsonResponse
     {
         $email = $request->request->get('email');
-        $errors = $this->validator->validate($email);
+        $token = $request->request->get('_token');
 
-        if (!$this->tokenManager->isTokenValid(new CsrfToken('newsletter', $request->request->get('_token')))) {
-            $errors[] = $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_csrf_token');
+        if (!is_string($email) || !is_string($token)) {
+            return new JsonResponse([
+                'success' => false,
+                'errors' => json_encode($this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_variable_type')),
+            ], Response::HTTP_BAD_REQUEST);
         }
 
-        if (count($errors) === 0) {
-            $this->handler->subscribe($email);
+        try {
+            $errors = $this->validator->validate($email);
+
+            if (!$this->tokenManager->isTokenValid(new CsrfToken('newsletter', $token))) {
+                $errors[] = $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_csrf_token');
+            }
+
+            if (count($errors) === 0) {
+                $this->handler->subscribe($email);
+
+                return new JsonResponse([
+                    'success' => true,
+                    'message' => $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.subscribed_successfully'),
+                ]);
+            }
 
             return new JsonResponse([
-                'success' => true,
-                'message' => $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.subscribed_successfully'),
-            ]);
+                'success' => false,
+                'errors' => json_encode($errors),
+            ], Response::HTTP_BAD_REQUEST);
+        } catch (BadRequestHttpException $e) {
+            return new JsonResponse([
+                'success' => false,
+                'errors' => json_encode([$this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.unexpected_error')]),
+            ], Response::HTTP_BAD_REQUEST);
         }
-
-        return new JsonResponse([
-            'success' => false,
-            'errors' => json_encode($errors),
-        ], Response::HTTP_BAD_REQUEST);
     }
 }

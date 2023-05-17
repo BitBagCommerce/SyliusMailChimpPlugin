@@ -1,11 +1,10 @@
 <?php
 
 /*
- * This file has been created by developers from BitBag.
- * Feel free to contact us once you face any issues or want to start
- * You can find more information about us on https://bitbag.io and write us
- * an email on hello@bitbag.io.
- */
+ * This file was created by developers working at BitBag
+ * Do you need more information about us and what we do? Visit our https://bitbag.io website!
+ * We are hiring developers from all over the world. Join us and start your new, exciting adventure and become part of us: https://bitbag.io/career
+*/
 
 declare(strict_types=1);
 
@@ -103,6 +102,7 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
     public function unsubscribeCustomerFromLocalDatabase(string $email): void
     {
+        /** @var CustomerInterface $customer */
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
         $this->updateCustomer($customer, false);
     }
@@ -126,8 +126,10 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
         if (false === $response) {
             throw new BadRequestHttpException(
-                sprintf('Mailchimp returned false instead of response array, last error : %s',
-                    $this->mailChimp->getLastError())
+                sprintf(
+                    'Mailchimp returned false instead of response array, last error : %s',
+                    $this->mailChimp->getLastError()
+                )
             );
         }
 
@@ -138,7 +140,8 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
             $concatenatedList = implode(',', $validListIds);
 
             throw new BadRequestHttpException(
-                sprintf('Mailchimp returned %1$i code, is the MAIL_CHIMP_LIST_ID [ %2$s ] one of available ones: [ %3$s ] ?',
+                sprintf(
+                    'Mailchimp returned %1$i code, is the MAIL_CHIMP_LIST_ID [ %2$s ] one of available ones: [ %3$s ] ?',
                     Response::HTTP_NOT_FOUND,
                     $this->listId,
                     $concatenatedList
@@ -169,8 +172,10 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
         if (false === $response) {
             throw new BadRequestHttpException(
-                sprintf('Mailchimp returned false instead of response array, last error : %s',
-                    $this->mailChimp->getLastError())
+                sprintf(
+                    'Mailchimp returned false instead of response array, last error : %s',
+                    $this->mailChimp->getLastError()
+                )
             );
         }
 

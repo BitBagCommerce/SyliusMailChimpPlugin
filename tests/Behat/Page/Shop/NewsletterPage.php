@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\BitBag\SyliusMailChimpPlugin\Behat\Page\Shop;
 
 use Sylius\Behat\Page\Shop\HomePage;
@@ -7,7 +9,7 @@ use Sylius\Behat\Page\Shop\HomePage;
 class NewsletterPage extends HomePage implements NewsletterPageInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function fillEmail($email)
     {
@@ -15,11 +17,11 @@ class NewsletterPage extends HomePage implements NewsletterPageInterface
     }
 
     /**
-     * @param string
+     * @param string $token
      */
     public function fillToken($token)
     {
-        $this->getDocument()->find('css','#newsletter-token')->setValue($token);
+        $this->getDocument()->find('css', '#newsletter-token')->setValue($token);
     }
 
     public function subscribe()
