@@ -9,9 +9,6 @@
         "sylius/sylius": "~1.11.0 || ~1.12.0",
         "drewm/mailchimp-api": "^v2.5.4",
         "ext-json": "*",
-        "vimeo/psalm": "^4.12",
-        "composer/xdebug-handler": "^2.0",
-        "bitbag/coding-standard": "^1.0.0 || ^2.0.0 ",
         "symfony/webpack-encore-bundle": "^1.16"
     },
     "require-dev": {
@@ -36,7 +33,10 @@
         "symfony/dotenv": "^5.4 || ^6.0",
         "symfony/intl": "^5.4 || ^6.0",
         "symfony/web-profiler-bundle": "^5.4 || ^6.0",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0"
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
+        "vimeo/psalm": "^4.12",
+        "composer/xdebug-handler": "^2.0",
+        "bitbag/coding-standard": "^1.0.0 || ^2.0.0"
     },
     "prefer-stable": true,
     "autoload": {
@@ -45,6 +45,7 @@
             "Tests\\BitBag\\SyliusMailChimpPlugin\\": "tests/"
         }
     },
+
     "autoload-dev": {
         "classmap": ["tests/Application/Kernel.php"]
     },
