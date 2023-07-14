@@ -2,12 +2,12 @@
     action="{{ path('bitbag_sylius_mailchimp_plugin_newsletter_subscribe') }}"
     method="POST"
     id="footer-newsletter-form"
-    class="ui form grid"
+    class="ui form grid bb-subscribe"
 >
     <div class="success-element ui text container"></div>
     <div class="validation-element ui text container"></div>
 
-    <div class="field row" style="display: flex; flex-wrap: nowrap; gap: 1rem;">
+    <div class="field bb-subscribe__row">
         <input
             type="text"
             id="newsletter-email" name="email"
