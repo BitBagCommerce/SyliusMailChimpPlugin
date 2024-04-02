@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "php": " ^8.0",
-        "sylius/sylius": "~1.11.0 || ~1.12.0",
+        "sylius/sylius": "~1.11.0 || ~1.12.0 || ~1.13.0",
         "drewm/mailchimp-api": "^v2.5.4",
         "ext-json": "*",
         "symfony/webpack-encore-bundle": "^1.16"
