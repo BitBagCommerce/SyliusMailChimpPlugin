@@ -141,7 +141,7 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
             throw new BadRequestHttpException(
                 sprintf(
-                    'Mailchimp returned %1$i code, is the MAIL_CHIMP_LIST_ID [ %2$s ] one of available ones: [ %3$s ] ?',
+                    'Mailchimp returned %1$d code, is the MAIL_CHIMP_LIST_ID [ %2$s ] one of available ones: [ %3$s ] ?',
                     Response::HTTP_NOT_FOUND,
                     $this->listId,
                     $concatenatedList
