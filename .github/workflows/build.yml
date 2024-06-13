@@ -108,10 +108,6 @@ jobs:
                 run: composer install --no-interaction
 
             -
-                name: Install Behat driver
-                run: vendor/bin/bdi browser:google-chrome drivers
-
-            -
                 name: Get Yarn cache directory
                 id: yarn-cache
                 run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
