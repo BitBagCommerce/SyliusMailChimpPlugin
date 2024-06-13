@@ -6,14 +6,14 @@
     "license": "MIT",
     "require": {
         "php": " ^8.0",
-        "sylius/sylius": "~1.11.0 || ~1.12.0",
-        "drewm/mailchimp-api": "^v2.5.4",
+        "sylius/sylius": "~1.12.0 || ~1.13.0",
+        "drewm/mailchimp-api": "^2.5.4",
         "ext-json": "*",
         "symfony/webpack-encore-bundle": "^1.16"
     },
     "require-dev": {
-        "behat/behat": "^3.6.1",
-        "behat/mink-selenium2-driver": "^1.4",
+        "behat/behat": "^3.7",
+        "behat/mink-selenium2-driver": "~1.6.0",
         "dmore/behat-chrome-extension": "^1.3",
         "dmore/chrome-mink-driver": "^2.7",
         "friends-of-behat/mink": "^1.8",
@@ -39,8 +39,8 @@
         "bitbag/coding-standard": "^1.0.0 || ^2.0.0"
     },
     "conflict": {
-         "doctrine/orm": ">=2.15.2"
-     },
+        "doctrine/orm": ">=2.15.2"
+    },
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
