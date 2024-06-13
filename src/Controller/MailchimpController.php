@@ -31,7 +31,7 @@ final class MailchimpController
     public function __construct(
         WebhookValidator $validator,
         NewsletterSubscriptionInterface $handler,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
     ) {
         $this->validator = $validator;
         $this->handler = $handler;

@@ -39,7 +39,7 @@ final class CustomerNewsletterListener
         if (!$customer instanceof CustomerInterface) {
             throw new UnexpectedTypeException(
                 $customer,
-                CustomerInterface::class
+                CustomerInterface::class,
             );
         }
 
@@ -62,7 +62,7 @@ final class CustomerNewsletterListener
         if (!$customer instanceof CustomerInterface) {
             throw new UnexpectedTypeException(
                 $customer,
-                CustomerInterface::class
+                CustomerInterface::class,
             );
         }
 

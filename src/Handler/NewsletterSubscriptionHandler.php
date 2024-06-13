@@ -46,7 +46,7 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
         FactoryInterface $customerFactory,
         EntityManagerInterface $customerManager,
         MailChimp $mailChimp,
-        string $listId
+        string $listId,
     ) {
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
@@ -128,8 +128,8 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
             throw new BadRequestHttpException(
                 sprintf(
                     'Mailchimp returned false instead of response array, last error : %s',
-                    $this->mailChimp->getLastError()
-                )
+                    $this->mailChimp->getLastError(),
+                ),
             );
         }
 
@@ -144,13 +144,13 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
                     'Mailchimp returned %1$d code, is the MAIL_CHIMP_LIST_ID [ %2$s ] one of available ones: [ %3$s ] ?',
                     Response::HTTP_NOT_FOUND,
                     $this->listId,
-                    $concatenatedList
-                )
+                    $concatenatedList,
+                ),
             );
         }
         if ($response['status'] !== 'subscribed') {
             throw new BadRequestHttpException(
-                sprintf('Response status is %s instead of %s', $response['status'], 'subscribed')
+                sprintf('Response status is %s instead of %s', $response['status'], 'subscribed'),
             );
         }
     }
@@ -174,8 +174,8 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
             throw new BadRequestHttpException(
                 sprintf(
                     'Mailchimp returned false instead of response array, last error : %s',
-                    $this->mailChimp->getLastError()
-                )
+                    $this->mailChimp->getLastError(),
+                ),
             );
         }
 

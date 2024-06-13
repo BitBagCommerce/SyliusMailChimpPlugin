@@ -38,7 +38,7 @@ final class NewsletterController
         NewsletterValidator $validator,
         TranslatorInterface $translator,
         NewsletterSubscriptionInterface $handler,
-        CsrfTokenManager $tokenManager
+        CsrfTokenManager $tokenManager,
     ) {
         $this->validator = $validator;
         $this->translator = $translator;
