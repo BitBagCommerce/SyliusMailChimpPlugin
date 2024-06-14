@@ -31,6 +31,8 @@ jobs:
         env:
             APP_ENV: test
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
+            MAIL_CHIMP_API_KEY: "mailchimp-api-key"
+            MAIL_CHIMP_LIST_ID: "mailchimp-list-id"
 
         steps:
             -
