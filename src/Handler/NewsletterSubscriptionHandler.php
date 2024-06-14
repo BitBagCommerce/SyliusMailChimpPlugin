@@ -47,7 +47,7 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
         EntityManagerInterface $customerManager,
         MailChimp $mailChimp,
         string $listId,
-    ) {
+        ) {
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
         $this->customerManager = $customerManager;
@@ -135,7 +135,7 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
         Assert::keyExists($response, 'status');
 
-        if ($response['status'] === Response::HTTP_NOT_FOUND) {
+        if (Response::HTTP_NOT_FOUND === $response['status']) {
             $validListIds = $this->getValidMailchimpListIds();
             $concatenatedList = implode(',', $validListIds);
 
@@ -148,7 +148,7 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
                 ),
             );
         }
-        if ($response['status'] !== 'subscribed') {
+        if ('subscribed' !== $response['status']) {
             throw new BadRequestHttpException(
                 sprintf('Response status is %s instead of %s', $response['status'], 'subscribed'),
             );

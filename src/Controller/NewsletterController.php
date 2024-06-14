@@ -39,7 +39,7 @@ final class NewsletterController
         TranslatorInterface $translator,
         NewsletterSubscriptionInterface $handler,
         CsrfTokenManager $tokenManager,
-    ) {
+        ) {
         $this->validator = $validator;
         $this->translator = $translator;
         $this->handler = $handler;
@@ -65,7 +65,7 @@ final class NewsletterController
                 $errors[] = $this->translator->trans('bitbag_sylius_mailchimp_plugin.ui.invalid_csrf_token');
             }
 
-            if (count($errors) === 0) {
+            if (0 === count($errors)) {
                 $this->handler->subscribe($email);
 
                 return new JsonResponse([

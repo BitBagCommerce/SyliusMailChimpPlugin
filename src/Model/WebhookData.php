@@ -42,7 +42,7 @@ final class WebhookData
         string $type,
         string $firedAt,
         array $data,
-    ) {
+        ) {
         $this->type = $type;
         $this->firedAt = $firedAt;
         $this->data = $data;

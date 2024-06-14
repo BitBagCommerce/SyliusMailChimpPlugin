@@ -32,7 +32,7 @@ final class MailchimpController
         WebhookValidator $validator,
         NewsletterSubscriptionInterface $handler,
         TranslatorInterface $translator,
-    ) {
+        ) {
         $this->validator = $validator;
         $this->handler = $handler;
         $this->translator = $translator;
@@ -43,7 +43,7 @@ final class MailchimpController
         $webhookData = WebhookData::createFromRequest($request);
         $errors = $this->validateRequest($webhookData, $request);
 
-        if (count($errors) === 0) {
+        if (0 === count($errors)) {
             $this->handler->unsubscribeCustomerFromLocalDatabase($webhookData->getData()['email']);
 
             return new JsonResponse([
