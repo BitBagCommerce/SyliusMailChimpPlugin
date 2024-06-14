@@ -39,11 +39,11 @@ final class CustomerNewsletterListener
         if (!$customer instanceof CustomerInterface) {
             throw new UnexpectedTypeException(
                 $customer,
-                CustomerInterface::class
+                CustomerInterface::class,
             );
         }
 
-        $customer->isSubscribedToNewsletter() === false ? $this->unsubscribe($customer) : $this->subscribe($customer);
+        false === $customer->isSubscribedToNewsletter() ? $this->unsubscribe($customer) : $this->subscribe($customer);
     }
 
     public function customerPostUpdateEvent(GenericEvent $event): void
@@ -62,7 +62,7 @@ final class CustomerNewsletterListener
         if (!$customer instanceof CustomerInterface) {
             throw new UnexpectedTypeException(
                 $customer,
-                CustomerInterface::class
+                CustomerInterface::class,
             );
         }
 

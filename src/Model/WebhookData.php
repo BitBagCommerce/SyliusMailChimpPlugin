@@ -41,8 +41,8 @@ final class WebhookData
     public function __construct(
         string $type,
         string $firedAt,
-        array $data
-    ) {
+        array $data,
+        ) {
         $this->type = $type;
         $this->firedAt = $firedAt;
         $this->data = $data;
@@ -55,7 +55,7 @@ final class WebhookData
         return new self(
             $request->get('type', self::TYPE_UNSUBSCRIBE),
             $request->get('fired_at', $dateString),
-            $request->get('data', [])
+            $request->get('data', []),
         );
     }
 

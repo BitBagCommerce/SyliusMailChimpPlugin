@@ -34,7 +34,7 @@ final class UniqueNewsletterEmailValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($constraint, UniqueNewsletterEmail::class);
 
-        if ($this->isEmailValid($value) === false) {
+        if (false === $this->isEmailValid($value)) {
             $this->context->addViolation($constraint->message);
         }
     }
@@ -43,11 +43,11 @@ final class UniqueNewsletterEmailValidator extends ConstraintValidator
     {
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
 
-        if ($customer instanceof CustomerInterface === false) {
+        if (false === $customer instanceof CustomerInterface) {
             return true;
         }
 
-        if ($customer->isSubscribedToNewsletter() === true) {
+        if (true === $customer->isSubscribedToNewsletter()) {
             return false;
         }
 

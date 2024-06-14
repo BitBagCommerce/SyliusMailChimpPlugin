@@ -29,8 +29,11 @@ final class WebhookValidator
     /** @var string */
     private $webhookSecret;
 
-    public function __construct(ValidatorInterface $validator, string $listId, string $webhookSecret)
-    {
+    public function __construct(
+        ValidatorInterface $validator,
+        string $listId,
+        string $webhookSecret
+    ) {
         $this->validator = $validator;
         $this->listId = $listId;
         $this->webhookSecret = $webhookSecret;
@@ -66,7 +69,7 @@ final class WebhookValidator
 
         $errors = [];
 
-        if (count($violations) === 0) {
+        if (0 === count($violations)) {
             return $errors;
         }
 
