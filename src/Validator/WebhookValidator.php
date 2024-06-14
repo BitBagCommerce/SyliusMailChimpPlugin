@@ -33,8 +33,7 @@ final class WebhookValidator
         ValidatorInterface $validator,
         string $listId,
         string $webhookSecret
-    )
-    {
+    ) {
         $this->validator = $validator;
         $this->listId = $listId;
         $this->webhookSecret = $webhookSecret;
