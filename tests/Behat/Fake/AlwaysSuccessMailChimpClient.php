@@ -17,4 +17,9 @@ final class AlwaysSuccessMailChimpClient extends MailChimp
     {
         return ['status' => 'subscribed'];
     }
+
+    public function getLastError():bool
+    {
+        return false;
+    }
 }
