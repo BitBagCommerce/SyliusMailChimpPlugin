@@ -14,17 +14,23 @@ use DrewM\MailChimp\MailChimp;
 
 final class AlwaysSuccessMailChimpClient extends MailChimp
 {
-    public function post($method, $args = [], $timeout = self::TIMEOUT)
-    {
+    public function post(
+        $method,
+        $args = [],
+        $timeout = self::TIMEOUT
+    ) {
         return ['status' => 'subscribed'];
     }
 
-    public function get($method, $args = [], $timeout = self::TIMEOUT)
-    {
+    public function get(
+        $method,
+        $args = [],
+        $timeout = self::TIMEOUT
+    ) {
         return ['status' => 'subscribed'];
     }
 
-    public function getLastError():bool
+    public function getLastError(): bool
     {
         return false;
     }

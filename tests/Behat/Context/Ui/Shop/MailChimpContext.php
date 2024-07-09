@@ -36,8 +36,11 @@ final class MailChimpContext implements Context
      * @param string $apiKey
      * @param string $listId
      */
-    public function __construct(SharedStorageInterface $sharedStorage, $apiKey, $listId)
-    {
+    public function __construct(
+        SharedStorageInterface $sharedStorage,
+        $apiKey,
+        $listId
+    ) {
         $this->sharedStorage = $sharedStorage;
         $this->mailChimp = new AlwaysSuccessMailChimpClient($apiKey);
         $this->listId = $listId;
