@@ -86,11 +86,14 @@ webpack_encore:
 
 Include the newsletter in your template:
 ```twig
+{# templates location: templates/bundles/SyliusShopBundle/ #}
+
 {% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
 ```
 
 Add these javascripts to the layout template that includes your subscription form imported in the previous steps
 ```html
+<!-- templates/bundles/SyliusShopBundle/_scripts.html.twig -->
 
 {{ encore_entry_script_tags('bitbag-mail-chimp-shop', null, 'mail-chimp-shop') }}
 <script>
