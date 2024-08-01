@@ -105,7 +105,7 @@ Add these javascripts to the layout template that includes your subscription for
 
 Clear project cache:
 ```php
-bin/console cache:clear
+bin/console cache:clear # if there is an issue with translations displaying correctly, clear the cache again.
 ```
 
 Update your webpack build:
