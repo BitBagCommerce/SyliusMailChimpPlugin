@@ -39,7 +39,8 @@
         "bitbag/coding-standard": "^1.0.0 || ^2.0.0"
     },
     "conflict": {
-        "doctrine/orm": ">=2.15.2"
+        "doctrine/orm": ">=2.15.2",
+        "doctrine/persistence": "<3.0"
     },
     "prefer-stable": true,
     "autoload": {
