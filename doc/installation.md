@@ -74,6 +74,7 @@ parameters:
 ```
 
 ### Configure MailChimp credentials:
+Complete the API authorisation data from your MailChimp account.
 
 To get info about list id: https://mailchimp.com/developer/marketing/api/lists/get-lists-info/
 
