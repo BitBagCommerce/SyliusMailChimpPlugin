@@ -101,7 +101,7 @@ bin/console cache:clear
 ## Templates
 Include the newsletter in your template:
 ```php
-# templates location: templates/bundles/SyliusShopBundle/ #
+# templates location: templates/bundles/SyliusShopBundle/The_place_where_the_form_is_to_be_placed #
 
 {% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
 ```
@@ -113,9 +113,16 @@ vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/views/Homepage/_news
 
 ```php
 // templates/bundles/SyliusShopBundle/Homepage/_newsletter.html.twig
-// ..
-<div class="column">
-    {% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
+
+<div class="ui very padded secondary segment newsletter">
+    <div class="ui bottom aligned grid">
+        <div class="doubling two column row">
+            // ..
+            <div class="column">
+                {% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
+            </div>
+        </div>
+    </div>
 </div>
 // ..
 ```
