@@ -74,6 +74,7 @@ parameters:
 ```
 
 ### Configure MailChimp credentials:
+Complete the API authorisation data from your MailChimp account.
 
 To get info about list id: https://mailchimp.com/developer/marketing/api/lists/get-lists-info/
 
@@ -100,9 +101,30 @@ bin/console cache:clear
 ## Templates
 Include the newsletter in your template:
 ```php
-{# templates location: templates/bundles/SyliusShopBundle/ #}
+# templates location: templates/bundles/SyliusShopBundle/The_place_where_the_form_is_to_be_placed #
 
 {% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
+```
+
+You could, for example, overwrite the template `_newsletter.html.twig` and paste in place of the current form in this file.
+```
+vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/views/Homepage/_newsletter.html.twig
+```
+
+```php
+// templates/bundles/SyliusShopBundle/Homepage/_newsletter.html.twig
+
+<div class="ui very padded secondary segment newsletter">
+    <div class="ui bottom aligned grid">
+        <div class="doubling two column row">
+            // ..
+            <div class="column">
+                {% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
+            </div>
+        </div>
+    </div>
+</div>
+// ..
 ```
 
 ## Webpack
