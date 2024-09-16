@@ -100,9 +100,23 @@ bin/console cache:clear
 ## Templates
 Include the newsletter in your template:
 ```php
-{# templates location: templates/bundles/SyliusShopBundle/ #}
+# templates location: templates/bundles/SyliusShopBundle/ #
 
 {% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
+```
+
+You could, for example, overwrite the template `_newsletter.html.twig` and paste in place of the current form in this file.
+```
+vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/views/Homepage/_newsletter.html.twig
+```
+
+```php
+// templates/bundles/SyliusShopBundle/Homepage/_newsletter.html.twig
+// ..
+<div class="column">
+    {% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
+</div>
+// ..
 ```
 
 ## Webpack
