@@ -18,12 +18,12 @@ ADDITIONAL
 ## Requirements:
 We work on stable, supported and up-to-date versions of packages. We recommend you to do the same.
 
-| Package       | Version         |
-|---------------|-----------------|
-| PHP           | \>=8.1          |
-| sylius/sylius | 1.12.x - 1.13.x |
-| MySQL         | \>= 5.7         |
-| NodeJS        | \>= 18.x        |
+| Package       | Version  |
+|---------------|----------|
+| PHP           | \>=8.2   |
+| sylius/sylius | 2.0.x    |
+| MySQL         | \>= 5.7  |
+| NodeJS        | \>= 18.x |
 
 ## Composer:
 ```bash
@@ -49,7 +49,7 @@ Import routing in your `config/routes.yaml` file
 # config/routes.yaml
 
 bitbag_sylius_mailchimp_plugin:
-    resource: "@BitBagSyliusMailChimpPlugin/Resources/config/routing.yml"
+    resource: "@BitBagSyliusMailChimpPlugin/config/routing.yml"
 ```
 
 Add the parameters listed below to your `config/packages/_sylius.yaml` file:
