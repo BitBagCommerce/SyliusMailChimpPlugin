@@ -1,48 +1,51 @@
-import { $ } from 'jquery';
-(function ($) {
+(function () {
     'use strict';
 
-    $.fn.extend({
-        joinNewsletter: function () {
-            var form = $(this);
-            form.submit(function (event) {
-                event.preventDefault();
+    // Create a method to handle the newsletter form
+    function joinNewsletter(form) {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
 
-                var successElement = form.find('.success-element');
-                var input = form.find('input[type=text]');
-                var validationElement = form.find('.validation-element');
+            var successElement = form.querySelector('.success-element');
+            var input = form.querySelector('input[type=text]');
+            var validationElement = form.querySelector('.validation-element');
 
-                successElement.text('');
-                validationElement.text('');
+            successElement.textContent = '';
+            validationElement.textContent = '';
 
-                $.ajax({
-                    url: $(form).attr('action'),
-                    type: $(form).attr('method'),
-                    data: form.serialize()
+            var formData = new FormData(form);
+            var actionUrl = form.getAttribute('action');
+            var method = form.getAttribute('method');
+
+            fetch(actionUrl, {
+                method: method,
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.hasOwnProperty('message')) {
+                        successElement.innerHTML = data.message;
+                        input.value = '';
+                    }
                 })
-                    .done(function (response) {
-                        if (response.hasOwnProperty('message')) {
-                            successElement.html(response.message);
-                            input.val('');
+                .catch(error => {
+                    var message = 'An unexpected error occurred. Please try again later.';
+                    if (error.responseJSON && error.responseJSON.hasOwnProperty('errors')) {
+                        var errors = error.responseJSON.errors;
+                        message = '';
+                        for (var key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                message += errors[key] + " ";
+                            }
                         }
-                    })
-                    .fail(function (response) {
-                        if (!response.responseJSON) {
-                            var message = 'An unexpected error occurred. Please try again later.';
+                    }
+                    validationElement.textContent = message;
+                });
+        });
+    }
 
-                            validationElement.text(message);
-                        } else if (response.responseJSON.hasOwnProperty('errors')) {
-                            var errors = $.parseJSON(response.responseJSON.errors);
-                            var message = '';
-
-                            $(errors).each(function (key, value) {
-                                message += value + " ";
-                            });
-
-                            validationElement.text(message);
-                        }
-                    });
-            });
-        }
+    // Applying the method to all forms with the .join-newsletter class
+    document.querySelectorAll('.join-newsletter').forEach(function (form) {
+        joinNewsletter(form);
     });
-})(jQuery);
+})();
