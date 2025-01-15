@@ -1,3 +1,4 @@
 framework:
     validation:
         enable_attributes: true
+        email_validation_mode: strict

@@ -12,7 +12,8 @@ namespace Tests\BitBag\SyliusMailChimpPlugin\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
+use Tests\BitBag\SyliusMailChimpPlugin\Behat\Page\Admin\Customer\UpdatePage;
+use Tests\BitBag\SyliusMailChimpPlugin\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Sylius\Behat\Service\SharedStorage;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;

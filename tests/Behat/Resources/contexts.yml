@@ -10,7 +10,7 @@ services:
             - "@sylius.manager.customer"
             - "@sylius.behat.shared_storage"
             - "@bitbag_sylius_mailchimp_plugin.behat.page.profile_update_page"
-            - "@sylius.behat.page.admin.customer.update"
+            - "@bitbag_sylius_mailchimp_plugin.behat.page.admin.customer.update"
 
     bitbag_sylius_mailchimp_plugin.context.ui.shop.mailchimp:
         class: Tests\BitBag\SyliusMailChimpPlugin\Behat\Context\Ui\Shop\MailChimpContext
