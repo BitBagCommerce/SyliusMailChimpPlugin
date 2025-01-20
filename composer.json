@@ -19,8 +19,7 @@
         "symfony/ux-live-component": "^2.20",
         "symfony/ux-twig-component": "^2.20",
         "symfony/webpack-encore-bundle": "^2.1",
-        "symfony/workflow": "^7.2",
-        "willdurand/hateoas-bundle": "2.5.0"
+        "symfony/workflow": "^7.2"
     },
     "require-dev": {
         "behat/behat": "^3.14",
