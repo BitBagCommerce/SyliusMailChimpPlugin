@@ -4,9 +4,6 @@ sylius_shop:
     requirements:
         _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
 
-##sylius_shop_payum:
-##    resource: "@SyliusPayumBundle/Resources/config/routing/integrations/sylius_shop.yaml"
-
 sylius_payment_notify:
     resource: "@SyliusPaymentBundle/Resources/config/routing/integrations/sylius.yaml"
 

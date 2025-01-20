@@ -1,33 +1,38 @@
 <form
-    action="{{ path('bitbag_sylius_mailchimp_plugin_newsletter_subscribe') }}"
-    method="POST"
-    id="footer-newsletter-form"
-    class="ui form grid bb-subscribe"
+        action="{{ path('bitbag_sylius_mailchimp_plugin_newsletter_subscribe') }}"
+        method="POST"
+        id="footer-newsletter-form"
+        class="row bb-subscribe"
 >
-    <div class="success-element ui text container"></div>
-    <div class="validation-element ui text container"></div>
+    <div class="success-element text-center"></div>
+    <div class="validation-element text-center"></div>
 
-    <div class="field bb-subscribe__row">
-        <input
-            type="text"
-            id="newsletter-email" name="email"
-            placeholder="{{ 'bitbag_sylius_mailchimp_plugin.ui.your_email_address'|trans }}"
-            class="fluid"
-        />
+    <div class="col-12 d-flex flex-wrap align-items-center">
+        <div class="mb-3 flex-grow-1 me-3">
+            <input
+                    type="text"
+                    id="newsletter-email"
+                    name="email"
+                    class="form-control"
+                    placeholder="{{ 'bitbag_sylius_mailchimp_plugin.ui.your_email_address'|trans }}"
+            />
+        </div>
 
         <input
-            type="hidden"
-            id="newsletter-token"
-            name="_token"
-            value="{{ csrf_token('newsletter') }}"
+                type="hidden"
+                id="newsletter-token"
+                name="_token"
+                value="{{ csrf_token('newsletter') }}"
         >
 
-        <button
-            title="{{ 'bitbag_sylius_mailchimp_plugin.ui.subscribe' }}"
-            type="submit"
-            class="ui button"
-        >
-            {{ 'bitbag_sylius_mailchimp_plugin.ui.subscribe'|trans }}
-        </button>
+        <div class="mb-3">
+            <button
+                    title="{{ 'bitbag_sylius_mailchimp_plugin.ui.subscribe' }}"
+                    type="submit"
+                    class="btn btn-primary"
+            >
+                {{ 'bitbag_sylius_mailchimp_plugin.ui.subscribe'|trans }}
+            </button>
+        </div>
     </div>
 </form>
