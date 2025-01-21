@@ -18,6 +18,6 @@ sylius_twig_hooks:
     hooks:
         'sylius_shop.homepage.index':
             newsletter:
-                template: "@SyliusShop/Homepage/_newsletter.html.twig"
+                template: "@BitBagSyliusMailChimpPlugin/_newsletter.html.twig"
                 priority: 30
 

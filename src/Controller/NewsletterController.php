@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\CsrfTokenManager;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class NewsletterController
@@ -32,14 +32,14 @@ final class NewsletterController
     /** @var NewsletterSubscriptionInterface */
     private $handler;
 
-    /** @var CsrfTokenManager */
+    /** @var CsrfTokenManagerInterface */
     private $tokenManager;
 
     public function __construct(
         NewsletterValidator $validator,
         TranslatorInterface $translator,
         NewsletterSubscriptionInterface $handler,
-        CsrfTokenManager $tokenManager,
+        CsrfTokenManagerInterface $tokenManager,
     ) {
         $this->validator = $validator;
         $this->translator = $translator;

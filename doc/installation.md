@@ -18,12 +18,12 @@ ADDITIONAL
 ## Requirements:
 We work on stable, supported and up-to-date versions of packages. We recommend you to do the same.
 
-| Package       | Version  |
-|---------------|----------|
-| PHP           | \>=8.2   |
-| sylius/sylius | 2.0.x    |
-| MySQL         | \>= 5.7  |
-| NodeJS        | \>= 18.x |
+| Package       | Version |
+|---------------|---------|
+| PHP           | \>=8.2  |
+| sylius/sylius | 2.0.x   |
+| MySQL         | \>= 5.7 |
+| NodeJS        | 20.x    |
 
 ## Composer:
 ```bash
@@ -106,24 +106,19 @@ Include the newsletter in your template:
 {% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
 ```
 
-You could, for example, overwrite the template `_newsletter.html.twig` and paste in place of the current form in this file.
+You could, for example, use the newsletter template `_newsletter.html.twig` (@BitBagSyliusMailChimpPlugin/_subscribe.html.twig).
 ```
-vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/views/Homepage/_newsletter.html.twig
+config/packages/_sylius.yaml
 ```
-
+Add:
 ```php
-// templates/bundles/SyliusShopBundle/Homepage/_newsletter.html.twig
-
-<div class="ui very padded secondary segment newsletter">
-    <div class="ui bottom aligned grid">
-        <div class="doubling two column row">
-            // ..
-            <div class="column">
-                {% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
-            </div>
-        </div>
-    </div>
-</div>
+sylius_twig_hooks:
+    hooks:
+...
+        'sylius_shop.homepage.index':
+            newsletter:
+                template: "@BitBagSyliusMailChimpPlugin/_newsletter.html.twig"
+                priority: 30
 // ..
 ```
 
