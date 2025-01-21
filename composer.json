@@ -8,7 +8,6 @@
         "php": "^8.2",
         "dompdf/dompdf": "^2.0",
         "drewm/mailchimp-api": "^2.5.4",
-        "sylius/calendar": "^0.5.0",
         "sylius/grid-bundle": "^1.13.0",
         "sylius/sylius": "~2.0",
         "sylius/twig-extra": "^0.6",
