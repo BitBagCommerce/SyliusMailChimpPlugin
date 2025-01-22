@@ -16,33 +16,33 @@ window.joinNewsletter = function joinNewsletter(form) {
             method: method,
             body: formData
         })
-            .then(async (response) => {
-                if (!response.ok) {
-                    response = await response.json();
-                    throw(response);
-                }
+        .then(async (response) => {
+            if (!response.ok) {
+                response = await response.json();
+                throw(response);
+            }
 
-                return await response.json()
-            })
-            .then((data) => {
-                if (data.hasOwnProperty('message')) {
-                    successElement.innerHTML = data.message;
-                    input.value = '';
-                }
-            })
-            .catch(error => {
-                var message = 'An unexpected error occurred. Please try again later.';
+            return await response.json()
+        })
+        .then((data) => {
+            if (data.hasOwnProperty('message')) {
+                successElement.innerHTML = data.message;
+                input.value = '';
+            }
+        })
+        .catch(error => {
+            var message = 'An unexpected error occurred. Please try again later.';
 
-                if (error.errors) {
-                    try {
-                        let jsonErrors = JSON.parse(error.errors);
-                        message = '';
-                        message = Object.values(jsonErrors).join(" ");
-                    } catch (e) {}
-                }
+            if (error.errors) {
+                try {
+                    let jsonErrors = JSON.parse(error.errors);
+                    message = '';
+                    message = Object.values(jsonErrors).join(" ");
+                } catch (e) {}
+            }
 
-                validationElement.textContent = message;
-            });
+            validationElement.textContent = message;
+        });
     });
 }
 

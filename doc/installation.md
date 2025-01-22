@@ -148,9 +148,10 @@ webpack_encore:
 ### Encore functions
 Add encore functions to your templates:
 
-SyliusShopBundle:
+SyliusShopBundle `templates/shop/javascripts.html.twig`: 
 ```php
-{# @SyliusShopBundle/_scripts.html.twig #}
+
+...
 {{ encore_entry_script_tags('bitbag-mail-chimp-shop', null, 'mail-chimp-shop') }}
 <script>
     document.addEventListener("DOMContentLoaded", function(event) { 
