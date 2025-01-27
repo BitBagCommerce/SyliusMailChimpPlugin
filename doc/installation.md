@@ -154,8 +154,11 @@ SyliusShopBundle `templates/shop/javascripts.html.twig`:
 ...
 {{ encore_entry_script_tags('bitbag-mail-chimp-shop', null, 'mail-chimp-shop') }}
 <script>
-    document.addEventListener("DOMContentLoaded", function(event) { 
-        $('#footer-newsletter-form').joinNewsletter();
+    document.addEventListener('DOMContentLoaded', function () {
+        var form = document.querySelector('#footer-newsletter-form');
+        if (form) {
+            joinNewsletter(form);
+        }
     });
 </script>
 ```
