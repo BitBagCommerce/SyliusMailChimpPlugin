@@ -10,7 +10,7 @@ Once the plugin is installed, the basic newsletter form is displayed on the Home
     <img src="./images/mailchimp.png"/>
 </div>
 
-By using this form user changes user's info about the fact if they're subscribed or not. 
+By using this form, user changes user's info about the fact if they're subscribed or not. 
 
 <div align="center">
     <img src="./images/mailchimp2.png"/>
@@ -18,7 +18,7 @@ By using this form user changes user's info about the fact if they're subscribed
 
 User has the possibility to customize it according to their needs. More about it [here.](https://github.com/BitBagCommerce/SyliusMailChimpPlugin/blob/master/doc/customization.md)
 
-Through API it is also possible to unsubscibe by using GET request.
+Through the API it is also possible to unsubscribe by using GET request.
 
 <div align="center">
     <img src="./images/mailchimp3.png"/>
