@@ -1,0 +1,19 @@
+<div class="newsletter container mb-6 rounded-3 bg-light">
+    <div class="row d-flex align-items-end mb-3 mt-3">
+        <div class="doubling two column row">
+            <div class="column">
+                <h2 class="ui mb-3 mt-3 ">
+                    {{ 'sylius.homepage.newsletter'|trans }}
+                </h2>
+                <p class="text-secondary">
+                    {{ 'sylius.homepage.newsletter_description'|trans|raw }}
+                </p>
+            </div>
+
+            <div class="column">
+                {% include '@BitBagSyliusMailChimpPlugin/_subscribe.html.twig' %}
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -8,3 +8,8 @@ services:
         class: Tests\BitBag\SyliusMailChimpPlugin\Behat\Page\Shop\ProfileUpdatePage
         parent: sylius.behat.page.shop.account.profile_update
         public: false
+
+    bitbag_sylius_mailchimp_plugin.behat.page.admin.customer.update:
+        class: Tests\BitBag\SyliusMailChimpPlugin\Behat\Page\Admin\Customer\UpdatePage
+        parent: sylius.behat.page.admin.customer.update
+

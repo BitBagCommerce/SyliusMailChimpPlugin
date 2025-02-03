@@ -13,3 +13,11 @@ parameters:
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.homepage.index':
+            newsletter:
+                template: "@BitBagSyliusMailChimpPlugin/_newsletter.html.twig"
+                priority: 30
+
