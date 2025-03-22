@@ -1,0 +1,9 @@
+bitbag_sylius_mailchimp_plugin:
+    ui:
+        newsletter: 'Newsletter'
+        subscribe: 'Abonnieren'
+        your_email_address: 'Ihre E-Mail-Adresse'
+        subscribed_successfully: 'Sie sind jetzt für den Newsletter angemeldet.'
+        invalid_csrf_token: 'Das eingereichte CSRF-Token ist ungültig.'
+        unsubscribed_successfully: 'Sie sind jetzt vom Newsletter abgemeldet.'
+        invalid_variable_type: 'Ungültiger Variablentyp'
