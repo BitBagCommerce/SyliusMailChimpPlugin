@@ -22,10 +22,11 @@ jobs:
             fail-fast: false
             matrix:
                 php: [ "8.2", "8.3" ]
-                symfony: [ "^7.1" ]
+                symfony: [ "^6.4", "^7.1" ]
                 sylius: [ "~2.0" ]
                 node: [ "20.x" ]
-                mysql: ["8.0"]
+                mysql: ["8.4"]
+                state_machine_adapter: ["symfony_workflow"]
 
         env:
             APP_ENV: test
@@ -62,6 +63,14 @@ jobs:
                     mysql root password: "root"
 
             -
+                name: Configure sysctl limits
+                run: |
+                    sudo swapoff -a
+                    sudo sysctl -w vm.swappiness=1
+                    sudo sysctl -w fs.file-max=262144
+                    sudo sysctl -w vm.max_map_count=262144
+
+            -
                 name: Output PHP version for Symfony CLI
                 run: php -v | head -n 1 | awk '{ print $2 }' > .php-version
 
@@ -90,6 +99,7 @@ jobs:
                     key: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ hashFiles('**/composer.json **/composer.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-composer-
+
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -97,6 +107,7 @@ jobs:
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
+
             -
                 name: Restrict Sylius version
                 if: matrix.sylius != ''
@@ -104,7 +115,7 @@ jobs:
 
             -
                 name: Install PHP dependencies
-                run: composer install --no-interaction
+                run: composer install --no-interaction --no-scripts
 
             -
                 name: Get Yarn cache directory
@@ -119,6 +130,7 @@ jobs:
                     key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-node-${{ matrix.node }}-yarn-
+
             -
                 name: Install JS dependencies
                 run: (cd tests/Application && yarn install)
@@ -128,11 +140,13 @@ jobs:
                 run: |
                     (cd tests/Application && bin/console doctrine:database:create -vvv)
                     (cd tests/Application && bin/console doctrine:schema:create -vvv)
+
             -
                 name: Prepare test application assets
                 run: |
-                    (cd tests/Application && bin/console assets:install public -vvv)
                     (cd tests/Application && yarn encore dev)
+                    (cd tests/Application && bin/console assets:install public -vvv)
+
             -
                 name: Prepare test application cache
                 run: (cd tests/Application && bin/console cache:warmup -vvv)
@@ -150,19 +164,14 @@ jobs:
                 run: (cd tests/Application && bin/console doctrine:schema:validate)
 
             -
-                name: Run PHPUnit
-                run: vendor/bin/unit --colors=always
-
-            -
-                name: Run Create behat logs directory
+                name: Create behat logs directory
                 run: (mkdir -p etc/build && chmod a+rw etc/build )
+            -
+                name: Run PHPUnit
+                run: vendor/bin/phpunit --colors=always
 
             -
                 name: Run Behat
-                env:
-                    MAIL_CHIMP_API_KEY: "mailchimp-api-key"
-                    MAIL_CHIMP_LIST_ID: "mailchimp-list-id"
-                    MAIL_CHIMP_WEBHOOK_SECRET: ${{ secrets.MAIL_CHIMP_WEBHOOK_SECRET }}
                 run: vendor/bin/behat --colors --strict -vvv --no-interaction || vendor/bin/behat --colors --strict -vvv --no-interaction --rerun
 
             -
@@ -179,10 +188,10 @@ jobs:
                 uses: rtCamp/action-slack-notify@v2
                 if: ${{ failure() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
                 env:
-                  SLACK_CHANNEL: ${{ secrets.FAILED_BUILD_SLACK_CHANNEL }}
-                  SLACK_COLOR: ${{ job.status }}
-                  SLACK_ICON: https://github.com/rtCamp.png?size=48
-                  SLACK_MESSAGE: ':x:'
-                  SLACK_TITLE: Failed build on ${{ github.event.repository.name }} repository
-                  SLACK_USERNAME: ${{ secrets.FAILED_BUILD_SLACK_USERNAME }}
-                  SLACK_WEBHOOK: ${{ secrets.FAILED_BUILD_SLACK_WEBHOOK }}
+                    SLACK_CHANNEL: ${{ secrets.FAILED_BUILD_SLACK_CHANNEL }}
+                    SLACK_COLOR: ${{ job.status }}
+                    SLACK_ICON: https://github.com/rtCamp.png?size=48
+                    SLACK_MESSAGE: ':x:'
+                    SLACK_TITLE: Failed build on ${{ github.event.repository.name }} repository
+                    SLACK_USERNAME: ${{ secrets.FAILED_BUILD_SLACK_USERNAME }}
+                    SLACK_WEBHOOK: ${{ secrets.FAILED_BUILD_SLACK_WEBHOOK }}
