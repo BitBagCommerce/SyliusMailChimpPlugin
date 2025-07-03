@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: BitBag\SyliusMailChimpPlugin
-        psr4_prefix: BitBag\SyliusMailChimpPlugin
-        src_path: .
