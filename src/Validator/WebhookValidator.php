@@ -52,10 +52,6 @@ final class WebhookValidator
                         new NotBlank(),
                         new Type(['type' => 'string']),
                     ],
-                    'status' => [
-                        new NotBlank(),
-                        new Type(['type' => 'string']),
-                    ],
                     'id' => [
                         new NotBlank(),
                         new Type(['type' => 'string']),
