@@ -1,0 +1,9 @@
+bitbag_sylius_mailchimp_plugin:
+    ui:
+        invalid_email: 'Die eingegebene E-Mail-Adresse ist nicht gültig.'
+        email_not_blank: 'Bitte füllen Sie das E-Mail-Feld aus.'
+        unique_email: 'Die angegebene E-Mail-Adresse ist bereits für den Newsletter angemeldet.'
+        invalid_list_id_malichimp: 'Die angegebene Listen-ID unterscheidet sich von der konfigurierten.'
+        invalid_list_id_configured: 'Die angegebene Listen-ID stimmt nicht mit denjenigen in Ihrem Mailchimp-Konto überein.'
+        invalid_query_secret: 'Das vom Webhook gesendete Abfragegeheimnis unterscheidet sich von dem konfigurierten.'
+        invalid_webhook_type: 'Ungültiger Webhook-Typ angegeben.'
