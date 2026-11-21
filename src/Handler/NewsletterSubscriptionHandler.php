@@ -64,7 +64,9 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
             $customer = $this->createNewCustomer($email);
         }
 
-        $this->addMailchimpData($email);
+        if ($this->isMailchimpConfigured()) {
+            $this->addMailchimpData($email);
+        }
 
         $customer->setSubscribedToNewsletter(true);
         $this->customerManager->flush();
@@ -72,6 +74,10 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
     public function getValidMailchimpListIds(): array
     {
+        if (!$this->isMailchimpConfigured()) {
+            return [];
+        }
+
         $responseArray = $this->mailChimp->get(self::API_PATH_LISTS);
         $ids = [];
 
@@ -98,6 +104,10 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
 
     public function unsubscribeEmail(string $email): void
     {
+        if (!$this->isMailchimpConfigured()) {
+            return;
+        }
+
         $this->mailChimp->delete($this->getListMemberEndpoint($email));
     }
 
@@ -106,6 +116,12 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
         /** @var CustomerInterface $customer */
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
         $this->updateCustomer($customer, false);
+    }
+
+    /** Without a list ID there is nothing to sync, so only the local newsletter flag is kept up to date. */
+    private function isMailchimpConfigured(): bool
+    {
+        return '' !== trim($this->listId);
     }
 
     private function createNewCustomer(string $email): CustomerInterface

@@ -9,4 +9,4 @@ services:
         autowire: true
         autoconfigure: true
 
-    Twig\Extra\Intl\IntlExtension: ~
+#    Twig\Extra\Intl\IntlExtension: ~

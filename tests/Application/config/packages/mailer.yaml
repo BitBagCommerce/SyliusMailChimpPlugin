@@ -1,0 +1,10 @@
+framework:
+    mailer:
+        dsn: '%env(MAILER_DSN)%'
+
+when@test:
+    framework:
+        cache:
+            pools:
+                test.mailer_pool:
+                    adapter: cache.adapter.filesystem

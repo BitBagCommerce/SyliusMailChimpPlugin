@@ -8,6 +8,7 @@ default:
                 - sylius.behat.context.setup.user
 
                 - sylius.behat.context.ui.shop.account
+                - sylius.behat.context.ui.save
 
                 - bitbag_sylius_mailchimp_plugin.context.ui.shop.newsletter
                 - bitbag_sylius_mailchimp_plugin.context.ui.shop.mailchimp
@@ -69,6 +70,7 @@ default:
                 - sylius.behat.context.ui.shop.checkout.addressing
                 - sylius.behat.context.ui.shop.checkout.complete
                 - sylius.behat.context.ui.shop.currency
+                - sylius.behat.context.ui.save
 
                 - bitbag_sylius_mailchimp_plugin.context.ui.shop.mailchimp
             filters:
@@ -80,6 +82,7 @@ default:
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.ui.admin.managing_customers
+                - sylius.behat.context.ui.save
 
                 - bitbag_sylius_mailchimp_plugin.context.ui.shop.mailchimp
                 - bitbag_sylius_mailchimp_plugin.context.ui.shop.newsletter

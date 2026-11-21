@@ -33,6 +33,8 @@ services:
     bitbag_sylius_mailchimp_plugin.drewm.mailchimp:
         class: DrewM\MailChimp\MailChimp
         public: true
+        # Lazy, so a missing API key does not break pages that never call Mailchimp.
+        lazy: true
         arguments:
             - "%mailchimp.api_key%"
 
