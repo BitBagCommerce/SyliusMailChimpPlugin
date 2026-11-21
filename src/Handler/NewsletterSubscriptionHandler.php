@@ -118,7 +118,6 @@ class NewsletterSubscriptionHandler implements NewsletterSubscriptionInterface
         $this->updateCustomer($customer, false);
     }
 
-    /** Without a list ID there is nothing to sync, so only the local newsletter flag is kept up to date. */
     private function isMailchimpConfigured(): bool
     {
         return '' !== trim($this->listId);
