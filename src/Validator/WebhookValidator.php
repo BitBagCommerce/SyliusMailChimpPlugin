@@ -44,24 +44,24 @@ final class WebhookValidator
     {
         $data = $webhookData->getData();
         $violations = $this->validator->validate($data, [
-            new Collection([
-                'allowExtraFields' => true,
-                'allowMissingFields' => false,
-                'fields' => [
+            new Collection(
+                fields: [
                     'list_id' => [
                         new NotBlank(),
-                        new Type(['type' => 'string']),
+                        new Type('string'),
                     ],
                     'id' => [
                         new NotBlank(),
-                        new Type(['type' => 'string']),
+                        new Type('string'),
                     ],
                     'email' => [
                         new NotBlank(),
-                        new Type(['type' => 'string']),
+                        new Type('string'),
                     ],
                 ],
-            ]),
+                allowExtraFields: true,
+                allowMissingFields: false,
+            ),
         ]);
 
         $errors = [];

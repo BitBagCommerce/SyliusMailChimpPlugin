@@ -33,6 +33,7 @@ services:
     bitbag_sylius_mailchimp_plugin.drewm.mailchimp:
         class: DrewM\MailChimp\MailChimp
         public: true
+        lazy: true
         arguments:
             - "%mailchimp.api_key%"
 
